@@ -10,5 +10,11 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+        initMatchPager();
     }
+
+    void initMatchPager() {
+        getViewState().initMatchPager();
+    }
+
 }

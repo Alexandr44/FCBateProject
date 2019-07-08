@@ -15,4 +15,8 @@
     <string name="nav_club">Клуб</string>
     <string name="nav_app">Приложение</string>
     <string name="communicate">Связаться</string>
+    <string name="matches">Matches</string>
+    <string name="more"><![CDATA[>]]></string>
+    <string name="club_news">Club\'s News</string>
+    <string name="socials">Socials</string>
 </resources>
