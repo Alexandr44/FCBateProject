@@ -1,19 +1,18 @@
 <resources>
-    <string name="app_name">FC BATE</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="communicate">Communicate</string>
-    <string name="nav_app">Application</string>
-    <string name="nav_calendar">Calendar</string>
-    <string name="nav_club">Club</string>
-    <string name="nav_main">Home</string>
-    <string name="nav_news">News</string>
-    <string name="nav_table">Table</string>
-    <string name="nav_team">Team</string>
+    <string name="app_name">ФК БАТЭ</string>
+    <string name="action_settings">Настройки</string>
+    <string name="communicate">Связаться</string>
+    <string name="nav_app">Приложение</string>
+    <string name="nav_calendar">Календарь</string>
+    <string name="nav_club">Клуб</string>
+    <string name="nav_main">Главная</string>
+    <string name="nav_news">Новости</string>
+    <string name="nav_table">Таблица</string>
+    <string name="nav_team">Команда</string>
+    <string name="club_news">Новости Клуба</string>
+    <string name="matches">Матчи</string>
+    <string name="socials">Мы в сети</string>
+    <string name="championship">Чемпионат</string>
 
 
 </resources>
