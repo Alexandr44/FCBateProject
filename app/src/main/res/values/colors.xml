@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="transparentWhite">#3FFFFFFF</color>
+    <color name="colorPrimary">#FFAF01</color>
+
+    <color name="transparentWhite">#1AFFFFFF</color>
+    <color name="defaultBlueFontColor">#313E8D</color>
+    <color name="defaultYellow">#FFAF01</color>
+    <color name="navigationViewBackground">#56B2E3</color>
 </resources>

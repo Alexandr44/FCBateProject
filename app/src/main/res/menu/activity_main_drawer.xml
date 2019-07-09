@@ -28,15 +28,11 @@
             android:id="@+id/nav_club"
             android:icon="@drawable/ic_card_membership_black_24dp"
             android:title="@string/nav_club" />
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/nav_app" />
     </group>
 
-    <item android:title="@string/communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_app"
-                android:icon="@drawable/ic_info_black_24dp"
-                android:title="@string/nav_app" />
-        </menu>
-    </item>
 
 </menu>

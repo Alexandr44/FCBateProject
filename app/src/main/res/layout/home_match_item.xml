@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/match_item_height"
@@ -12,7 +13,8 @@
         android:orientation="vertical"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp">
 
         <ImageView
             android:id="@+id/left_logo"
@@ -26,7 +28,8 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:text="Имя"/>
+            android:textColor="@android:color/white"
+            tools:text="Имя"/>
 
     </LinearLayout>
 
@@ -52,26 +55,30 @@
             android:id="@+id/champ_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Чемпионат Белоруси"/>
+            android:textColor="@android:color/white"
+            tools:text="Чемпионат Белоруси"/>
 
         <TextView
             android:id="@+id/match_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:text="V"/>
+            android:textColor="@android:color/white"
+            tools:text="V"/>
 
         <TextView
             android:id="@+id/match_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22 июня, сб"/>
+            android:textColor="@android:color/white"
+            tools:text="22 июня, сб"/>
 
         <TextView
             android:id="@+id/match_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="17:00"/>
+            android:textColor="@android:color/white"
+            tools:text="17:00"/>
 
     </LinearLayout>
 
@@ -82,7 +89,8 @@
         android:orientation="vertical"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp">
 
         <ImageView
             android:id="@+id/right_logo"
@@ -96,7 +104,8 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:text="Имя"/>
+            android:textColor="@android:color/white"
+            tools:text="Имя"/>
 
     </LinearLayout>
 

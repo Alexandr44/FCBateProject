@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/background_gradient">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/matches_layout"
@@ -22,6 +23,7 @@
             android:textSize="20sp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
+            android:textColor="@color/defaultYellow"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -29,23 +31,21 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/transparentWhite"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/matches_text_view"
             app:layout_constraintEnd_toStartOf="@+id/matches_side" />
 
-        <TextView
+        <ImageView
             android:id="@+id/matches_side"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/more"
-            android:textSize="32sp"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
+            android:src="@drawable/ic_right_bkt"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -67,8 +67,8 @@
         app:piv_animationType="slide"
         app:piv_dynamicCount="true"
         app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="@color/colorAccent"
-        app:piv_unselectedColor="@color/colorPrimaryDark"
+        app:piv_selectedColor="@color/defaultYellow"
+        app:piv_unselectedColor="@color/transparentWhite"
         app:piv_viewPager="@id/home_pager"
         app:piv_radius="4dp"
         app:layout_constraintTop_toBottomOf="@+id/home_pager"
@@ -94,6 +94,7 @@
             android:textSize="20sp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
+            android:textColor="@color/defaultYellow"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -101,23 +102,21 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/transparentWhite"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/club_news_text_view"
             app:layout_constraintEnd_toStartOf="@+id/club_news_side" />
 
-        <TextView
+        <ImageView
             android:id="@+id/club_news_side"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/more"
-            android:textSize="32sp"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
+            android:src="@drawable/ic_right_bkt"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -139,8 +138,8 @@
         app:piv_animationType="slide"
         app:piv_dynamicCount="true"
         app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="@color/colorAccent"
-        app:piv_unselectedColor="@color/colorPrimaryDark"
+        app:piv_selectedColor="@color/defaultYellow"
+        app:piv_unselectedColor="@color/transparentWhite"
         app:piv_viewPager="@id/home_news_pager"
         app:piv_radius="4dp"
         app:layout_constraintTop_toBottomOf="@+id/home_news_pager"
@@ -166,6 +165,7 @@
             android:textSize="20sp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
+            android:textColor="@color/defaultYellow"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -173,23 +173,21 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/transparentWhite"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/champ_text_view"
             app:layout_constraintEnd_toStartOf="@+id/champ_side" />
 
-        <TextView
+        <ImageView
             android:id="@+id/champ_side"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/more"
-            android:textSize="32sp"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
+            android:src="@drawable/ic_right_bkt"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -222,6 +220,7 @@
             android:textSize="20sp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
+            android:textColor="@color/defaultYellow"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -229,7 +228,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/transparentWhite"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
