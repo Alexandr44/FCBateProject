@@ -46,10 +46,10 @@
         >
 
         <ImageView
-            android:id="@+id/middle_logo"
+            android:id="@+id/tournament_logo"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_launcher"/>
+            tools:src="@drawable/trnm_bel_league_logo"/>
 
         <TextView
             android:id="@+id/champ_name"

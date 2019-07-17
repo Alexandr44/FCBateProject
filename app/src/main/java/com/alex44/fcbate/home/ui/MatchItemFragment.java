@@ -32,8 +32,8 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
     protected ImageView leftLogo;
     @BindView(R.id.right_logo)
     protected ImageView rightLogo;
-    @BindView(R.id.middle_logo)
-    protected ImageView middleLogo;
+    @BindView(R.id.tournament_logo)
+    protected ImageView tournamentLogo;
     @BindView(R.id.left_title)
     protected TextView leftTitle;
     @BindView(R.id.right_title)
@@ -114,5 +114,20 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
     @Override
     public void setTime(@NotNull String time) {
         matchTime.setText(time);
+    }
+
+    @Override
+    public void setTournamentLogo(@NotNull String tournamentShortName) {
+        tournamentLogo.setImageResource(getImageResByTournamentName(tournamentShortName));
+    }
+
+    private int getImageResByTournamentName(String name) {
+        if ("ЧБ".equals(name)) return R.drawable.trnm_bel_league_logo;
+        if ("КБ".equals(name)) return R.drawable.trnm_bel_cup_logo;
+        if ("СКБ".equals(name)) return R.drawable.trnm_bel_super_cup_logo;
+        if ("ЛЧ".equals(name)) return R.drawable.trnm_eur_champion_league_logo;
+        if ("ЕЛ".equals(name)) return R.drawable.trnm_eur_league_logo;
+        if ("ЮЛ".equals(name)) return R.drawable.trnm_eur_youth_league_logo;
+        return 0;
     }
 }

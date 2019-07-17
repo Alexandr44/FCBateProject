@@ -23,4 +23,8 @@ public class TournamentDTO {
     @Expose
     @SerializedName("title")
     private String title;
+
+    @Expose
+    @SerializedName("title_short")
+    private String titleShort;
 }

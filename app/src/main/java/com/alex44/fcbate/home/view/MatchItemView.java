@@ -21,4 +21,6 @@ public interface MatchItemView {
     void setDate(@NotNull String date);
 
     void setTime(@NotNull String time);
+
+    void setTournamentLogo(@NotNull String tournamentShortName);
 }

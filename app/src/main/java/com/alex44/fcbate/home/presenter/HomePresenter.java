@@ -87,6 +87,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
             view.setRightLogo(matchDTO.getRightTeam().getLogoUrl());
             view.setRightTeamTitle(matchDTO.getRightTeam().getTitle());
             view.setChampTitle(matchDTO.getTournament().getTitle());
+            view.setTournamentLogo(matchDTO.getTournament().getTitleShort());
             if (matchDTO.getGoalsLeft() == 0 && matchDTO.getGoalsRight() == 0) {
                 view.setScore("V");
             }
