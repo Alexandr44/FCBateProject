@@ -127,7 +127,7 @@
         android:id="@+id/home_news_pager"
         android:layout_marginTop="0dp"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="@dimen/news_pager_height"
         app:layout_constraintTop_toBottomOf="@+id/club_news_layout"
         />
 

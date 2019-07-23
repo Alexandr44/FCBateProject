@@ -6,4 +6,6 @@ public class ApiStrings {
 
     public final static String MATCHES_URL = "games/slider";
 
+    public final static String NEWS_URL = "news";
+
 }
