@@ -78,12 +78,12 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
 
     @Override
     public void setLeftLogo(@NotNull String logoUrl) {
-        imageLoader.loadInto(logoUrl, leftLogo);
+        imageLoader.loadInto(logoUrl, leftLogo, 50);
     }
 
     @Override
     public void setRightLogo(@NotNull String logoUrl) {
-        imageLoader.loadInto(logoUrl, rightLogo);
+        imageLoader.loadInto(logoUrl, rightLogo, 50);
     }
 
     @Override

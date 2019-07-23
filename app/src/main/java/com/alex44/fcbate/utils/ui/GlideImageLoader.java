@@ -31,9 +31,9 @@ public class GlideImageLoader implements IImageLoader<ImageView> {
 //    }
 
     @Override
-    public void loadInto(String url, ImageView container) {
+    public void loadInto(String url, ImageView container, int corners) {
         final MultiTransformation<Bitmap> multi = new MultiTransformation<>(
-                new RoundedCorners(50)
+                new RoundedCorners(corners)
         );
 
         Glide.with(container.getContext())
