@@ -9,12 +9,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchPagerAdapter extends FragmentPagerAdapter {
+public class HomePagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> titleList = new ArrayList<>();
 
-    public MatchPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    public HomePagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 

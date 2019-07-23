@@ -1,9 +1,11 @@
 package com.alex44.fcbate.home.presenter;
 
 import com.alex44.fcbate.home.model.dto.MatchDTO;
+import com.alex44.fcbate.home.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.repo.HomeRepo;
 import com.alex44.fcbate.home.view.HomeView;
 import com.alex44.fcbate.home.view.MatchItemView;
+import com.alex44.fcbate.home.view.NewsItemView;
 import com.alex44.fcbate.utils.model.ISystemInfo;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -11,6 +13,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -30,9 +33,13 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     private Scheduler mainThreadScheduler;
 
     private Disposable matchesDisposable;
+    private Disposable newsDisposable;
 
     @Getter
     private MatchItemPresenter matchItemPresenter;
+
+    @Getter
+    private NewsItemPresenter newsItemPresenter;
 
     public HomePresenter(Scheduler mainThreadScheduler, ISystemInfo systemInfo) {
         this.mainThreadScheduler = mainThreadScheduler;
@@ -44,7 +51,9 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         matchItemPresenter = new MatchItemPresenter();
+        newsItemPresenter = new NewsItemPresenter();
         initMatchPager();
+        initNewsPager();
     }
 
     void initMatchPager() {
@@ -55,6 +64,21 @@ public class HomePresenter extends MvpPresenter<HomeView> {
                     matchItemPresenter.getMatches().addAll(matchDTOS);
                     getViewState().initMatchPager();
                 }, throwable -> {
+                    getViewState().showMessage("Matches load failed");
+                    Timber.e(throwable);
+                });
+    }
+
+    void initNewsPager() {
+        newsDisposable = homeRepo.getNews()
+                .observeOn(mainThreadScheduler)
+                .subscribe(newsDTOS -> {
+                    newsDTOS.subList(5, newsDTOS.size()).clear();
+                    newsItemPresenter.getNews().clear();
+                    newsItemPresenter.getNews().addAll(newsDTOS);
+                    getViewState().initNewsPager();
+                }, throwable -> {
+                    getViewState().showMessage("News load failed");
                     Timber.e(throwable);
                 });
     }
@@ -63,11 +87,21 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         Timber.d("ToDo: go to calendar");
     }
 
+    public void goToNewsScreen() {
+        Timber.d("ToDo: go to news");
+    }
+
+    private void goToNewsDetailScreen(Long id) {
+        Timber.d("ToDo: go to news detail with id: "+id);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!matchesDisposable.isDisposed())
+        if (matchesDisposable != null && !matchesDisposable.isDisposed())
             matchesDisposable.dispose();
+        if (newsDisposable != null && !newsDisposable.isDisposed())
+            newsDisposable.dispose();
     }
 
     private class MatchItemPresenter implements IMatchItemPresenter {
@@ -101,6 +135,80 @@ public class HomePresenter extends MvpPresenter<HomeView> {
             } catch (ParseException e) {
                 Timber.e(e);
             }
+        }
+    }
+
+    private class NewsItemPresenter implements INewsItemPresenter {
+
+        private final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        private final SimpleDateFormat timeOutFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+        @Getter
+        private List<NewsDTO> news = new ArrayList<>();
+
+
+        @Override
+        public void update(NewsItemView view) {
+            final NewsDTO newsDTO = news.get(view.getPos());
+            view.setPhoto(newsDTO.getPhotoUrl());
+            view.setTitle(newsDTO.getTitle());
+            String dateStr = newsDTO.getCreated();
+
+            try {
+                final Date date = dateTimeFormat.parse(newsDTO.getCreated());
+                final Calendar now = Calendar.getInstance();
+                final Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+
+                calendar.add(Calendar.HOUR_OF_DAY, 1);
+                if (calendar.after(now)) {  //за последний час
+                    calendar.add(Calendar.HOUR_OF_DAY, -1);
+                    final long minutes = (now.getTimeInMillis() - calendar.getTimeInMillis()) / 1000 / 60;
+                    dateStr = String.valueOf(minutes);
+                    final String lastDigit = dateStr.substring(dateStr.length()-1);
+                    if (lastDigit.equals("1")) {
+                        dateStr += " минуту назад";
+                    }
+                    else if (lastDigit.equals("2") || lastDigit.equals("3") || lastDigit.equals("4")) {
+                        dateStr += " минуты назад";
+                    }
+                    else {
+                        dateStr += " минут назад";
+                    }
+                    view.setDateTime(dateStr, true);
+                    return;
+                }
+
+                calendar.add(Calendar.HOUR_OF_DAY, -1);
+
+                if (calendar.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH) &&
+                    calendar.get(Calendar.MONTH) == now.get(Calendar.MONTH) &&
+                    calendar.get(Calendar.YEAR) == now.get(Calendar.YEAR) ) {
+                    dateStr = "Сегодня в " + timeOutFormat.format(date);
+                    view.setDateTime(dateStr, false);
+                    return;
+                }
+
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+                if (calendar.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH) &&
+                    calendar.get(Calendar.MONTH) == now.get(Calendar.MONTH) &&
+                    calendar.get(Calendar.YEAR) == now.get(Calendar.YEAR) ) {
+                    dateStr = "Вчера в " + timeOutFormat.format(date);
+                    view.setDateTime(dateStr, false);
+                    return;
+                }
+
+                view.setDateTime(dateStr, false);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void imageClicked(int pos) {
+            goToNewsDetailScreen(newsItemPresenter.getNews().get(pos).getId());
+            Timber.d(newsItemPresenter.getNews().get(pos).getTitle());
         }
     }
 

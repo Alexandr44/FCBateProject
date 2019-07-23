@@ -9,4 +9,7 @@ public interface HomeView extends MvpView {
 
     void initMatchPager();
 
+    void initNewsPager();
+
+    void showMessage(String message);
 }
