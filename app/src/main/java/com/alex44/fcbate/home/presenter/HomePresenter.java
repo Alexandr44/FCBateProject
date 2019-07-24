@@ -2,6 +2,7 @@ package com.alex44.fcbate.home.presenter;
 
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.repo.HomeRepo;
 import com.alex44.fcbate.home.view.HomeView;
 import com.alex44.fcbate.home.view.MatchItemView;
@@ -20,6 +21,7 @@ import java.util.Locale;
 
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import lombok.Getter;
 import timber.log.Timber;
 
@@ -34,6 +36,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     private Disposable matchesDisposable;
     private Disposable newsDisposable;
+    private Disposable tournamentsDisposable;
 
     @Getter
     private MatchItemPresenter matchItemPresenter;
@@ -54,6 +57,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         newsItemPresenter = new NewsItemPresenter();
         initMatchPager();
         initNewsPager();
+        initTournamentsRV();
     }
 
     void initMatchPager() {
@@ -83,6 +87,20 @@ public class HomePresenter extends MvpPresenter<HomeView> {
                 });
     }
 
+    private void initTournamentsRV() {
+        tournamentsDisposable = homeRepo.getTournamentsInfo()
+                .observeOn(mainThreadScheduler)
+                .subscribe(infoList -> {
+                    for (TournamentInfoDTO info : infoList) {
+                        Timber.d("Info: "+info.getPosition()+" "+info.getTeamName()+" "+info.getGames()+
+                                " "+info.getDiffs()+" "+info.getPoints());
+                    }
+                }, throwable -> {
+                    getViewState().showMessage("Tournaments info load failed");
+                    Timber.e(throwable);
+                });
+    }
+
     public void goToCalendarScreen() {
         Timber.d("ToDo: go to calendar");
     }
@@ -102,6 +120,8 @@ public class HomePresenter extends MvpPresenter<HomeView> {
             matchesDisposable.dispose();
         if (newsDisposable != null && !newsDisposable.isDisposed())
             newsDisposable.dispose();
+        if (tournamentsDisposable != null && !tournamentsDisposable.isDisposed())
+            tournamentsDisposable.dispose();
     }
 
     private class MatchItemPresenter implements IMatchItemPresenter {

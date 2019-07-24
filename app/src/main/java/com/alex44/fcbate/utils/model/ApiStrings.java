@@ -8,4 +8,6 @@ public class ApiStrings {
 
     public final static String NEWS_URL = "news";
 
+    public final static String TOURNAMENTS_URL = "tournaments/1/table";
+
 }

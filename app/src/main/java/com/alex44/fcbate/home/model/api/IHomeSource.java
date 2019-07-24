@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 
 import static com.alex44.fcbate.utils.model.ApiStrings.MATCHES_URL;
 import static com.alex44.fcbate.utils.model.ApiStrings.NEWS_URL;
+import static com.alex44.fcbate.utils.model.ApiStrings.TOURNAMENTS_URL;
 
 public interface IHomeSource {
 
@@ -18,5 +19,8 @@ public interface IHomeSource {
 
     @GET(NEWS_URL)
     Maybe<List<NewsDTO>> getNews();
+
+    @GET(TOURNAMENTS_URL)
+    Maybe<List<List<String>>> getTournamentsInfo();
 
 }
