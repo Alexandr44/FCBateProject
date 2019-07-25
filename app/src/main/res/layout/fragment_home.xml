@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:background="@drawable/background_gradient">
 
@@ -194,20 +195,227 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_rv"
+    <TableLayout
+        android:id="@+id/home_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintTop_toBottomOf="@+id/champ_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        >
+
+        <TableRow
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@color/defaultYellow"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/team"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@color/defaultYellow"
+                android:textStyle="bold"
+                android:layout_marginStart="24dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/games"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/defaultYellow"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/diffs"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/defaultYellow"
+                android:textStyle="bold"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/points"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/defaultYellow"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@drawable/home_table_background"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/home_table_pos_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"
+                tools:text="1"/>
+            <TextView
+                android:id="@+id/home_table_team_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                tools:text="Динамо Бр"/>
+            <TextView
+                android:id="@+id/home_table_games_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                tools:text="11"/>
+            <TextView
+                android:id="@+id/home_table_diffs_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                tools:text="26-6"/>
+            <TextView
+                android:id="@+id/home_table_points_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp"
+                tools:text="29"/>
+        </TableRow>
+
+        <TableRow
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/home_table_pos_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@color/defaultYellow"
+                android:layout_marginStart="8dp"
+                tools:text="1"/>
+            <TextView
+                android:id="@+id/home_table_team_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@color/defaultYellow"
+                android:layout_marginStart="24dp"
+                tools:text="Динамо Бр"/>
+            <TextView
+                android:id="@+id/home_table_games_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/defaultYellow"
+                tools:text="11"/>
+            <TextView
+                android:id="@+id/home_table_diffs_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/defaultYellow"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                tools:text="26-6"/>
+            <TextView
+                android:id="@+id/home_table_points_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/defaultYellow"
+                android:layout_marginEnd="8dp"
+                tools:text="29"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@drawable/home_table_background"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/home_table_pos_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"
+                tools:text="1"/>
+            <TextView
+                android:id="@+id/home_table_team_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                tools:text="Динамо Бр"/>
+            <TextView
+                android:id="@+id/home_table_games_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                tools:text="11"/>
+            <TextView
+                android:id="@+id/home_table_diffs_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                tools:text="26-6"/>
+            <TextView
+                android:id="@+id/home_table_points_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp"
+                tools:text="29"/>
+        </TableRow>
+
+    </TableLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/socials_layout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/home_rv"
+        app:layout_constraintTop_toBottomOf="@+id/home_table"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -240,17 +448,67 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/buttons_layout"
+        android:id="@+id/home_buttons_layout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="90dp"
         android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintTop_toBottomOf="@+id/socials_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="50dp"
-            android:layout_height="match_parent" />
+        <!--<TableRow>-->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_facebook_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_background"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_background"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_background"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_background"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_background"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_background"/>
+        <!--</TableRow>-->
 
     </LinearLayout>
 

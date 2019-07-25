@@ -63,7 +63,7 @@ public class HomeRepo {
                     for (List<String> list : lists) {
                         if (list.size() == 8) {
                             final TournamentInfoDTO tournamentInfo = new TournamentInfoDTO();
-                            tournamentInfo.setPosition(list.get(0));
+                            tournamentInfo.setPosition(Long.valueOf(list.get(0).replace(".","")));
                             tournamentInfo.setTeamName(list.get(1));
                             tournamentInfo.setGames(Long.valueOf(list.get(2)));
                             tournamentInfo.setWins(Long.valueOf(list.get(3)));

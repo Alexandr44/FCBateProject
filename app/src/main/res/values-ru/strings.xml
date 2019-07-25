@@ -13,6 +13,9 @@
     <string name="matches">Матчи</string>
     <string name="socials">Мы в сети</string>
     <string name="championship">Чемпионат</string>
+    <string name="games">И</string>
+    <string name="points">О</string>
+    <string name="team">Команда</string>
 
 
 </resources>

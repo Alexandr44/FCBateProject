@@ -16,7 +16,7 @@ import lombok.ToString;
 public class TournamentInfoDTO {
 
     @Expose
-    private String position;
+    private Long position;
 
     @Expose
     private String teamName;

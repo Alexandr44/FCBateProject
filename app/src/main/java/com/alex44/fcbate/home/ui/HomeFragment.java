@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.alex44.fcbate.R;
+import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.view.HomeView;
 import com.alex44.fcbate.utils.model.ISystemInfo;
@@ -19,6 +21,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +45,39 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     protected ViewPager pager;
     @BindView(R.id.home_news_pager)
     protected ViewPager newsPager;
+    
+    @BindView(R.id.home_table_pos_1)
+    protected TextView tablePos1;
+    @BindView(R.id.home_table_team_1)
+    protected TextView tableTeam1;
+    @BindView(R.id.home_table_games_1)
+    protected TextView tableGames1;
+    @BindView(R.id.home_table_diffs_1)
+    protected TextView tableDiffs1;
+    @BindView(R.id.home_table_points_1)
+    protected TextView tablePoints1;
+
+    @BindView(R.id.home_table_pos_2)
+    protected TextView tablePos2;
+    @BindView(R.id.home_table_team_2)
+    protected TextView tableTeam2;
+    @BindView(R.id.home_table_games_2)
+    protected TextView tableGames2;
+    @BindView(R.id.home_table_diffs_2)
+    protected TextView tableDiffs2;
+    @BindView(R.id.home_table_points_2)
+    protected TextView tablePoints2;
+
+    @BindView(R.id.home_table_pos_3)
+    protected TextView tablePos3;
+    @BindView(R.id.home_table_team_3)
+    protected TextView tableTeam3;
+    @BindView(R.id.home_table_games_3)
+    protected TextView tableGames3;
+    @BindView(R.id.home_table_diffs_3)
+    protected TextView tableDiffs3;
+    @BindView(R.id.home_table_points_3)
+    protected TextView tablePoints3;
 
     @ProvidePresenter
     protected HomePresenter createPresenter() {
@@ -142,6 +179,27 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
                 }
             }
         });
+    }
+
+    @Override
+    public void fillTable(List<TournamentInfoDTO> infoList) {
+        tablePos1.setText(String.valueOf(infoList.get(0).getPosition()));
+        tableTeam1.setText(infoList.get(0).getTeamName());
+        tableGames1.setText(String.valueOf(infoList.get(0).getGames()));
+        tableDiffs1.setText(infoList.get(0).getDiffs());
+        tablePoints1.setText(String.valueOf(infoList.get(0).getPoints()));
+
+        tablePos2.setText(String.valueOf(infoList.get(1).getPosition()));
+        tableTeam2.setText(infoList.get(1).getTeamName());
+        tableGames2.setText(String.valueOf(infoList.get(1).getGames()));
+        tableDiffs2.setText(infoList.get(1).getDiffs());
+        tablePoints2.setText(String.valueOf(infoList.get(1).getPoints()));
+
+        tablePos3.setText(String.valueOf(infoList.get(2).getPosition()));
+        tableTeam3.setText(infoList.get(2).getTeamName());
+        tableGames3.setText(String.valueOf(infoList.get(2).getGames()));
+        tableDiffs3.setText(infoList.get(2).getDiffs());
+        tablePoints3.setText(String.valueOf(infoList.get(2).getPoints()));
     }
 
     @Override

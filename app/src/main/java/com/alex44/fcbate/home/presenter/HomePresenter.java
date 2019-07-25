@@ -91,9 +91,8 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         tournamentsDisposable = homeRepo.getTournamentsInfo()
                 .observeOn(mainThreadScheduler)
                 .subscribe(infoList -> {
-                    for (TournamentInfoDTO info : infoList) {
-                        Timber.d("Info: "+info.getPosition()+" "+info.getTeamName()+" "+info.getGames()+
-                                " "+info.getDiffs()+" "+info.getPoints());
+                    if (infoList.size() >= 3) {
+                        getViewState().fillTable(infoList);
                     }
                 }, throwable -> {
                     getViewState().showMessage("Tournaments info load failed");
