@@ -1,8 +1,13 @@
 package com.alex44.fcbate.home.view;
 
+import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+
 import org.jetbrains.annotations.NotNull;
 
-public interface MatchItemView {
+@StateStrategyType(value = AddToEndSingleStrategy.class)
+public interface MatchItemView extends MvpView {
 
     int getPos();
 

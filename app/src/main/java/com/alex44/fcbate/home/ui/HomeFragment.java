@@ -1,9 +1,15 @@
 package com.alex44.fcbate.home.ui;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +25,7 @@ import com.alex44.fcbate.utils.ui.SystemInfo;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,8 +33,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import timber.log.Timber;
 
 import static androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
 
@@ -78,6 +87,22 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     protected TextView tableDiffs3;
     @BindView(R.id.home_table_points_3)
     protected TextView tablePoints3;
+
+    @BindView(R.id.home_facebook_button)
+    protected ImageButton facebookButton;
+    @BindView(R.id.home_instagram_button)
+    protected ImageButton instagramButton;
+    @BindView(R.id.home_twitter_button)
+    protected ImageButton twitterButton;
+    @BindView(R.id.home_vk_button)
+    protected ImageButton vkButton;
+    @BindView(R.id.home_youtube_button)
+    protected ImageButton youtubeButton;
+    @BindView(R.id.home_viber_button)
+    protected ImageButton viberButton;
+
+    @BindView(R.id.home_table)
+    protected TableLayout homeTable;
 
     @ProvidePresenter
     protected HomePresenter createPresenter() {
@@ -182,6 +207,43 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     }
 
     @Override
+    public void initTable() {
+        homeTable.setOnTouchListener(new View.OnTouchListener() {
+            private Float x = null;
+            private Float y = null;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        x = event.getX();
+                        y = event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (x != null && y != null) {
+                            final Float deltaX = Math.abs(x - event.getX());
+                            final Float deltaY = Math.abs(y - event.getY());
+                            final WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+                            DisplayMetrics metrics = new DisplayMetrics();
+                            wm.getDefaultDisplay().getMetrics(metrics);
+                            Timber.d("Check: "+deltaX + " "+deltaY+" "+metrics.widthPixels);
+                            if (deltaX > deltaY && deltaX > 0 && deltaX > metrics.widthPixels*0.5) {
+                                presenter.goToTournamentScreen();
+                            }
+
+                        }
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        Timber.d("Cancel");
+                        x = null;
+                        y = null;
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
     public void fillTable(List<TournamentInfoDTO> infoList) {
         tablePos1.setText(String.valueOf(infoList.get(0).getPosition()));
         tableTeam1.setText(infoList.get(0).getTeamName());
@@ -205,6 +267,48 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     @Override
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.home_facebook_button)
+    public void facebookClick() {
+        final Snackbar snackbar = Snackbar.make(view, "Facebook Button", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("Ok", v -> snackbar.dismiss());
+        snackbar.show();
+    }
+
+    @OnClick(R.id.home_instagram_button)
+    public void instagramClick() {
+        final Snackbar snackbar = Snackbar.make(view, "Instagram Button", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("Ok", v -> snackbar.dismiss());
+        snackbar.show();
+    }
+
+    @OnClick(R.id.home_twitter_button)
+    public void twitterClick() {
+        final Snackbar snackbar = Snackbar.make(view, "Twitter Button", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("Ok", v -> snackbar.dismiss());
+        snackbar.show();
+    }
+
+    @OnClick(R.id.home_vk_button)
+    public void vkClick() {
+        final Snackbar snackbar = Snackbar.make(view, "VK Button", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("Ok", v -> snackbar.dismiss());
+        snackbar.show();
+    }
+
+    @OnClick(R.id.home_youtube_button)
+    public void youtubeClick() {
+        final Snackbar snackbar = Snackbar.make(view, "Youtube Button", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("Ok", v -> snackbar.dismiss());
+        snackbar.show();
+    }
+
+    @OnClick(R.id.home_viber_button)
+    public void viberClick() {
+        final Snackbar snackbar = Snackbar.make(view, "Viber Button", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("Ok", v -> snackbar.dismiss());
+        snackbar.show();
     }
 
 }

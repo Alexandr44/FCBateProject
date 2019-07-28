@@ -2,7 +2,6 @@ package com.alex44.fcbate.home.presenter;
 
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.NewsDTO;
-import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.repo.HomeRepo;
 import com.alex44.fcbate.home.view.HomeView;
 import com.alex44.fcbate.home.view.MatchItemView;
@@ -21,7 +20,6 @@ import java.util.Locale;
 
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import lombok.Getter;
 import timber.log.Timber;
 
@@ -57,7 +55,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         newsItemPresenter = new NewsItemPresenter();
         initMatchPager();
         initNewsPager();
-        initTournamentsRV();
+        initTournamentsTable();
     }
 
     void initMatchPager() {
@@ -87,7 +85,8 @@ public class HomePresenter extends MvpPresenter<HomeView> {
                 });
     }
 
-    private void initTournamentsRV() {
+    private void initTournamentsTable() {
+        getViewState().initTable();
         tournamentsDisposable = homeRepo.getTournamentsInfo()
                 .observeOn(mainThreadScheduler)
                 .subscribe(infoList -> {
@@ -106,6 +105,10 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     public void goToNewsScreen() {
         Timber.d("ToDo: go to news");
+    }
+
+    public void goToTournamentScreen() {
+        Timber.d("ToDo: go to tournaments");
     }
 
     private void goToNewsDetailScreen(Long id) {
