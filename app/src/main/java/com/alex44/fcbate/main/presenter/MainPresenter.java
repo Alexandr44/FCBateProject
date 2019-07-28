@@ -1,7 +1,6 @@
 package com.alex44.fcbate.main.presenter;
 
 import com.alex44.fcbate.main.view.MainView;
-import com.alex44.fcbate.utils.api.ApiHolder;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -13,7 +12,6 @@ public class MainPresenter  extends MvpPresenter<MainView> {
         super.onFirstViewAttach();
         getViewState().init();
         getViewState().goToHomeScreen();
-        ApiHolder.getInstance().init();
     }
 
     public void selectedHome() {

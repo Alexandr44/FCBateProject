@@ -8,14 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.home.presenter.INewsItemPresenter;
 import com.alex44.fcbate.home.view.NewsItemView;
 import com.alex44.fcbate.utils.model.IImageLoader;
-import com.alex44.fcbate.utils.ui.GlideImageLoader;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
 import org.jetbrains.annotations.NotNull;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,10 +26,12 @@ import butterknife.Unbinder;
 
 public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemView {
 
+    @Inject
+    protected IImageLoader<ImageView> imageLoader;
+
     private View view;
     private Unbinder unbinder;
     private int pos;
-    private IImageLoader<ImageView> imageLoader = new GlideImageLoader();
     private INewsItemPresenter newsItemPresenter;
 
     @BindView(R.id.news_photo)
@@ -38,10 +42,12 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
     protected TextView newsDateTime;
 
     public NewsItemFragment() {
+        App.getInstance().getAppComponent().inject(this);
         // Required empty public constructor
     }
 
     public NewsItemFragment(int pos, INewsItemPresenter newsItemPresenter) {
+        App.getInstance().getAppComponent().inject(this);
         this.pos = pos;
         this.newsItemPresenter = newsItemPresenter;
     }

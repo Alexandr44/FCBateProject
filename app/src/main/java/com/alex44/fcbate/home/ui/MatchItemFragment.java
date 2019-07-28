@@ -7,14 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.home.presenter.IMatchItemPresenter;
 import com.alex44.fcbate.home.view.MatchItemView;
 import com.alex44.fcbate.utils.model.IImageLoader;
-import com.alex44.fcbate.utils.ui.GlideImageLoader;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
 import org.jetbrains.annotations.NotNull;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +24,12 @@ import butterknife.Unbinder;
 
 public class MatchItemFragment extends MvpAppCompatFragment implements MatchItemView {
 
+    @Inject
+    protected IImageLoader<ImageView> imageLoader;
+
     private View view;
     private Unbinder unbinder;
     private int pos;
-    private IImageLoader<ImageView> imageLoader = new GlideImageLoader();
     private IMatchItemPresenter matchItemPresenter;
 
     @BindView(R.id.left_logo)
@@ -48,10 +52,12 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
     protected TextView matchScore;
 
     public MatchItemFragment() {
+        App.getInstance().getAppComponent().inject(this);
         // Required empty public constructor
     }
 
     public MatchItemFragment(int pos, IMatchItemPresenter iMatchItemPresenter) {
+        App.getInstance().getAppComponent().inject(this);
         this.pos = pos;
         this.matchItemPresenter = iMatchItemPresenter;
     }

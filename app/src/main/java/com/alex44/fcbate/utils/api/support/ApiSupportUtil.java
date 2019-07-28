@@ -1,6 +1,6 @@
 package com.alex44.fcbate.utils.api.support;
 
-import com.alex44.fcbate.utils.ui.SystemInfo;
+import com.alex44.fcbate.utils.model.ISystemInfo;
 
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -26,7 +26,7 @@ import timber.log.Timber;
  */
 public class ApiSupportUtil {
 
-    public static OkHttpClient.Builder enableTls12OnPreLollipop(OkHttpClient.Builder client, SystemInfo systemInfo) {
+    public static OkHttpClient.Builder enableTls12OnPreLollipop(OkHttpClient.Builder client, ISystemInfo systemInfo) {
         if (systemInfo.needToConfigSSL()) {
             try {
                 SSLContext sc = SSLContext.getInstance("TLSv1.2");

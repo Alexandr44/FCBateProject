@@ -1,16 +1,10 @@
 package com.alex44.fcbate.home.ui;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +15,6 @@ import com.alex44.fcbate.R;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.view.HomeView;
-import com.alex44.fcbate.utils.model.ISystemInfo;
-import com.alex44.fcbate.utils.ui.SystemInfo;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -37,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import timber.log.Timber;
 
 import static androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
 
@@ -45,8 +36,6 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
     private View view;
     private Unbinder unbinder;
-
-    private ISystemInfo systemInfo = new SystemInfo();
 
     @InjectPresenter
     HomePresenter presenter;
@@ -104,7 +93,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
     @ProvidePresenter
     protected HomePresenter createPresenter() {
-        return new HomePresenter(AndroidSchedulers.mainThread(), systemInfo);
+        return new HomePresenter(AndroidSchedulers.mainThread());
     }
 
     public HomeFragment() {

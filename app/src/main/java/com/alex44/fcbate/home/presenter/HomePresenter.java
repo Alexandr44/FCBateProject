@@ -1,12 +1,12 @@
 package com.alex44.fcbate.home.presenter;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.NewsDTO;
-import com.alex44.fcbate.home.model.repo.HomeRepo;
+import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.view.HomeView;
 import com.alex44.fcbate.home.view.MatchItemView;
 import com.alex44.fcbate.home.view.NewsItemView;
-import com.alex44.fcbate.utils.model.ISystemInfo;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import lombok.Getter;
@@ -26,9 +28,8 @@ import timber.log.Timber;
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
 
-    private HomeRepo homeRepo;
-
-    private ISystemInfo systemInfo;
+    @Inject
+    protected IHomeRepo homeRepo;
 
     private Scheduler mainThreadScheduler;
 
@@ -42,10 +43,9 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     @Getter
     private NewsItemPresenter newsItemPresenter;
 
-    public HomePresenter(Scheduler mainThreadScheduler, ISystemInfo systemInfo) {
+    public HomePresenter(Scheduler mainThreadScheduler) {
         this.mainThreadScheduler = mainThreadScheduler;
-        this.systemInfo = systemInfo;
-        homeRepo = new HomeRepo(systemInfo);
+        App.getInstance().getAppComponent().inject(this);
     }
 
     @Override

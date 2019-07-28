@@ -1,17 +1,29 @@
 package com.alex44.fcbate;
 
 import android.app.Application;
+
+import com.alex44.fcbate.di.AppComponent;
+import com.alex44.fcbate.di.DaggerAppComponent;
+import com.alex44.fcbate.di.modules.AppModule;
+
+import lombok.Getter;
 import timber.log.Timber;
 
 public class App extends Application {
 
     private static App instance;
 
+    @Getter
+    private AppComponent appComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         Timber.plant(new Timber.DebugTree());
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
     public static App getInstance() {
