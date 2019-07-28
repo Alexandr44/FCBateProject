@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,9 +102,6 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     @BindView(R.id.home_viber_button)
     protected ImageButton viberButton;
 
-    @BindView(R.id.home_table)
-    protected TableLayout homeTable;
-
     @ProvidePresenter
     protected HomePresenter createPresenter() {
         return new HomePresenter(AndroidSchedulers.mainThread(), systemInfo);
@@ -139,32 +137,6 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
         pager.setAdapter(pagerAdapter);
         pager.setCurrentItem(2);
         pager.setPageTransformer(true, new ZoomOutSlideTransformer());
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            boolean lastPage = true;
-            boolean lastPageDragEnabled = false;
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (lastPage && position == 4 && lastPageDragEnabled) {
-                    lastPage = false;
-                    presenter.goToCalendarScreen();
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                lastPage = position == 4;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (lastPage) {
-                    lastPageDragEnabled = state == ViewPager.SCROLL_STATE_DRAGGING;
-                }
-                else {
-                    lastPageDragEnabled = false;
-                }
-            }
-        });
     }
 
     @Override
@@ -178,69 +150,6 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
         newsPager.setAdapter(pagerAdapter);
         newsPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-        newsPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            boolean lastPage = true;
-            boolean lastPageDragEnabled = false;
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (lastPage && position == 4 && lastPageDragEnabled) {
-                    lastPage = false;
-                    presenter.goToNewsScreen();
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                lastPage = position == 4;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (lastPage) {
-                    lastPageDragEnabled = state == ViewPager.SCROLL_STATE_DRAGGING;
-                }
-                else {
-                    lastPageDragEnabled = false;
-                }
-            }
-        });
-    }
-
-    @Override
-    public void initTable() {
-        homeTable.setOnTouchListener(new View.OnTouchListener() {
-            private Float x = null;
-            private Float y = null;
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        x = event.getX();
-                        y = event.getY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if (x != null && y != null) {
-                            final Float deltaX = Math.abs(x - event.getX());
-                            final Float deltaY = Math.abs(y - event.getY());
-                            final WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-                            DisplayMetrics metrics = new DisplayMetrics();
-                            wm.getDefaultDisplay().getMetrics(metrics);
-                            Timber.d("Check: "+deltaX + " "+deltaY+" "+metrics.widthPixels);
-                            if (deltaX > deltaY && deltaX > 0 && deltaX > metrics.widthPixels*0.5) {
-                                presenter.goToTournamentScreen();
-                            }
-
-                        }
-                        break;
-                    case MotionEvent.ACTION_CANCEL:
-                        Timber.d("Cancel");
-                        x = null;
-                        y = null;
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -309,6 +218,21 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
         final Snackbar snackbar = Snackbar.make(view, "Viber Button", Snackbar.LENGTH_SHORT);
         snackbar.setAction("Ok", v -> snackbar.dismiss());
         snackbar.show();
+    }
+
+    @OnClick(R.id.matches_side)
+    public void openCalendar() {
+        presenter.goToCalendarScreen();
+    }
+
+    @OnClick(R.id.club_news_side)
+    public void openNews() {
+        presenter.goToNewsScreen();
+    }
+
+    @OnClick(R.id.champ_side)
+    public void openTournament() {
+        presenter.goToTournamentScreen();
     }
 
 }

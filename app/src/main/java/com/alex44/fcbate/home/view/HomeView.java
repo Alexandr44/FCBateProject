@@ -14,8 +14,6 @@ public interface HomeView extends MvpView {
 
     void initNewsPager();
 
-    void initTable();
-
     void fillTable(List<TournamentInfoDTO> infoList);
 
     void showMessage(String message);

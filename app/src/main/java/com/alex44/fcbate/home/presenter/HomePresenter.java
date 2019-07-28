@@ -86,7 +86,6 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     }
 
     private void initTournamentsTable() {
-        getViewState().initTable();
         tournamentsDisposable = homeRepo.getTournamentsInfo()
                 .observeOn(mainThreadScheduler)
                 .subscribe(infoList -> {
