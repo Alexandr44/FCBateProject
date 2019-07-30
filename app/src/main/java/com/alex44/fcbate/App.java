@@ -5,6 +5,7 @@ import android.app.Application;
 import com.alex44.fcbate.di.AppComponent;
 import com.alex44.fcbate.di.DaggerAppComponent;
 import com.alex44.fcbate.di.modules.AppModule;
+import com.alex44.fcbate.home.model.room.db.DatabaseRoom;
 
 import lombok.Getter;
 import timber.log.Timber;
@@ -24,6 +25,7 @@ public class App extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
+        DatabaseRoom.create(getApplicationContext());
     }
 
     public static App getInstance() {

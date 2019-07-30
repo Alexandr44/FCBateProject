@@ -10,10 +10,10 @@ import io.reactivex.Maybe;
 
 public interface IHomeRepo {
 
-    public Maybe<List<MatchDTO>> getMatches();
+    Maybe<List<MatchDTO>> getMatches();
 
-    public Maybe<List<NewsDTO>> getNews();
+    Maybe<List<NewsDTO>> getNews();
 
-    public Maybe<List<TournamentInfoDTO>> getTournamentsInfo();
+    Maybe<List<TournamentInfoDTO>> getTournamentsInfo();
 
 }

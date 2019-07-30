@@ -18,6 +18,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +27,7 @@ import butterknife.Unbinder;
 
 public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemView {
 
+    @Named("Glide")
     @Inject
     protected IImageLoader<ImageView> imageLoader;
 

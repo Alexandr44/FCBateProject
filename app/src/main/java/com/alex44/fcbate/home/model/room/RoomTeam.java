@@ -1,7 +1,8 @@
-package com.alex44.fcbate.home.model.dto;
+package com.alex44.fcbate.home.model.room;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -10,24 +11,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-public class TeamDTO {
+public class RoomTeam {
 
-    @Expose
-    @SerializedName("team_general_id")
+    @NonNull
+    @PrimaryKey
     private Long id;
 
-    @Expose
-    @SerializedName("logo")
     private String logoUrl;
 
-    @Expose
-    @SerializedName("title")
     private String title;
 
 }

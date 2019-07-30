@@ -1,6 +1,8 @@
-package com.alex44.fcbate.home.model.dto;
+package com.alex44.fcbate.home.model.room;
 
-import com.google.gson.annotations.Expose;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,36 +11,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-public class TournamentInfoDTO {
+public class RoomTournamentInfo {
 
-    @Expose
+    @NonNull
+    @PrimaryKey
     private Long position;
 
-    @Expose
     private String teamName;
 
-    @Expose
     private Long games;
 
-    @Expose
     private Long wins;
 
-    @Expose
     private Long draws;
 
-    @Expose
     private Long loses;
 
-    @Expose
     private String diffs;
 
-    @Expose
     private Long points;
 
 }
