@@ -42,6 +42,9 @@ public interface RoomTournamentInfoDao {
     @Delete
     void delete(List<RoomTournamentInfo> roomTournamentInfoList);
 
-    @Query("SELECT * FROM RoomTournamentInfo ORDER BY points desc LIMIT 3")
+    @Query("SELECT * FROM RoomTournamentInfo i ORDER BY i.points desc LIMIT 3")
     List<RoomTournamentInfo> findFirstThree();
+
+    @Query("SELECT * FROM RoomTournamentInfo i where i.position = :position LIMIT 1")
+    RoomTournamentInfo findByPosition(Long position);
 }

@@ -45,7 +45,6 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     public HomePresenter(Scheduler mainThreadScheduler) {
         this.mainThreadScheduler = mainThreadScheduler;
-        App.getInstance().getAppComponent().inject(this);
     }
 
     @Override
@@ -58,7 +57,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         initTournamentsTable();
     }
 
-    void initMatchPager() {
+    public void initMatchPager() {
         matchesDisposable = homeRepo.getMatches()
                 .observeOn(mainThreadScheduler)
                 .subscribe(matchDTOS -> {
@@ -71,7 +70,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
                 });
     }
 
-    void initNewsPager() {
+    public void initNewsPager() {
         newsDisposable = homeRepo.getNews()
                 .observeOn(mainThreadScheduler)
                 .subscribe(newsDTOS -> {
@@ -85,7 +84,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
                 });
     }
 
-    private void initTournamentsTable() {
+    public void initTournamentsTable() {
         tournamentsDisposable = homeRepo.getTournamentsInfo()
                 .observeOn(mainThreadScheduler)
                 .subscribe(infoList -> {

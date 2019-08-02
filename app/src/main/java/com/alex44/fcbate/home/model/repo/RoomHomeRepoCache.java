@@ -46,6 +46,25 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
     }
 
     @Override
+    public MatchDTO getMatchById(Long id) {
+        final RoomMatch match = DatabaseRoom.getInstance().getMatchDao().findById(id);
+        final MatchDTO matchDTO = new MatchDTO();
+        final Date date = new Date(match.getDate());
+        matchDTO.setId(match.getId());
+        matchDTO.setDateStr(dateTimeFormat.format(date));
+        matchDTO.setGoalsLeft(match.getGoalsLeft());
+        matchDTO.setGoalsRight(match.getGoalsRight());
+        matchDTO.setOnline(match.isOnline());
+        final RoomTeam roomLeftTeam = DatabaseRoom.getInstance().getTeamDao().findById(match.getLeftTeamId());
+        matchDTO.setLeftTeam(new TeamDTO(roomLeftTeam.getId(), roomLeftTeam.getLogoUrl(), roomLeftTeam.getTitle()));
+        final RoomTeam roomRightTeam = DatabaseRoom.getInstance().getTeamDao().findById(match.getRightTeamId());
+        matchDTO.setRightTeam(new TeamDTO(roomRightTeam.getId(), roomRightTeam.getLogoUrl(), roomRightTeam.getTitle()));
+        final RoomTournament tournament = DatabaseRoom.getInstance().getTournamentDao().findById(match.getTournamentId());
+        matchDTO.setTournament(new TournamentDTO(tournament.getId(), tournament.getTitle(), tournament.getTitleShort()));
+        return matchDTO;
+    }
+
+    @Override
     public List<NewsDTO> getNews() {
         final List<RoomNews> news = DatabaseRoom.getInstance().getNewsDao().findLastFive();
         final List<NewsDTO> newsDTOs = new ArrayList<>();
@@ -59,6 +78,18 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
                     ));
         }
         return newsDTOs;
+    }
+
+    @Override
+    public NewsDTO getNewsById(Long id) {
+        final RoomNews news = DatabaseRoom.getInstance().getNewsDao().findById(id);
+        final Date date = new Date(news.getCreated());
+        return new NewsDTO(news.getId(),
+                news.getPhotoUrl(),
+                dateTimeFormat.format(date),
+                news.getTitle(),
+                news.getBrief()
+        );
     }
 
     @Override
@@ -77,6 +108,20 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
             ));
         }
         return tournamentInfoDTOs;
+    }
+
+    @Override
+    public TournamentInfoDTO getTournamentInfoByPosition(Long position) {
+        final RoomTournamentInfo tournamentInfo = DatabaseRoom.getInstance().getTournamentInfoDao().findByPosition(position);
+        return new TournamentInfoDTO(tournamentInfo.getPosition(),
+                tournamentInfo.getTeamName(),
+                tournamentInfo.getGames(),
+                tournamentInfo.getWins(),
+                tournamentInfo.getDraws(),
+                tournamentInfo.getLoses(),
+                tournamentInfo.getDiffs(),
+                tournamentInfo.getPoints()
+        );
     }
 
     @Override

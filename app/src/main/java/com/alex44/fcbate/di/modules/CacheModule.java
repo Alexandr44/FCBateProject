@@ -13,7 +13,7 @@ public class CacheModule {
 
     @Named("Room")
     @Provides
-    IHomeRepoCache rooHomeRepoCache() {
+    public IHomeRepoCache roomHomeRepoCache() {
         return new RoomHomeRepoCache();
     }
 

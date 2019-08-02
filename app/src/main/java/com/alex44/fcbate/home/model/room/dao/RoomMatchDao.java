@@ -45,4 +45,7 @@ public interface RoomMatchDao {
     @Query("SELECT * FROM (SELECT * FROM RoomMatch m ORDER BY m.date desc LIMIT 5) ORDER BY date asc")
     List<RoomMatch> findLastFive();
 
+    @Query("SELECT * FROM RoomMatch m where m.id = :id LIMIT 1")
+    RoomMatch findById(Long id);
+
 }

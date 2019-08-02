@@ -10,9 +10,15 @@ public interface IHomeRepoCache {
 
     List<MatchDTO> getMatches();
 
+    MatchDTO getMatchById(Long id);
+
     List<NewsDTO> getNews();
 
+    NewsDTO getNewsById(Long id);
+
     List<TournamentInfoDTO> getTournamentsInfo();
+
+    TournamentInfoDTO getTournamentInfoByPosition(Long position);
 
     boolean putMatches(List<MatchDTO> matches);
 

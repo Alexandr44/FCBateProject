@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.presenter.HomePresenter;
@@ -93,7 +94,9 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
     @ProvidePresenter
     protected HomePresenter createPresenter() {
-        return new HomePresenter(AndroidSchedulers.mainThread());
+        final HomePresenter homePresenter = new HomePresenter(AndroidSchedulers.mainThread());
+        App.getInstance().getAppComponent().inject(homePresenter);
+        return homePresenter;
     }
 
     public HomeFragment() {

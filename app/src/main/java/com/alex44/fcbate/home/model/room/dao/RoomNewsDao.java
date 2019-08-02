@@ -42,6 +42,9 @@ public interface RoomNewsDao {
     @Delete
     void delete(List<RoomNews> roomNewsList);
 
-    @Query("SELECT * FROM RoomNews m ORDER BY m.created desc LIMIT 5")
+    @Query("SELECT * FROM RoomNews n ORDER BY n.created desc LIMIT 5")
     List<RoomNews> findLastFive();
+
+    @Query("SELECT * FROM RoomNews n where n.id = :id LIMIT 1")
+    RoomNews findById(Long id);
 }
