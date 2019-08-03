@@ -103,4 +103,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
             tournamentsDisposable.dispose();
     }
 
+    public void backClick() {
+
+    }
 }

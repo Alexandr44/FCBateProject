@@ -82,6 +82,8 @@ dependencies {
     //Room
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'
+    //Cicerone
+    implementation 'ru.terrakok.cicerone:cicerone:5.0.0'
 
     //Unit Tests
     testImplementation 'junit:junit:4.12'

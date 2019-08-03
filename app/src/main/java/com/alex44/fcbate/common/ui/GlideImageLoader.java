@@ -1,9 +1,9 @@
-package com.alex44.fcbate.utils.ui;
+package com.alex44.fcbate.common.ui;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import com.alex44.fcbate.utils.model.IImageLoader;
+import com.alex44.fcbate.common.model.IImageLoader;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;

@@ -1,4 +1,4 @@
-package com.alex44.fcbate.home.model.room.db;
+package com.alex44.fcbate.common.model.db;
 
 import android.content.Context;
 

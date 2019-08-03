@@ -9,10 +9,10 @@ import android.widget.TextView;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
+import com.alex44.fcbate.common.model.IImageLoader;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.presenter.MatchItemPresenter;
 import com.alex44.fcbate.home.view.MatchItemView;
-import com.alex44.fcbate.utils.model.IImageLoader;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;

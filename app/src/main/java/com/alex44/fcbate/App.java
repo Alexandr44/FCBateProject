@@ -5,7 +5,7 @@ import android.app.Application;
 import com.alex44.fcbate.di.AppComponent;
 import com.alex44.fcbate.di.DaggerAppComponent;
 import com.alex44.fcbate.di.modules.AppModule;
-import com.alex44.fcbate.home.model.room.db.DatabaseRoom;
+import com.alex44.fcbate.common.model.db.DatabaseRoom;
 
 import lombok.Getter;
 import timber.log.Timber;

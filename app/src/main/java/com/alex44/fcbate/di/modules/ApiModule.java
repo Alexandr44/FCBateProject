@@ -1,9 +1,9 @@
 package com.alex44.fcbate.di.modules;
 
 import com.alex44.fcbate.App;
+import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
 import com.alex44.fcbate.home.model.api.IHomeSource;
-import com.alex44.fcbate.utils.api.support.ApiSupportUtil;
-import com.alex44.fcbate.utils.model.ISystemInfo;
+import com.alex44.fcbate.common.model.ISystemInfo;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.alex44.fcbate.utils.model.ApiStrings.RETROFIT_BASE_URL;
+import static com.alex44.fcbate.common.ApiStrings.RETROFIT_BASE_URL;
 
 @Module(includes = {SystemModule.class, AppModule.class})
 public class ApiModule {

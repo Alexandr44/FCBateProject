@@ -10,7 +10,7 @@ import com.alex44.fcbate.home.model.room.RoomNews;
 import com.alex44.fcbate.home.model.room.RoomTeam;
 import com.alex44.fcbate.home.model.room.RoomTournament;
 import com.alex44.fcbate.home.model.room.RoomTournamentInfo;
-import com.alex44.fcbate.home.model.room.db.DatabaseRoom;
+import com.alex44.fcbate.common.model.db.DatabaseRoom;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

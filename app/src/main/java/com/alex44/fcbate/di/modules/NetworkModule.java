@@ -1,7 +1,7 @@
 package com.alex44.fcbate.di.modules;
 
-import com.alex44.fcbate.utils.model.INetworkStatus;
-import com.alex44.fcbate.utils.ui.NetworkStatus;
+import com.alex44.fcbate.common.model.INetworkStatus;
+import com.alex44.fcbate.common.ui.NetworkStatus;
 
 import dagger.Module;
 import dagger.Provides;

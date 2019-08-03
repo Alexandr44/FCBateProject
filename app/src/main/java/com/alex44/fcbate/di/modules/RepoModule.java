@@ -4,8 +4,8 @@ import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.home.model.repo.HomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
-import com.alex44.fcbate.utils.model.INetworkStatus;
-import com.alex44.fcbate.utils.model.ISystemInfo;
+import com.alex44.fcbate.common.model.INetworkStatus;
+import com.alex44.fcbate.common.model.ISystemInfo;
 
 import javax.inject.Named;
 

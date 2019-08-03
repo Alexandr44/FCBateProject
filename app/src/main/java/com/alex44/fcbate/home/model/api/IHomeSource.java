@@ -8,9 +8,9 @@ import java.util.List;
 import io.reactivex.Maybe;
 import retrofit2.http.GET;
 
-import static com.alex44.fcbate.utils.model.ApiStrings.MATCHES_URL;
-import static com.alex44.fcbate.utils.model.ApiStrings.NEWS_URL;
-import static com.alex44.fcbate.utils.model.ApiStrings.TOURNAMENTS_URL;
+import static com.alex44.fcbate.common.ApiStrings.MATCHES_URL;
+import static com.alex44.fcbate.common.ApiStrings.NEWS_URL;
+import static com.alex44.fcbate.common.ApiStrings.TOURNAMENTS_URL;
 
 public interface IHomeSource {
 

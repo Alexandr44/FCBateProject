@@ -1,11 +1,11 @@
-package com.alex44.fcbate.utils.ui;
+package com.alex44.fcbate.common.ui;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.alex44.fcbate.App;
-import com.alex44.fcbate.utils.model.INetworkStatus;
+import com.alex44.fcbate.common.model.INetworkStatus;
 
 public class NetworkStatus implements INetworkStatus {
 

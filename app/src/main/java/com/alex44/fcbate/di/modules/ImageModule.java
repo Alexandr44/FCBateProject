@@ -2,8 +2,8 @@ package com.alex44.fcbate.di.modules;
 
 import android.widget.ImageView;
 
-import com.alex44.fcbate.utils.model.IImageLoader;
-import com.alex44.fcbate.utils.ui.GlideImageLoader;
+import com.alex44.fcbate.common.model.IImageLoader;
+import com.alex44.fcbate.common.ui.GlideImageLoader;
 
 import javax.inject.Named;
 

@@ -7,8 +7,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.alex44.fcbate.R;
+import com.alex44.fcbate.common.ui.BackButtonListener;
 import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.view.MainView;
@@ -100,11 +102,16 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).backClick()) {
+                return;
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -159,4 +166,7 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

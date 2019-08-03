@@ -1,8 +1,8 @@
-package com.alex44.fcbate.utils.ui;
+package com.alex44.fcbate.common.ui;
 
 import android.os.Build;
 
-import com.alex44.fcbate.utils.model.ISystemInfo;
+import com.alex44.fcbate.common.model.ISystemInfo;
 
 public class SystemInfo implements ISystemInfo {
 

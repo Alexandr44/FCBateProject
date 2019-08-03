@@ -1,4 +1,4 @@
-package com.alex44.fcbate.utils.api.support;
+package com.alex44.fcbate.common.model.api.support;
 
 import java.io.IOException;
 import java.net.InetAddress;

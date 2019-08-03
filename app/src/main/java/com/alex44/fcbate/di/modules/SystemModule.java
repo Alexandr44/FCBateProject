@@ -1,7 +1,7 @@
 package com.alex44.fcbate.di.modules;
 
-import com.alex44.fcbate.utils.model.ISystemInfo;
-import com.alex44.fcbate.utils.ui.SystemInfo;
+import com.alex44.fcbate.common.model.ISystemInfo;
+import com.alex44.fcbate.common.ui.SystemInfo;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,6 +1,6 @@
-package com.alex44.fcbate.utils.api.support;
+package com.alex44.fcbate.common.model.api.support;
 
-import com.alex44.fcbate.utils.model.ISystemInfo;
+import com.alex44.fcbate.common.model.ISystemInfo;
 
 import java.security.KeyStore;
 import java.security.KeyStoreException;

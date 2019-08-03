@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
+import com.alex44.fcbate.common.ui.BackButtonListener;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
@@ -35,7 +36,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import static androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
 
-public class HomeFragment extends MvpAppCompatFragment implements HomeView {
+public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener {
 
     private View view;
     private Unbinder unbinder;
@@ -243,4 +244,9 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
         presenter.goToTournamentScreen();
     }
 
+    @Override
+    public Boolean backClick() {
+        presenter.backClick();
+        return true;
+    }
 }

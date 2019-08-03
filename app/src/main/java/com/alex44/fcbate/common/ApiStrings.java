@@ -1,4 +1,4 @@
-package com.alex44.fcbate.utils.model;
+package com.alex44.fcbate.common;
 
 public class ApiStrings {
 

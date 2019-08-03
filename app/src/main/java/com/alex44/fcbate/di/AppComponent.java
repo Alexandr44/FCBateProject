@@ -1,6 +1,7 @@
 package com.alex44.fcbate.di;
 
 import com.alex44.fcbate.di.modules.AppModule;
+import com.alex44.fcbate.di.modules.CiceroneModule;
 import com.alex44.fcbate.di.modules.ImageModule;
 import com.alex44.fcbate.di.modules.RepoModule;
 import com.alex44.fcbate.home.presenter.HomePresenter;
@@ -12,7 +13,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {AppModule.class, RepoModule.class, ImageModule.class})
+@Component(modules = {AppModule.class, RepoModule.class, ImageModule.class, CiceroneModule.class})
 public interface AppComponent {
     void inject(HomePresenter homePresenter);
 
