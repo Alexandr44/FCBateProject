@@ -1,5 +1,7 @@
 package com.alex44.fcbate.home.view;
 
+import com.alex44.fcbate.home.model.dto.MatchDTO;
+import com.alex44.fcbate.home.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
@@ -10,9 +12,9 @@ import java.util.List;
 @StateStrategyType(value = AddToEndSingleStrategy.class)
 public interface HomeView extends MvpView {
 
-    void initMatchPager();
+    void initMatchPager(List<MatchDTO> matchDTOS);
 
-    void initNewsPager();
+    void initNewsPager(List<NewsDTO> newsDTOS);
 
     void fillTable(List<TournamentInfoDTO> infoList);
 

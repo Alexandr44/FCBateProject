@@ -9,10 +9,13 @@ import android.widget.TextView;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
-import com.alex44.fcbate.home.presenter.IMatchItemPresenter;
+import com.alex44.fcbate.home.model.dto.MatchDTO;
+import com.alex44.fcbate.home.presenter.MatchItemPresenter;
 import com.alex44.fcbate.home.view.MatchItemView;
 import com.alex44.fcbate.utils.model.IImageLoader;
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +25,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 public class MatchItemFragment extends MvpAppCompatFragment implements MatchItemView {
 
@@ -31,8 +35,9 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
 
     private View view;
     private Unbinder unbinder;
-    private int pos;
-    private IMatchItemPresenter matchItemPresenter;
+
+    @InjectPresenter
+    MatchItemPresenter matchItemPresenter;
 
     @BindView(R.id.left_logo)
     protected ImageView leftLogo;
@@ -55,13 +60,18 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
 
     public MatchItemFragment() {
         App.getInstance().getAppComponent().inject(this);
-        // Required empty public constructor
     }
 
-    public MatchItemFragment(int pos, IMatchItemPresenter iMatchItemPresenter) {
-        App.getInstance().getAppComponent().inject(this);
-        this.pos = pos;
-        this.matchItemPresenter = iMatchItemPresenter;
+    @ProvidePresenter
+    protected MatchItemPresenter createPresenter() {
+        MatchDTO matchDTO = null;
+        if (getArguments() != null && getArguments().getSerializable("data") instanceof MatchDTO) {
+            matchDTO = (MatchDTO) getArguments().getSerializable("data");
+        }
+        else {
+            Timber.e("No data for MatchItemPresenter");
+        }
+        return new MatchItemPresenter(matchDTO);
     }
 
     @Override
@@ -69,7 +79,6 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.home_match_item, container, false);
         unbinder = ButterKnife.bind(this, view);
-        matchItemPresenter.update(this);
         return view;
     }
 
@@ -77,11 +86,6 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @Override
-    public int getPos() {
-        return pos;
     }
 
     @Override

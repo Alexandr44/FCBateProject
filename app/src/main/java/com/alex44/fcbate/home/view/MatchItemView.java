@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 @StateStrategyType(value = AddToEndSingleStrategy.class)
 public interface MatchItemView extends MvpView {
 
-    int getPos();
-
     void setLeftLogo(@NotNull String logoUrl);
 
     void setRightLogo(@NotNull String logoUrl);

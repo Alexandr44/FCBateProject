@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
-import com.alex44.fcbate.home.presenter.INewsItemPresenter;
+import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.home.presenter.NewsItemPresenter;
 import com.alex44.fcbate.home.view.NewsItemView;
 import com.alex44.fcbate.utils.model.IImageLoader;
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemView {
 
@@ -33,8 +37,9 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
 
     private View view;
     private Unbinder unbinder;
-    private int pos;
-    private INewsItemPresenter newsItemPresenter;
+
+    @InjectPresenter
+    NewsItemPresenter newsItemPresenter;
 
     @BindView(R.id.news_photo)
     protected ImageView newsPhoto;
@@ -45,13 +50,18 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
 
     public NewsItemFragment() {
         App.getInstance().getAppComponent().inject(this);
-        // Required empty public constructor
     }
 
-    public NewsItemFragment(int pos, INewsItemPresenter newsItemPresenter) {
-        App.getInstance().getAppComponent().inject(this);
-        this.pos = pos;
-        this.newsItemPresenter = newsItemPresenter;
+    @ProvidePresenter
+    protected NewsItemPresenter createPresenter() {
+        NewsDTO newsDTO = null;
+        if (getArguments() != null && getArguments().getSerializable("data") instanceof NewsDTO) {
+            newsDTO = (NewsDTO) getArguments().getSerializable("data");
+        }
+        else {
+            Timber.e("No data for NewsItemPresenter");
+        }
+        return new NewsItemPresenter(newsDTO);
     }
 
     @Override
@@ -59,7 +69,6 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.home_news_item, container, false);
         unbinder = ButterKnife.bind(this, view);
-        newsItemPresenter.update(this);
         return view;
     }
 
@@ -67,11 +76,6 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @Override
-    public int getPos() {
-        return pos;
     }
 
     @Override
@@ -99,7 +103,8 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
 
     @OnClick(R.id.news_photo)
     public void imageClick() {
-        newsItemPresenter.imageClicked(pos);
+        Timber.d("Click image");
+        newsItemPresenter.imageClicked();
     }
 
 }

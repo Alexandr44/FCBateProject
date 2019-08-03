@@ -119,8 +119,21 @@ public class HomePresenterTest {
 
         testScheduler.advanceTimeBy(1, TimeUnit.SECONDS);
 
-        Mockito.verify(homeView).initMatchPager();
-        Mockito.verify(homeView).initNewsPager();
+        final List<MatchDTO> matches = new ArrayList<>();
+        matches.add(matchDTO);
+        matches.add(matchDTO);
+        matches.add(matchDTO);
+        matches.add(matchDTO);
+        matches.add(matchDTO);
+        final List<NewsDTO> news = new ArrayList<>();
+        news.add(newsDTO);
+        news.add(newsDTO);
+        news.add(newsDTO);
+        news.add(newsDTO);
+        news.add(newsDTO);
+
+        Mockito.verify(homeView).initMatchPager(matches);
+        Mockito.verify(homeView).initNewsPager(news);
         final List<TournamentInfoDTO> list = new ArrayList<>();
         list.add(tournamentInfoDTO);
         list.add(tournamentInfoDTO);

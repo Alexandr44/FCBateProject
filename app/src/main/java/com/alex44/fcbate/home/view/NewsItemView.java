@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 @StateStrategyType(value = AddToEndSingleStrategy.class)
 public interface NewsItemView extends MvpView {
 
-    int getPos();
-
     void setPhoto(@NotNull String photoUrl);
 
     void setTitle(@NotNull String title);

@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
+import com.alex44.fcbate.home.model.dto.MatchDTO;
+import com.alex44.fcbate.home.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.view.HomeView;
@@ -118,30 +120,44 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     }
 
     @Override
-    public void initMatchPager() {
+    public void initMatchPager(List<MatchDTO> matchDTOS) {
         final HomePagerAdapter pagerAdapter = new HomePagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        pagerAdapter.addFragment(new MatchItemFragment(0, presenter.getMatchItemPresenter()), "Match 1");
-        pagerAdapter.addFragment(new MatchItemFragment(1, presenter.getMatchItemPresenter()), "Match 2");
-        pagerAdapter.addFragment(new MatchItemFragment(2, presenter.getMatchItemPresenter()), "Match 3");
-        pagerAdapter.addFragment(new MatchItemFragment(3, presenter.getMatchItemPresenter()), "Match 4");
-        pagerAdapter.addFragment(new MatchItemFragment(4, presenter.getMatchItemPresenter()), "Match 5");
+
+        for (int i = 0; i < matchDTOS.size(); i++) {
+            pagerAdapter.addFragment(createMatchItemFragment(matchDTOS.get(i)), "Match "+i);
+        }
 
         pager.setAdapter(pagerAdapter);
         pager.setCurrentItem(2);
         pager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
+    private MatchItemFragment createMatchItemFragment(MatchDTO matchDTO) {
+        final Bundle arguments = new Bundle();
+        arguments.putSerializable("data", matchDTO);
+        final MatchItemFragment fragment = new MatchItemFragment();
+        fragment.setArguments(arguments);
+        return fragment;
+    }
+
     @Override
-    public void initNewsPager() {
+    public void initNewsPager(List<NewsDTO> newsDTOS) {
         final HomePagerAdapter pagerAdapter = new HomePagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        pagerAdapter.addFragment(new NewsItemFragment(0, presenter.getNewsItemPresenter()), "News 1");
-        pagerAdapter.addFragment(new NewsItemFragment(1, presenter.getNewsItemPresenter()), "News 2");
-        pagerAdapter.addFragment(new NewsItemFragment(2, presenter.getNewsItemPresenter()), "News 3");
-        pagerAdapter.addFragment(new NewsItemFragment(3, presenter.getNewsItemPresenter()), "News 4");
-        pagerAdapter.addFragment(new NewsItemFragment(4, presenter.getNewsItemPresenter()), "News 5");
+
+        for (int i = 0; i < newsDTOS.size(); i++) {
+            pagerAdapter.addFragment(createNewsItemFragment(newsDTOS.get(i)), "News "+i);
+        }
 
         newsPager.setAdapter(pagerAdapter);
         newsPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+    }
+
+    private NewsItemFragment createNewsItemFragment(NewsDTO newsDTO) {
+        final Bundle arguments = new Bundle();
+        arguments.putSerializable("data", newsDTO);
+        final NewsItemFragment fragment = new NewsItemFragment();
+        fragment.setArguments(arguments);
+        return fragment;
     }
 
     @Override
