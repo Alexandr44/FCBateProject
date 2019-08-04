@@ -138,8 +138,8 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
         if ("КБ".equals(name)) return R.drawable.trnm_bel_cup_logo;
         if ("СКБ".equals(name)) return R.drawable.trnm_bel_super_cup_logo;
         if ("ЛЧ".equals(name)) return R.drawable.trnm_eur_champion_league_logo;
-        if ("ЕЛ".equals(name)) return R.drawable.trnm_eur_league_logo;
-        if ("ЮЛ".equals(name)) return R.drawable.trnm_eur_youth_league_logo;
+        if ("ЛЕ".equals(name)) return R.drawable.trnm_eur_league_logo;
+        if ("ЛЮ".equals(name)) return R.drawable.trnm_eur_youth_league_logo;
         return 0;
     }
 }
