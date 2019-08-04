@@ -11,10 +11,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
 public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
+
+    @Inject
+    protected Router router;
 
     private final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     private final SimpleDateFormat timeOutFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -89,6 +95,7 @@ public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
 
     public void imageClicked() {
         Timber.d("Go to detail news with id:" + newsDTO.getId() + ": "+newsDTO.getTitle());
+//        router.navigateTo(TODO: create new screen);
     }
 
 }

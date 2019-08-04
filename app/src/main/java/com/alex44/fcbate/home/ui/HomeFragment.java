@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
@@ -94,6 +95,10 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     protected ImageButton youtubeButton;
     @BindView(R.id.home_viber_button)
     protected ImageButton viberButton;
+
+    public static Fragment newInstance() {
+        return new HomeFragment();
+    }
 
     @ProvidePresenter
     protected HomePresenter createPresenter() {

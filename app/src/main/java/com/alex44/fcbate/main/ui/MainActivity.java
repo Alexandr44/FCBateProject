@@ -9,25 +9,41 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.ui.BackButtonListener;
 import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.view.MainView;
+import com.alex44.fcbate.news.ui.NewsFragment;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.google.android.material.navigation.NavigationView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class MainActivity  extends MvpAppCompatActivity implements MainView,
          NavigationView.OnNavigationItemSelectedListener {
 
     @InjectPresenter
     MainPresenter presenter;
+
+    @Inject
+    protected NavigatorHolder navigatorHolder;
+
+    @Inject
+    protected Router router;
+
+    private Navigator navigator = new SupportAppNavigator(this, R.id.menu_fragment_layout);
 
     private Unbinder unbinder;
 
@@ -41,6 +57,7 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -56,48 +73,11 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         navigationView.setCheckedItem(R.id.nav_home);
     }
 
-
-    @Override
-    public void goToHomeScreen() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.menu_fragment_layout, new HomeFragment())
-                .commit();
-    }
-
-    @Override
-    public void goToNewsScreen() {
-
-    }
-
-    @Override
-    public void goToCalendarScreen() {
-
-    }
-
-    @Override
-    public void goToTableScreen() {
-
-    }
-
-    @Override
-    public void goToTeamScreen() {
-
-    }
-
-    @Override
-    public void goToClubScreen() {
-
-    }
-
-    @Override
-    public void goToAppScreen() {
-
-    }
-
     @ProvidePresenter
     protected MainPresenter createPresenter() {
-        return new MainPresenter();
+        final MainPresenter mainPresenter = new MainPresenter();
+        App.getInstance().getAppComponent().inject(mainPresenter);
+        return mainPresenter;
     }
 
     @Override
@@ -113,6 +93,18 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
                 super.onBackPressed();
             }
         }
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        navigatorHolder.setNavigator(navigator);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        navigatorHolder.removeNavigator();
     }
 
     @Override
@@ -147,19 +139,25 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         final int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            presenter.selectedHome();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (!(fragment instanceof HomeFragment)) {
+                presenter.goToHomeScreen();
+            }
         } else if (id == R.id.nav_news) {
-            presenter.selectedNews();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (!(fragment instanceof NewsFragment)) {
+                presenter.goToNewsScreen();
+            }
         } else if (id == R.id.nav_calendar) {
-            presenter.selectedCalendar();
+            presenter.goToCalendarScreen();
         } else if (id == R.id.nav_table) {
-            presenter.selectedTable();
+            presenter.goToTableScreen();
         } else if (id == R.id.nav_team) {
-            presenter.selectedTeam();
+            presenter.goToTeamScreen();
         } else if (id == R.id.nav_club) {
-            presenter.selectedClub();
+            presenter.goToClubScreen();
         } else if (id == R.id.nav_app) {
-            presenter.selectedApp();
+            presenter.goToAppScreen();
         }
 
 //        DrawerLayout drawer = findViewById(R.id.drawer_layout);

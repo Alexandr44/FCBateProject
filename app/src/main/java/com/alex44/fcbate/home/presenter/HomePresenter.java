@@ -9,10 +9,14 @@ import javax.inject.Inject;
 
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
+import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
+
+    @Inject
+    protected Router router;
 
     @Inject
     protected IHomeRepo homeRepo;
@@ -78,18 +82,17 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     public void goToCalendarScreen() {
         Timber.d("ToDo: go to calendar");
+//        router.navigateTo(TODO: new screen);
     }
 
     public void goToNewsScreen() {
         Timber.d("ToDo: go to news");
+//        router.navigateTo(TODO: new screen);
     }
 
     public void goToTournamentScreen() {
         Timber.d("ToDo: go to tournaments");
-    }
-
-    private void goToNewsDetailScreen(Long id) {
-        Timber.d("ToDo: go to news detail with id: "+id);
+//        router.navigateTo(TODO: new screen);
     }
 
     @Override
@@ -104,6 +107,6 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     }
 
     public void backClick() {
-
+        router.exit();
     }
 }
