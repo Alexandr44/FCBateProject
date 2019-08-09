@@ -3,6 +3,8 @@ package com.alex44.fcbate.home.model.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class TournamentDTO {
+public class TournamentDTO  implements Serializable {
 
     @Expose
     @SerializedName("tournament_id")

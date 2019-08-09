@@ -23,11 +23,11 @@ public class MainPresenter  extends MvpPresenter<MainView> {
     }
     
     public void goToHomeScreen() {
-        router.navigateTo(new Screens.HomeScreen());
+        router.newRootScreen(new Screens.HomeScreen());
     }
 
     public void goToNewsScreen() {
-        router.navigateTo(new Screens.NewsScreen());
+        router.newRootScreen(new Screens.NewsScreen());
     }
 
     public void goToCalendarScreen() {

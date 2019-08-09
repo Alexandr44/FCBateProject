@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
@@ -30,6 +31,7 @@ import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.android.support.SupportAppNavigator;
+import ru.terrakok.cicerone.commands.Command;
 
 public class MainActivity  extends MvpAppCompatActivity implements MainView,
          NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +45,13 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
     @Inject
     protected Router router;
 
-    private Navigator navigator = new SupportAppNavigator(this, R.id.menu_fragment_layout);
+    private Navigator navigator = new SupportAppNavigator(this, R.id.menu_fragment_layout) {
+        @Override
+        protected void setupFragmentTransaction(Command command, Fragment currentFragment, Fragment nextFragment, FragmentTransaction fragmentTransaction) {
+            super.setupFragmentTransaction(command, currentFragment, nextFragment, fragmentTransaction);
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out);
+        }
+    };
 
     private Unbinder unbinder;
 

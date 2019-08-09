@@ -1,5 +1,6 @@
 package com.alex44.fcbate.news.presenter;
 
+import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.news.view.NewsView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -32,7 +33,7 @@ public class NewsPresenter extends MvpPresenter<NewsView> {
     }
 
     public void backClick() {
-        router.exit();
+        router.newRootScreen(new Screens.HomeScreen());
     }
 
 }
