@@ -4,6 +4,7 @@ import com.alex44.fcbate.App;
 import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
 import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.common.model.ISystemInfo;
+import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -72,6 +73,11 @@ public class ApiModule {
     @Provides
     public IHomeSource homeSource(Retrofit retrofit) {
         return retrofit.create(IHomeSource.class);
+    }
+
+    @Provides
+    public INewsDetailSource newsDetailSource(Retrofit retrofit) {
+        return retrofit.create(INewsDetailSource.class);
     }
 
 }

@@ -61,7 +61,9 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
         else {
             Timber.e("No data for NewsItemPresenter");
         }
-        return new NewsItemPresenter(newsDTO);
+        final NewsItemPresenter newsItemPresenter = new NewsItemPresenter(newsDTO);
+        App.getInstance().getAppComponent().inject(newsItemPresenter);
+        return newsItemPresenter;
     }
 
     @Override

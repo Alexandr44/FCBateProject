@@ -16,8 +16,11 @@ import com.alex44.fcbate.home.model.room.dao.RoomNewsDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTeamDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTournamentDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTournamentInfoDao;
+import com.alex44.fcbate.newsdetail.model.room.RoomNewsDetail;
+import com.alex44.fcbate.newsdetail.model.room.dao.RoomNewsDetailDao;
 
-@Database(entities = {RoomMatch.class, RoomNews.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class}, version = 1)
+@Database(entities = {RoomMatch.class, RoomNews.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
+        RoomNewsDetail.class}, version = 1)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static final String DATABASE_NAME = "RoomDatabase.db";
@@ -54,5 +57,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract RoomTeamDao getTeamDao();
     public abstract RoomTournamentDao getTournamentDao();
     public abstract RoomTournamentInfoDao getTournamentInfoDao();
+
+    public abstract RoomNewsDetailDao getNewsDetailDao();
 
 }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a8bc3227f3c2df69a6b7bb8fbbb835e9",
+    "identityHash": "3912827080c7a611628f68dae69ce844",
     "entities": [
       {
         "tableName": "RoomMatch",
@@ -294,12 +294,62 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "RoomNewsDetail",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `photoUrl` TEXT, `dateCreated` TEXT, `title` TEXT, `brief` TEXT, `content` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "brief",
+            "columnName": "brief",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a8bc3227f3c2df69a6b7bb8fbbb835e9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3912827080c7a611628f68dae69ce844')"
     ]
   }
 }

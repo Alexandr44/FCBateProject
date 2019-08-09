@@ -9,4 +9,5 @@
     <dimen name="match_pager_height">140dp</dimen>
     <dimen name="news_item_height">200dp</dimen>
     <dimen name="news_pager_height">250dp</dimen>
+    <dimen name="news_details_image_height">250dp</dimen>
 </resources>
