@@ -1,7 +1,7 @@
 package com.alex44.fcbate.home.presenter;
 
 import com.alex44.fcbate.common.navigation.Screens;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.view.NewsItemView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;

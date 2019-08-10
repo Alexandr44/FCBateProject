@@ -2,13 +2,13 @@ package com.alex44.fcbate.home.model.repo;
 
 import android.annotation.SuppressLint;
 
+import com.alex44.fcbate.common.model.INetworkStatus;
+import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.MatchesListResponse;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
-import com.alex44.fcbate.common.model.INetworkStatus;
-import com.alex44.fcbate.common.model.ISystemInfo;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,7 @@ public class HomeRepo implements IHomeRepo {
         }
         else {
             return Maybe.create((MaybeOnSubscribe<List<NewsDTO>>) emitter -> {
-                final List<NewsDTO> news = homeRepoCache.getNews();
+                final List<NewsDTO> news = homeRepoCache.getNews(5);
                 if (news == null || news.isEmpty()) {
                     emitter.onError(new RuntimeException("No news found in local storage"));
                 } else {

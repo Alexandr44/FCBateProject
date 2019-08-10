@@ -7,20 +7,24 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.alex44.fcbate.home.model.room.RoomMatch;
-import com.alex44.fcbate.home.model.room.RoomNews;
 import com.alex44.fcbate.home.model.room.RoomTeam;
 import com.alex44.fcbate.home.model.room.RoomTournament;
 import com.alex44.fcbate.home.model.room.RoomTournamentInfo;
 import com.alex44.fcbate.home.model.room.dao.RoomMatchDao;
-import com.alex44.fcbate.home.model.room.dao.RoomNewsDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTeamDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTournamentDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTournamentInfoDao;
+import com.alex44.fcbate.news.model.room.RoomDeclaration;
+import com.alex44.fcbate.news.model.room.RoomNews;
+import com.alex44.fcbate.news.model.room.RoomPress;
+import com.alex44.fcbate.news.model.room.dao.RoomDeclarationDao;
+import com.alex44.fcbate.news.model.room.dao.RoomNewsDao;
+import com.alex44.fcbate.news.model.room.dao.RoomPressDao;
 import com.alex44.fcbate.newsdetail.model.room.RoomNewsDetail;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomNewsDetailDao;
 
-@Database(entities = {RoomMatch.class, RoomNews.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
-        RoomNewsDetail.class}, version = 1)
+@Database(entities = {RoomMatch.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
+        RoomNewsDetail.class, RoomNews.class, RoomPress.class, RoomDeclaration.class}, version = 1)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static final String DATABASE_NAME = "RoomDatabase.db";
@@ -53,11 +57,14 @@ public abstract class DatabaseRoom extends RoomDatabase {
     }
 
     public abstract RoomMatchDao getMatchDao();
-    public abstract RoomNewsDao getNewsDao();
     public abstract RoomTeamDao getTeamDao();
     public abstract RoomTournamentDao getTournamentDao();
     public abstract RoomTournamentInfoDao getTournamentInfoDao();
 
     public abstract RoomNewsDetailDao getNewsDetailDao();
+
+    public abstract RoomNewsDao getNewsDao();
+    public abstract RoomPressDao getPressDao();
+    public abstract RoomDeclarationDao getDeclarationDao();
 
 }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.model.IImageLoader;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.presenter.NewsItemPresenter;
 import com.alex44.fcbate.home.view.NewsItemView;
 import com.arellomobile.mvp.MvpAppCompatFragment;

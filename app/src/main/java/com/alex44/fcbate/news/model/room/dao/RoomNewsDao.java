@@ -1,4 +1,4 @@
-package com.alex44.fcbate.home.model.room.dao;
+package com.alex44.fcbate.news.model.room.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.alex44.fcbate.home.model.room.RoomNews;
+import com.alex44.fcbate.news.model.room.RoomNews;
 
 import java.util.List;
 
@@ -42,8 +42,8 @@ public interface RoomNewsDao {
     @Delete
     void delete(List<RoomNews> roomNewsList);
 
-    @Query("SELECT * FROM RoomNews n ORDER BY n.created desc LIMIT 5")
-    List<RoomNews> findLastFive();
+    @Query("SELECT * FROM RoomNews n ORDER BY n.created desc LIMIT :count")
+    List<RoomNews> findLast(int count);
 
     @Query("SELECT * FROM RoomNews n where n.id = :id LIMIT 1")
     RoomNews findById(Long id);

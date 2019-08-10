@@ -1,7 +1,7 @@
 package com.alex44.fcbate.home.model.repo;
 
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface IHomeRepoCache {
 
     MatchDTO getMatchById(Long id);
 
-    List<NewsDTO> getNews();
+    List<NewsDTO> getNews(int count);
 
     NewsDTO getNewsById(Long id);
 

@@ -1,7 +1,7 @@
 package com.alex44.fcbate.home.model.api;
 
 import com.alex44.fcbate.home.model.dto.MatchesListResponse;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 
 import java.util.List;
 

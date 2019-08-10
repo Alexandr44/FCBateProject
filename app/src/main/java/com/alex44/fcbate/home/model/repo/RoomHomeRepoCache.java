@@ -1,12 +1,12 @@
 package com.alex44.fcbate.home.model.repo;
 
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.room.RoomMatch;
-import com.alex44.fcbate.home.model.room.RoomNews;
+import com.alex44.fcbate.news.model.room.RoomNews;
 import com.alex44.fcbate.home.model.room.RoomTeam;
 import com.alex44.fcbate.home.model.room.RoomTournament;
 import com.alex44.fcbate.home.model.room.RoomTournamentInfo;
@@ -65,8 +65,8 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
     }
 
     @Override
-    public List<NewsDTO> getNews() {
-        final List<RoomNews> news = DatabaseRoom.getInstance().getNewsDao().findLastFive();
+    public List<NewsDTO> getNews(int count) {
+        final List<RoomNews> news = DatabaseRoom.getInstance().getNewsDao().findLast(count);
         final List<NewsDTO> newsDTOs = new ArrayList<>();
         for (RoomNews roomNews : news) {
             final Date date = new Date(roomNews.getCreated());

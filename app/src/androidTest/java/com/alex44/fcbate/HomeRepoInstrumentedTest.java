@@ -8,7 +8,7 @@ import com.alex44.fcbate.di.modules.ApiModule;
 import com.alex44.fcbate.di.modules.AppModule;
 import com.alex44.fcbate.di.modules.CacheModule;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.home.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;

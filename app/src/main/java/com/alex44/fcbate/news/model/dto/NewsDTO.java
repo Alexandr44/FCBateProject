@@ -1,4 +1,4 @@
-package com.alex44.fcbate.home.model.dto;
+package com.alex44.fcbate.news.model.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,18 +6,12 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class NewsDTO implements Serializable {
 
     @Expose

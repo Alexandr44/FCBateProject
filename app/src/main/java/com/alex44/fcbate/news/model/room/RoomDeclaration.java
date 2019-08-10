@@ -1,24 +1,18 @@
-package com.alex44.fcbate.home.model.room;
+package com.alex44.fcbate.news.model.room;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomNews {
+public class RoomDeclaration {
 
     @NonNull
     @PrimaryKey
