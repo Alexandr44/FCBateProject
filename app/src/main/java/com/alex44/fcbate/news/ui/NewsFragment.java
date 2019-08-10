@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
@@ -17,6 +19,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -28,6 +31,9 @@ public class NewsFragment extends MvpAppCompatFragment implements NewsView, Back
 
     @InjectPresenter
     NewsPresenter presenter;
+
+    @BindView(R.id.news_pager)
+    protected ViewPager pager;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -49,10 +55,6 @@ public class NewsFragment extends MvpAppCompatFragment implements NewsView, Back
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_news, container, false);
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-        params.width = FrameLayout.LayoutParams.MATCH_PARENT;
-        params.height = FrameLayout.LayoutParams.MATCH_PARENT;
-        view.setLayoutParams(params);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -67,5 +69,10 @@ public class NewsFragment extends MvpAppCompatFragment implements NewsView, Back
     public Boolean backClick() {
         presenter.backClick();
         return true;
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

@@ -1,11 +1,15 @@
 package com.alex44.fcbate.di.modules;
 
+import com.alex44.fcbate.common.model.INetworkStatus;
+import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.home.model.repo.HomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
-import com.alex44.fcbate.common.model.INetworkStatus;
-import com.alex44.fcbate.common.model.ISystemInfo;
+import com.alex44.fcbate.news.model.api.INewsSource;
+import com.alex44.fcbate.news.model.repo.INewsRepo;
+import com.alex44.fcbate.news.model.repo.INewsRepoCache;
+import com.alex44.fcbate.news.model.repo.NewsRepo;
 import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepo;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepoCache;
@@ -25,8 +29,13 @@ public class RepoModule {
     }
 
     @Provides
-    public INewsDetailRepo newsDetailRepo(INewsDetailSource newsDetailSource, @Named("Room")  INewsDetailRepoCache newsDetailRepoCache, INetworkStatus networkStatus) {
+    public INewsDetailRepo newsDetailRepo(INewsDetailSource newsDetailSource, @Named("Room") INewsDetailRepoCache newsDetailRepoCache, INetworkStatus networkStatus) {
         return new NewsDetailRepo(newsDetailSource, newsDetailRepoCache, networkStatus);
+    }
+
+    @Provides
+    public INewsRepo newsRepo(INewsSource newsSource, INetworkStatus networkStatus, @Named("Room") INewsRepoCache repoCache) {
+        return new NewsRepo(newsSource, networkStatus, repoCache);
     }
 
 }
