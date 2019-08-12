@@ -8,6 +8,6 @@ public interface NewsRVItemView {
 
     void setTitle(String title);
 
-    void setDateTime(String dateTime);
+    void setDateTime(String dateTime, boolean isInLastHour);
 
 }

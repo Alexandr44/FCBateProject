@@ -1,5 +1,6 @@
 package com.alex44.fcbate.news.presenter;
 
+import com.alex44.fcbate.common.model.DateFormatUtil;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.model.repo.INewsRepo;
@@ -42,7 +43,8 @@ public class NewsPagerItemPresenter extends MvpPresenter<NewsPagerItemView> {
         final NewsItemDTO itemDTO = data.get(view.getPos());
         view.setPhoto(itemDTO.getPhotoUrl());
         view.setTitle(itemDTO.getTitle());
-        view.setDateTime(itemDTO.getCreated());
+        final String dateStr = DateFormatUtil.getFormattedDateStr(itemDTO.getCreated());
+        view.setDateTime(dateStr, dateStr.contains("назад"));
     }
 
     @Override

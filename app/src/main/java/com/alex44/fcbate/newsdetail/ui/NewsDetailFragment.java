@@ -1,6 +1,7 @@
 package com.alex44.fcbate.newsdetail.ui;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -124,8 +125,16 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
     }
 
     @Override
-    public void setDate(String text) {
+    public void setDate(String text, boolean isInLastHour) {
         dateText.setText(text);
+        if (isInLastHour) {
+            dateText.setTextColor(getResources().getColor(R.color.defaultBlueFontColor));
+            dateText.setBackgroundColor(getResources().getColor(R.color.defaultYellow));
+        }
+        else {
+            dateText.setTextColor(Color.WHITE);
+            dateText.setBackgroundColor(0x000);
+        }
     }
 
     @Override

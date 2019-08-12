@@ -13,7 +13,7 @@ public interface NewsDetailView extends MvpView {
 
     void setBrief(String text);
 
-    void setDate(String text);
+    void setDate(String text, boolean isInLastHour);
 
     void showMessage(String message);
 

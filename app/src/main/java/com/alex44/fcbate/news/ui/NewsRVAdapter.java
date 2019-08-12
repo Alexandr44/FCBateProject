@@ -1,5 +1,6 @@
 package com.alex44.fcbate.news.ui;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,8 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
         @Setter
         private int pos;
 
+        private View view;
+
         @BindView(R.id.news_rv_item_photo)
         protected ImageView photo;
         @BindView(R.id.news_rv_item_title)
@@ -69,6 +72,7 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            view = itemView;
             unbinder = ButterKnife.bind(this, itemView);
         }
 
@@ -88,8 +92,16 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
         }
 
         @Override
-        public void setDateTime(String dateTime) {
+        public void setDateTime(String dateTime, boolean isInLastHour) {
             this.dateTime.setText(dateTime);
+            if (isInLastHour) {
+                this.dateTime.setTextColor(view.getResources().getColor(R.color.defaultBlueFontColor));
+                this.dateTime.setBackgroundColor(view.getResources().getColor(R.color.defaultYellow));
+            }
+            else {
+                this.dateTime.setTextColor(Color.WHITE);
+                this.dateTime.setBackgroundColor(0x000);
+            }
         }
 
     }
