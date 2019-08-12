@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".news.ui.NewsPagerItemFragment"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/news_rv_item_photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_details_image_height"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/news_rv_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_alignBottom="@+id/news_rv_item_photo"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="1.5" />
+
+    <TextView
+        android:id="@+id/news_rv_item_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_above="@id/news_rv_item_title"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/defaultYellow"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="1.5" />
+
+</RelativeLayout>

@@ -10,7 +10,9 @@ import com.alex44.fcbate.home.ui.MatchItemFragment;
 import com.alex44.fcbate.home.ui.NewsItemFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.ui.MainActivity;
+import com.alex44.fcbate.news.presenter.NewsPagerItemPresenter;
 import com.alex44.fcbate.news.presenter.NewsPresenter;
+import com.alex44.fcbate.news.ui.NewsRVAdapter;
 import com.alex44.fcbate.newsdetail.presenter.NewsDetailPresenter;
 import com.alex44.fcbate.newsdetail.ui.NewsDetailFragment;
 
@@ -38,4 +40,8 @@ public interface AppComponent {
     void inject(NewsDetailFragment newsDetailFragment);
 
     void inject(MainActivity mainActivity);
+
+    void inject(NewsPagerItemPresenter presenter);
+
+    void inject(NewsRVAdapter adapter);
 }

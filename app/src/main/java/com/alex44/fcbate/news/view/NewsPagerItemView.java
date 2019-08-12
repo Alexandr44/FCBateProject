@@ -5,9 +5,11 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(value = AddToEndSingleStrategy.class)
-public interface NewsView extends MvpView {
+public interface NewsPagerItemView extends MvpView {
 
-    void initPager();
+    void init();
+
+    void updateData();
 
     void showMessage(String message);
 
