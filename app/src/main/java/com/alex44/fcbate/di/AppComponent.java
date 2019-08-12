@@ -15,6 +15,7 @@ import com.alex44.fcbate.news.presenter.NewsPresenter;
 import com.alex44.fcbate.news.ui.NewsRVAdapter;
 import com.alex44.fcbate.newsdetail.presenter.NewsDetailPresenter;
 import com.alex44.fcbate.newsdetail.ui.NewsDetailFragment;
+import com.alex44.fcbate.tournament.presenter.TournamentPresenter;
 
 import javax.inject.Singleton;
 
@@ -44,4 +45,6 @@ public interface AppComponent {
     void inject(NewsPagerItemPresenter presenter);
 
     void inject(NewsRVAdapter adapter);
+
+    void inject(TournamentPresenter tournamentPresenter);
 }

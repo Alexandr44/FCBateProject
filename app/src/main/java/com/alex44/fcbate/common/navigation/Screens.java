@@ -6,6 +6,7 @@ import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.ui.NewsFragment;
 import com.alex44.fcbate.newsdetail.ui.NewsDetailFragment;
+import com.alex44.fcbate.tournament.ui.TournamentFragment;
 
 import ru.terrakok.cicerone.android.support.SupportAppScreen;
 
@@ -37,6 +38,13 @@ public class Screens {
         @Override
         public Fragment getFragment() {
             return NewsDetailFragment.newInstance(type, id);
+        }
+    }
+
+    public static class TournamentScreen extends SupportAppScreen {
+        @Override
+        public Fragment getFragment() {
+            return TournamentFragment.newInstance();
         }
     }
 

@@ -17,6 +17,7 @@ import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.view.MainView;
 import com.alex44.fcbate.news.ui.NewsFragment;
+import com.alex44.fcbate.tournament.ui.TournamentFragment;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -159,7 +160,10 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         } else if (id == R.id.nav_calendar) {
             presenter.goToCalendarScreen();
         } else if (id == R.id.nav_table) {
-            presenter.goToTableScreen();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (!(fragment instanceof TournamentFragment)) {
+                presenter.goToTableScreen();
+            }
         } else if (id == R.id.nav_team) {
             presenter.goToTeamScreen();
         } else if (id == R.id.nav_club) {
