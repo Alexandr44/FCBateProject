@@ -6,11 +6,11 @@ import com.alex44.fcbate.di.DaggerTestComponent;
 import com.alex44.fcbate.di.TestComponent;
 import com.alex44.fcbate.di.modules.AppModule;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -130,11 +130,11 @@ public class HomeRepoCacheInstrumentedTest {
     public void getNews() {
         Timber.d("Test started: getNews");
 
-        final List<NewsDTO> list = new ArrayList<>();
-        final NewsDTO newsDTO = new NewsDTO(id, url, anyDateStr, title, titleShort);
+        final List<NewsItemDTO> list = new ArrayList<>();
+        final NewsItemDTO newsDTO = new NewsItemDTO(id, url, anyDateStr, title, titleShort);
         list.add(newsDTO);
 
-        TestObserver<NewsDTO> observer = new TestObserver<>();
+        TestObserver<NewsItemDTO> observer = new TestObserver<>();
         Single.fromCallable(() -> {
             homeRepoCache.putNews(list);
             return homeRepoCache.getNewsById(newsDTO.getId());

@@ -1,6 +1,7 @@
 package com.alex44.fcbate.news.presenter;
 
 import com.alex44.fcbate.common.model.DateFormatUtil;
+import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.model.repo.INewsRepo;
@@ -19,6 +20,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 import lombok.Getter;
+import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
@@ -29,6 +31,9 @@ public class NewsPagerItemPresenter extends MvpPresenter<NewsPagerItemView> {
 
     @Inject
     protected INewsRepo newsRepo;
+
+    @Inject
+    protected Router router;
 
     private Disposable disposable;
     private Disposable clickDisposable;
@@ -62,7 +67,7 @@ public class NewsPagerItemPresenter extends MvpPresenter<NewsPagerItemView> {
     private void processClicks() {
         clickDisposable = clickSubject.subscribe(newsRVItemView -> {
             final NewsItemDTO itemDTO = data.get(newsRVItemView.getPos());
-            getViewState().showMessage(itemDTO.getTitle());
+            router.navigateTo(new Screens.NewsDetailScreen(type, itemDTO.getId()));
         });
     }
 

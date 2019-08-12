@@ -3,7 +3,8 @@ package com.alex44.fcbate.home.presenter;
 import com.alex44.fcbate.common.model.DateFormatUtil;
 import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.home.view.NewsItemView;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
+import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -18,9 +19,9 @@ public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
     @Inject
     protected Router router;
 
-    private NewsDTO newsDTO;
+    private NewsItemDTO newsDTO;
 
-    public NewsItemPresenter(NewsDTO newsDTO) {
+    public NewsItemPresenter(NewsItemDTO newsDTO) {
         this.newsDTO = newsDTO;
     }
 
@@ -39,7 +40,7 @@ public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
 
     public void imageClicked() {
         Timber.d("Go to detail news with id:" + newsDTO.getId() + ": "+newsDTO.getTitle());
-        router.navigateTo(new Screens.NewsDetailScreen(newsDTO.getId()));
+        router.navigateTo(new Screens.NewsDetailScreen(NewsItemType.NEWS, newsDTO.getId()));
     }
 
 }

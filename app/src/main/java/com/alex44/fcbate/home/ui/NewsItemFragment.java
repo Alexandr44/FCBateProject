@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.model.IImageLoader;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.presenter.NewsItemPresenter;
 import com.alex44.fcbate.home.view.NewsItemView;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -54,9 +54,9 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
 
     @ProvidePresenter
     protected NewsItemPresenter createPresenter() {
-        NewsDTO newsDTO = null;
-        if (getArguments() != null && getArguments().getSerializable("data") instanceof NewsDTO) {
-            newsDTO = (NewsDTO) getArguments().getSerializable("data");
+        NewsItemDTO newsDTO = null;
+        if (getArguments() != null && getArguments().getSerializable("data") instanceof NewsItemDTO) {
+            newsDTO = (NewsItemDTO) getArguments().getSerializable("data");
         }
         else {
             Timber.e("No data for NewsItemPresenter");

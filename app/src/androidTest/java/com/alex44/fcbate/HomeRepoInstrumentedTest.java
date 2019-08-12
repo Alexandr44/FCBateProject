@@ -8,12 +8,12 @@ import com.alex44.fcbate.di.modules.ApiModule;
 import com.alex44.fcbate.di.modules.AppModule;
 import com.alex44.fcbate.di.modules.CacheModule;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -123,12 +123,12 @@ public class HomeRepoInstrumentedTest {
                         final MatchDTO matchDTO = new MatchDTO(id, teamDTO1, teamDTO2, tournamentDTO, anyDateStr, goals1, goals2, online);
                         final List<MatchDTO> list = new ArrayList<>();
                         list.add(matchDTO);
-                        final List<NewsDTO> listNews = new ArrayList<>();
-                        listNews.add(new NewsDTO(id, url, anyDateStr, title, titleShort));
+                        final List<NewsItemDTO> listNews = new ArrayList<>();
+                        listNews.add(new NewsItemDTO(id, url, anyDateStr, title, titleShort));
                         final List<TournamentInfoDTO> infoList = new ArrayList<>();
                         infoList.add(new TournamentInfoDTO(position, title, games, wins, draws, loses, diffs, points));
                         Mockito.when(cache.getMatches()).thenReturn(list);
-                        Mockito.when(cache.getNews()).thenReturn(listNews);
+                        Mockito.when(cache.getNews(5)).thenReturn(listNews);
                         Mockito.when(cache.getTournamentsInfo()).thenReturn(infoList);
                         Mockito.when(cache.putMatches(Mockito.any())).thenReturn(true);
                         Mockito.when(cache.putNews(Mockito.any())).thenReturn(true);
@@ -181,7 +181,7 @@ public class HomeRepoInstrumentedTest {
         Timber.d("Test started: getNews");
 
         mockWebServer.enqueue(createNewsResponse());
-        TestObserver<List<NewsDTO>> observer = new TestObserver<>();
+        TestObserver<List<NewsItemDTO>> observer = new TestObserver<>();
         homeRepo.getNews().subscribe(observer);
 
         observer.awaitTerminalEvent();

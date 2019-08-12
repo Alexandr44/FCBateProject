@@ -3,6 +3,7 @@ package com.alex44.fcbate.common.navigation;
 import androidx.fragment.app.Fragment;
 
 import com.alex44.fcbate.home.ui.HomeFragment;
+import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.ui.NewsFragment;
 import com.alex44.fcbate.newsdetail.ui.NewsDetailFragment;
 
@@ -25,15 +26,17 @@ public class Screens {
     }
 
     public static class NewsDetailScreen extends SupportAppScreen {
-        private Long newsId;
+        private NewsItemType type;
+        private Long id;
 
-        public NewsDetailScreen(Long id) {
-            newsId = id;
+        public NewsDetailScreen(NewsItemType type, Long id) {
+            this.type = type;
+            this.id = id;
         }
 
         @Override
         public Fragment getFragment() {
-            return NewsDetailFragment.newInstance(newsId);
+            return NewsDetailFragment.newInstance(type, id);
         }
     }
 

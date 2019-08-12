@@ -4,13 +4,13 @@ import com.alex44.fcbate.di.DaggerTestComponent;
 import com.alex44.fcbate.di.TestComponent;
 import com.alex44.fcbate.di.modules.TestRepoModule;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.view.HomeView;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,7 +43,7 @@ public class HomePresenterTest {
     IHomeRepo homeRepo;
 
     private MatchDTO matchDTO;
-    private NewsDTO newsDTO;
+    private NewsItemDTO newsDTO;
     private TournamentInfoDTO tournamentInfoDTO;
 
     @BeforeClass
@@ -68,7 +68,7 @@ public class HomePresenterTest {
         final TeamDTO teamRight = new TeamDTO(10L, "otherLogoUrl", "TeamN2");
         final TournamentDTO tournamentDTO = new TournamentDTO(20L, "TournamentName", "Name");
         matchDTO = new MatchDTO(1L, teamLeft, teamRight, tournamentDTO, "DateStr", 2, 3, true);
-        newsDTO = new NewsDTO(50L, "NewsPhotoUrl", "createdAt", "PhotoTitle", "Brief");
+        newsDTO = new NewsItemDTO(50L, "NewsPhotoUrl", "createdAt", "PhotoTitle", "Brief");
         tournamentInfoDTO = new TournamentInfoDTO(1L, "AnyTeamName", 20L, 15L, 15L, 30L, "20 - 15", 15L);
     }
 
@@ -91,7 +91,7 @@ public class HomePresenterTest {
                         matches.add(matchDTO);
                         matches.add(matchDTO);
                         matches.add(matchDTO);
-                        final List<NewsDTO> news = new ArrayList<>();
+                        final List<NewsItemDTO> news = new ArrayList<>();
                         news.add(newsDTO);
                         news.add(newsDTO);
                         news.add(newsDTO);
@@ -125,7 +125,7 @@ public class HomePresenterTest {
         matches.add(matchDTO);
         matches.add(matchDTO);
         matches.add(matchDTO);
-        final List<NewsDTO> news = new ArrayList<>();
+        final List<NewsItemDTO> news = new ArrayList<>();
         news.add(newsDTO);
         news.add(newsDTO);
         news.add(newsDTO);

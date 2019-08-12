@@ -1,8 +1,8 @@
 package com.alex44.fcbate.newsdetail.model.repo;
 
 import com.alex44.fcbate.common.model.INetworkStatus;
+import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
 import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
-import com.alex44.fcbate.newsdetail.model.dto.NewsDetailDTO;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeOnSubscribe;
@@ -24,7 +24,7 @@ public class NewsDetailRepo implements INewsDetailRepo {
     }
 
     @Override
-    public Maybe<NewsDetailDTO> getNewsDetail(Long id) {
+    public Maybe<NewsItemDetailDTO> getNewsDetail(Long id) {
         Timber.d("Requesting news detail for id: %s", id);
         if (networkStatus.isOnline()) {
             return newsDetailSource.getNewsDetail(id)
@@ -35,8 +35,8 @@ public class NewsDetailRepo implements INewsDetailRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<NewsDetailDTO>) emitter -> {
-                final NewsDetailDTO newsDetailDTO = newsDetailRepoCache.getNewsDetail(id);
+            return Maybe.create((MaybeOnSubscribe<NewsItemDetailDTO>) emitter -> {
+                final NewsItemDetailDTO newsDetailDTO = newsDetailRepoCache.getNewsDetail(id);
                 if (newsDetailDTO == null) {
                     emitter.onError(new RuntimeException("No news detail found in local storage"));
                 }
@@ -46,6 +46,34 @@ public class NewsDetailRepo implements INewsDetailRepo {
             })
                     .subscribeOn(Schedulers.io());
         }
+    }
+
+    @Override
+    public Maybe<NewsItemDetailDTO> getPressDetail(Long id) {
+        Timber.d("Requesting press detail for id: %s", id);
+        if (networkStatus.isOnline()) {
+            return newsDetailSource.getPressDetail(id)
+                    .subscribeOn(Schedulers.io())
+                    .map(pressDetailDTO -> {
+//                        newsDetailRepoCache.putNewsDetail(newsDetailDTO);
+                        return pressDetailDTO;
+                    });
+        }
+        return null;
+    }
+
+    @Override
+    public Maybe<NewsItemDetailDTO> getDeclarationDetail(Long id) {
+        Timber.d("Requesting declarations detail for id: %s", id);
+        if (networkStatus.isOnline()) {
+            return newsDetailSource.getDeclarationsDetail(id)
+                    .subscribeOn(Schedulers.io())
+                    .map(declarationDetailDTO -> {
+//                        newsDetailRepoCache.putNewsDetail(newsDetailDTO);
+                        return declarationDetailDTO;
+                    });
+        }
+        return null;
     }
 
 }

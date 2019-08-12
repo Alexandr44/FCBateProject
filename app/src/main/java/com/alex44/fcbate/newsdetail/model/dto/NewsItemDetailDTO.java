@@ -1,21 +1,15 @@
-package com.alex44.fcbate.news.model.dto;
+package com.alex44.fcbate.newsdetail.model.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class NewsDTO implements Serializable {
+public class NewsItemDetailDTO {
 
     @Expose
-    @SerializedName("news_general_id")
+    @SerializedName(value = "news_general_id", alternate = {"press_general_id", "declaration_general_id"})
     private Long id;
 
     @Expose
@@ -24,7 +18,7 @@ public class NewsDTO implements Serializable {
 
     @Expose
     @SerializedName("created")
-    private String created;
+    private String dateCreated;
 
     @Expose
     @SerializedName("title")
@@ -34,4 +28,7 @@ public class NewsDTO implements Serializable {
     @SerializedName("brief")
     private String brief;
 
+    @Expose
+    @SerializedName("content")
+    private String content;
 }

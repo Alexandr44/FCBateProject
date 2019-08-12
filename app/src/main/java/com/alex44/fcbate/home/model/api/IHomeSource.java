@@ -1,7 +1,7 @@
 package com.alex44.fcbate.home.model.api;
 
 import com.alex44.fcbate.home.model.dto.MatchesListResponse;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface IHomeSource {
     Maybe<MatchesListResponse> getMatches();
 
     @GET(NEWS_URL)
-    Maybe<List<NewsDTO>> getNews();
+    Maybe<List<NewsItemDTO>> getNews();
 
     @GET(TOURNAMENTS_URL)
     Maybe<List<List<String>>> getTournamentsInfo();

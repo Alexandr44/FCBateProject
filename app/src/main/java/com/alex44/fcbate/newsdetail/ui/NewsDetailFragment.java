@@ -17,6 +17,7 @@ import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.model.IImageLoader;
 import com.alex44.fcbate.common.ui.BackButtonListener;
+import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.newsdetail.presenter.NewsDetailPresenter;
 import com.alex44.fcbate.newsdetail.view.NewsDetailView;
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -59,8 +60,9 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
         App.getInstance().getAppComponent().inject(this);
     }
 
-    public static Fragment newInstance(Long newsId) {
+    public static Fragment newInstance(NewsItemType type, Long newsId) {
         final Bundle arguments = new Bundle();
+        arguments.putSerializable("type", type);
         arguments.putLong("newsId", newsId);
         final NewsDetailFragment fragment = new NewsDetailFragment();
         fragment.setArguments(arguments);
@@ -69,12 +71,14 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
 
     @ProvidePresenter
     protected NewsDetailPresenter createPresenter() {
+        NewsItemType type = null;
         Long newsId = null;
         if (getArguments() != null) {
             newsId = getArguments().getLong("newsId");
+            type = (NewsItemType)getArguments().getSerializable("type");
         }
 
-        final NewsDetailPresenter newsDetailPresenter = new NewsDetailPresenter(newsId, AndroidSchedulers.mainThread());
+        final NewsDetailPresenter newsDetailPresenter = new NewsDetailPresenter(type, newsId, AndroidSchedulers.mainThread());
         App.getInstance().getAppComponent().inject(newsDetailPresenter);
         return newsDetailPresenter;
     }

@@ -19,7 +19,7 @@ import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.view.HomeView;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -147,7 +147,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     }
 
     @Override
-    public void initNewsPager(List<NewsDTO> newsDTOS) {
+    public void initNewsPager(List<NewsItemDTO> newsDTOS) {
         final HomePagerAdapter pagerAdapter = new HomePagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         for (int i = 0; i < newsDTOS.size(); i++) {
@@ -158,7 +158,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
         newsPager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
-    private NewsItemFragment createNewsItemFragment(NewsDTO newsDTO) {
+    private NewsItemFragment createNewsItemFragment(NewsItemDTO newsDTO) {
         final Bundle arguments = new Bundle();
         arguments.putSerializable("data", newsDTO);
         final NewsItemFragment fragment = new NewsItemFragment();

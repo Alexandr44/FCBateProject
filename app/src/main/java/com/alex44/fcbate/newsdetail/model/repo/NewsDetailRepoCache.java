@@ -1,15 +1,15 @@
 package com.alex44.fcbate.newsdetail.model.repo;
 
 import com.alex44.fcbate.common.model.db.DatabaseRoom;
-import com.alex44.fcbate.newsdetail.model.dto.NewsDetailDTO;
+import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
 import com.alex44.fcbate.newsdetail.model.room.RoomNewsDetail;
 
 public class NewsDetailRepoCache implements INewsDetailRepoCache {
 
     @Override
-    public NewsDetailDTO getNewsDetail(Long id) {
+    public NewsItemDetailDTO getNewsDetail(Long id) {
         final RoomNewsDetail roomNewsDetail = DatabaseRoom.getInstance().getNewsDetailDao().findById(id);
-        final NewsDetailDTO newsDetailDTO = new NewsDetailDTO();
+        final NewsItemDetailDTO newsDetailDTO = new NewsItemDetailDTO();
         newsDetailDTO.setBrief(roomNewsDetail.getBrief());
         newsDetailDTO.setContent(roomNewsDetail.getContent());
         newsDetailDTO.setDateCreated(roomNewsDetail.getDateCreated());
@@ -20,7 +20,7 @@ public class NewsDetailRepoCache implements INewsDetailRepoCache {
     }
 
     @Override
-    public boolean putNewsDetail(NewsDetailDTO newsDetailDTO) {
+    public boolean putNewsDetail(NewsItemDetailDTO newsDetailDTO) {
         final RoomNewsDetail roomNewsDetail = new RoomNewsDetail();
         roomNewsDetail.setBrief(newsDetailDTO.getBrief());
         roomNewsDetail.setContent(newsDetailDTO.getContent());
@@ -30,6 +30,26 @@ public class NewsDetailRepoCache implements INewsDetailRepoCache {
         roomNewsDetail.setTitle(newsDetailDTO.getTitle());
         DatabaseRoom.getInstance().getNewsDetailDao().insert(roomNewsDetail);
         return true;
+    }
+
+    @Override
+    public NewsItemDetailDTO getPressDetail(Long id) {
+        return null;
+    }
+
+    @Override
+    public boolean putPressDetail(NewsItemDetailDTO itemDetailDTO) {
+        return false;
+    }
+
+    @Override
+    public NewsItemDetailDTO getDeclarationsDetail(Long id) {
+        return null;
+    }
+
+    @Override
+    public boolean putDeclarationsDetail(NewsItemDetailDTO itemDetailDTO) {
+        return false;
     }
 
 }

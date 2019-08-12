@@ -8,7 +8,7 @@ import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.MatchesListResponse;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class HomeRepo implements IHomeRepo {
 
     @Override
     @SuppressLint("NewApi")
-    public Maybe<List<NewsDTO>> getNews() {
+    public Maybe<List<NewsItemDTO>> getNews() {
         Timber.d("Requesting news");
         if (networkStatus.isOnline()) {
             return homeSource.getNews()
@@ -86,8 +86,8 @@ public class HomeRepo implements IHomeRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<List<NewsDTO>>) emitter -> {
-                final List<NewsDTO> news = homeRepoCache.getNews(5);
+            return Maybe.create((MaybeOnSubscribe<List<NewsItemDTO>>) emitter -> {
+                final List<NewsItemDTO> news = homeRepoCache.getNews(5);
                 if (news == null || news.isEmpty()) {
                     emitter.onError(new RuntimeException("No news found in local storage"));
                 } else {

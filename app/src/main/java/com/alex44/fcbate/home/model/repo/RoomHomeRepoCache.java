@@ -1,16 +1,16 @@
 package com.alex44.fcbate.home.model.repo;
 
+import com.alex44.fcbate.common.model.db.DatabaseRoom;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.room.RoomMatch;
-import com.alex44.fcbate.news.model.room.RoomNews;
 import com.alex44.fcbate.home.model.room.RoomTeam;
 import com.alex44.fcbate.home.model.room.RoomTournament;
 import com.alex44.fcbate.home.model.room.RoomTournamentInfo;
-import com.alex44.fcbate.common.model.db.DatabaseRoom;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
+import com.alex44.fcbate.news.model.room.RoomNews;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,12 +65,12 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
     }
 
     @Override
-    public List<NewsDTO> getNews(int count) {
+    public List<NewsItemDTO> getNews(int count) {
         final List<RoomNews> news = DatabaseRoom.getInstance().getNewsDao().findLast(count);
-        final List<NewsDTO> newsDTOs = new ArrayList<>();
+        final List<NewsItemDTO> newsDTOs = new ArrayList<>();
         for (RoomNews roomNews : news) {
             final Date date = new Date(roomNews.getCreated());
-            newsDTOs.add(new NewsDTO(roomNews.getId(),
+            newsDTOs.add(new NewsItemDTO(roomNews.getId(),
                     roomNews.getPhotoUrl(),
                     dateTimeFormat.format(date),
                     roomNews.getTitle(),
@@ -81,10 +81,10 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
     }
 
     @Override
-    public NewsDTO getNewsById(Long id) {
+    public NewsItemDTO getNewsById(Long id) {
         final RoomNews news = DatabaseRoom.getInstance().getNewsDao().findById(id);
         final Date date = new Date(news.getCreated());
-        return new NewsDTO(news.getId(),
+        return new NewsItemDTO(news.getId(),
                 news.getPhotoUrl(),
                 dateTimeFormat.format(date),
                 news.getTitle(),
@@ -159,10 +159,10 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
     }
 
     @Override
-    public boolean putNews(List<NewsDTO> news) {
+    public boolean putNews(List<NewsItemDTO> news) {
         final List<RoomNews> roomNewsList = new ArrayList<>();
 
-        for (NewsDTO newsDTO : news) {
+        for (NewsItemDTO newsDTO : news) {
             try {
                 final Date date = dateTimeFormat.parse(newsDTO.getCreated());
                 roomNewsList.add(new RoomNews(newsDTO.getId(),
