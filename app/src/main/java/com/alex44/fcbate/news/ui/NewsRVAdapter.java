@@ -14,6 +14,7 @@ import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.model.IImageLoader;
 import com.alex44.fcbate.news.presenter.NewsPagerItemPresenter;
 import com.alex44.fcbate.news.view.NewsRVItemView;
+import com.jakewharton.rxbinding3.view.RxView;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,6 +47,7 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setPos(position);
         presenter.bind(holder);
+        RxView.clicks(holder.itemView).map(o -> holder).subscribe(presenter.getClickSubject());
     }
 
     @Override

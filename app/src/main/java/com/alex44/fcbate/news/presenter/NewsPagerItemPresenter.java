@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 import lombok.Getter;
 import timber.log.Timber;
 
@@ -30,9 +31,12 @@ public class NewsPagerItemPresenter extends MvpPresenter<NewsPagerItemView> {
     protected INewsRepo newsRepo;
 
     private Disposable disposable;
+    private Disposable clickDisposable;
 
     @Getter
     private List<NewsItemDTO> data = new ArrayList<>();
+    @Getter
+    private PublishSubject<NewsRVItemView> clickSubject = PublishSubject.create();
 
     public NewsPagerItemPresenter(Scheduler mainThreadScheduler, NewsItemType type) {
         this.mainThreadScheduler = mainThreadScheduler;
@@ -52,6 +56,14 @@ public class NewsPagerItemPresenter extends MvpPresenter<NewsPagerItemView> {
         super.onFirstViewAttach();
         getViewState().init();
         loadData();
+        processClicks();
+    }
+
+    private void processClicks() {
+        clickDisposable = clickSubject.subscribe(newsRVItemView -> {
+            final NewsItemDTO itemDTO = data.get(newsRVItemView.getPos());
+            getViewState().showMessage(itemDTO.getTitle());
+        });
     }
 
     private void loadData() {
@@ -85,6 +97,9 @@ public class NewsPagerItemPresenter extends MvpPresenter<NewsPagerItemView> {
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
+        }
+        if (clickDisposable != null && !clickDisposable.isDisposed()) {
+            clickDisposable.dispose();
         }
     }
 
