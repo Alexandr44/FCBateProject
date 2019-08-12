@@ -7,8 +7,8 @@ import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.MatchesListResponse;
-import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
+import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
 
 import java.util.ArrayList;
 import java.util.List;

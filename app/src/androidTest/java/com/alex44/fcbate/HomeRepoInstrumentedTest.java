@@ -10,10 +10,10 @@ import com.alex44.fcbate.di.modules.CacheModule;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
-import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
+import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
 
 import org.junit.After;
 import org.junit.AfterClass;

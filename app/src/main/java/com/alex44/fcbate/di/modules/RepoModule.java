@@ -14,6 +14,9 @@ import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepo;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepoCache;
 import com.alex44.fcbate.newsdetail.model.repo.NewsDetailRepo;
+import com.alex44.fcbate.tournament.model.api.ITournamentSource;
+import com.alex44.fcbate.tournament.model.repo.ITournamentRepo;
+import com.alex44.fcbate.tournament.model.repo.TournamentRepo;
 
 import javax.inject.Named;
 
@@ -36,6 +39,11 @@ public class RepoModule {
     @Provides
     public INewsRepo newsRepo(INewsSource newsSource, INetworkStatus networkStatus, @Named("Room") INewsRepoCache repoCache) {
         return new NewsRepo(newsSource, networkStatus, repoCache);
+    }
+
+    @Provides
+    public ITournamentRepo tournamentRepo(ITournamentSource source, INetworkStatus networkStatus) {
+        return new TournamentRepo(source, networkStatus);
     }
 
 }

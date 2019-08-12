@@ -1,11 +1,12 @@
 package com.alex44.fcbate.di.modules;
 
 import com.alex44.fcbate.App;
+import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
 import com.alex44.fcbate.home.model.api.IHomeSource;
-import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.news.model.api.INewsSource;
 import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
+import com.alex44.fcbate.tournament.model.api.ITournamentSource;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -84,6 +85,11 @@ public class ApiModule {
     @Provides
     public INewsSource newsSource(Retrofit retrofit) {
         return retrofit.create(INewsSource.class);
+    }
+
+    @Provides
+    public ITournamentSource tournamentSource(Retrofit retrofit) {
+        return retrofit.create(ITournamentSource.class);
     }
 
 }

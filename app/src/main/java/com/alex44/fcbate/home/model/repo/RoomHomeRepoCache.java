@@ -4,13 +4,13 @@ import com.alex44.fcbate.common.model.db.DatabaseRoom;
 import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.TeamDTO;
 import com.alex44.fcbate.home.model.dto.TournamentDTO;
-import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.home.model.room.RoomMatch;
 import com.alex44.fcbate.home.model.room.RoomTeam;
 import com.alex44.fcbate.home.model.room.RoomTournament;
 import com.alex44.fcbate.home.model.room.RoomTournamentInfo;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.news.model.room.RoomNews;
+import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

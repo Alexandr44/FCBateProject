@@ -1,8 +1,8 @@
 package com.alex44.fcbate.home.view;
 
 import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.home.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
+import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
