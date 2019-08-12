@@ -1,8 +1,8 @@
 package com.alex44.fcbate.newsdetail.model.repo;
 
 import com.alex44.fcbate.common.model.INetworkStatus;
-import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
 import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
+import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeOnSubscribe;
@@ -55,11 +55,22 @@ public class NewsDetailRepo implements INewsDetailRepo {
             return newsDetailSource.getPressDetail(id)
                     .subscribeOn(Schedulers.io())
                     .map(pressDetailDTO -> {
-//                        newsDetailRepoCache.putNewsDetail(newsDetailDTO);
+                        newsDetailRepoCache.putPressDetail(pressDetailDTO);
                         return pressDetailDTO;
                     });
         }
-        return null;
+        else {
+            return Maybe.create((MaybeOnSubscribe<NewsItemDetailDTO>) emitter -> {
+                final NewsItemDetailDTO itemDetailDTO = newsDetailRepoCache.getPressDetail(id);
+                if (itemDetailDTO == null) {
+                    emitter.onError(new RuntimeException("No press detail found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(itemDetailDTO);
+                }
+            })
+                    .subscribeOn(Schedulers.io());
+        }
     }
 
     @Override
@@ -69,11 +80,22 @@ public class NewsDetailRepo implements INewsDetailRepo {
             return newsDetailSource.getDeclarationsDetail(id)
                     .subscribeOn(Schedulers.io())
                     .map(declarationDetailDTO -> {
-//                        newsDetailRepoCache.putNewsDetail(newsDetailDTO);
+                        newsDetailRepoCache.putDeclarationsDetail(declarationDetailDTO);
                         return declarationDetailDTO;
                     });
         }
-        return null;
+        else {
+            return Maybe.create((MaybeOnSubscribe<NewsItemDetailDTO>) emitter -> {
+                final NewsItemDetailDTO itemDetailDTO = newsDetailRepoCache.getDeclarationsDetail(id);
+                if (itemDetailDTO == null) {
+                    emitter.onError(new RuntimeException("No declaration detail found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(itemDetailDTO);
+                }
+            })
+                    .subscribeOn(Schedulers.io());
+        }
     }
 
 }

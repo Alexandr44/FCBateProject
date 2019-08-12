@@ -20,11 +20,16 @@ import com.alex44.fcbate.news.model.room.RoomPress;
 import com.alex44.fcbate.news.model.room.dao.RoomDeclarationDao;
 import com.alex44.fcbate.news.model.room.dao.RoomNewsDao;
 import com.alex44.fcbate.news.model.room.dao.RoomPressDao;
+import com.alex44.fcbate.newsdetail.model.room.RoomDeclarationDetail;
 import com.alex44.fcbate.newsdetail.model.room.RoomNewsDetail;
+import com.alex44.fcbate.newsdetail.model.room.RoomPressDetail;
+import com.alex44.fcbate.newsdetail.model.room.dao.RoomDeclarationDetailDao;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomNewsDetailDao;
+import com.alex44.fcbate.newsdetail.model.room.dao.RoomPressDetailDao;
 
 @Database(entities = {RoomMatch.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
-        RoomNewsDetail.class, RoomNews.class, RoomPress.class, RoomDeclaration.class}, version = 1)
+        RoomNewsDetail.class, RoomPressDetail.class, RoomDeclarationDetail.class,
+        RoomNews.class, RoomPress.class, RoomDeclaration.class}, version = 1)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static final String DATABASE_NAME = "RoomDatabase.db";
@@ -62,6 +67,8 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract RoomTournamentInfoDao getTournamentInfoDao();
 
     public abstract RoomNewsDetailDao getNewsDetailDao();
+    public abstract RoomPressDetailDao getPressDetailDao();
+    public abstract RoomDeclarationDetailDao getDeclarationDetailDao();
 
     public abstract RoomNewsDao getNewsDao();
     public abstract RoomPressDao getPressDao();
