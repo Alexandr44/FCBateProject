@@ -1,8 +1,6 @@
 package com.alex44.fcbate.news.model.api;
 
-import com.alex44.fcbate.news.model.dto.DeclarationDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
-import com.alex44.fcbate.news.model.dto.PressDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.List;
 
@@ -17,12 +15,12 @@ import static com.alex44.fcbate.common.ApiStrings.PRESS_URL;
 public interface INewsSource {
 
     @GET(NEWS_URL+"?offset=0")
-    Maybe<List<NewsDTO>> getNews(@Query("limit") int limit);
+    Maybe<List<NewsItemDTO>> getNews(@Query("limit") int limit);
 
     @GET(PRESS_URL+"?offset=0")
-    Maybe<List<PressDTO>> getPresses(@Query("limit") int limit);
+    Maybe<List<NewsItemDTO>> getPresses(@Query("limit") int limit);
 
     @GET(DECLARATION_URL+"?offset=0")
-    Maybe<List<DeclarationDTO>> getDeclarations(@Query("limit") int limit);
+    Maybe<List<NewsItemDTO>> getDeclarations(@Query("limit") int limit);
 
 }

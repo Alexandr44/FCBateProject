@@ -2,9 +2,7 @@ package com.alex44.fcbate.news.model.repo;
 
 import com.alex44.fcbate.common.model.INetworkStatus;
 import com.alex44.fcbate.news.model.api.INewsSource;
-import com.alex44.fcbate.news.model.dto.DeclarationDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
-import com.alex44.fcbate.news.model.dto.PressDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class NewsRepo implements INewsRepo {
     }
 
     @Override
-    public Maybe<List<NewsDTO>> getNews() {
+    public Maybe<List<NewsItemDTO>> getNews() {
         Timber.d("Requesting news");
         if (networkStatus.isOnline()) {
             return source.getNews(ELEMENTS_TO_REQUEST)
@@ -41,8 +39,8 @@ public class NewsRepo implements INewsRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<List<NewsDTO>>) emitter -> {
-                final List<NewsDTO> result = repoCache.getNews(ELEMENTS_TO_REQUEST);
+            return Maybe.create((MaybeOnSubscribe<List<NewsItemDTO>>) emitter -> {
+                final List<NewsItemDTO> result = repoCache.getNews(ELEMENTS_TO_REQUEST);
                 if (result == null || result.isEmpty()) {
                     emitter.onError(new RuntimeException("No news found in local storage"));
                 }
@@ -55,7 +53,7 @@ public class NewsRepo implements INewsRepo {
     }
 
     @Override
-    public Maybe<List<PressDTO>> getPresses() {
+    public Maybe<List<NewsItemDTO>> getPresses() {
         Timber.d("Requesting presses");
         if (networkStatus.isOnline()) {
             return source.getPresses(ELEMENTS_TO_REQUEST)
@@ -67,8 +65,8 @@ public class NewsRepo implements INewsRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<List<PressDTO>>) emitter -> {
-                final List<PressDTO> result = repoCache.getPress(ELEMENTS_TO_REQUEST);
+            return Maybe.create((MaybeOnSubscribe<List<NewsItemDTO>>) emitter -> {
+                final List<NewsItemDTO> result = repoCache.getPress(ELEMENTS_TO_REQUEST);
                 if (result == null || result.isEmpty()) {
                     emitter.onError(new RuntimeException("No press found in local storage"));
                 }
@@ -81,7 +79,7 @@ public class NewsRepo implements INewsRepo {
     }
 
     @Override
-    public Maybe<List<DeclarationDTO>> getDeclarations() {
+    public Maybe<List<NewsItemDTO>> getDeclarations() {
         Timber.d("Requesting declarations");
         if (networkStatus.isOnline()) {
             return source.getDeclarations(ELEMENTS_TO_REQUEST)
@@ -93,8 +91,8 @@ public class NewsRepo implements INewsRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<List<DeclarationDTO>>) emitter -> {
-                final List<DeclarationDTO> result = repoCache.getDeclarations(ELEMENTS_TO_REQUEST);
+            return Maybe.create((MaybeOnSubscribe<List<NewsItemDTO>>) emitter -> {
+                final List<NewsItemDTO> result = repoCache.getDeclarations(ELEMENTS_TO_REQUEST);
                 if (result == null || result.isEmpty()) {
                     emitter.onError(new RuntimeException("No news found in local storage"));
                 }

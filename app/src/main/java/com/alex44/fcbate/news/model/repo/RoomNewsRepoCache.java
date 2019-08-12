@@ -1,39 +1,37 @@
 package com.alex44.fcbate.news.model.repo;
 
-import com.alex44.fcbate.news.model.dto.DeclarationDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
-import com.alex44.fcbate.news.model.dto.PressDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.List;
 
 public class RoomNewsRepoCache implements INewsRepoCache {
     @Override
-    public List<NewsDTO> getNews(int count) {
+    public List<NewsItemDTO> getNews(int count) {
         return null;
     }
 
     @Override
-    public List<PressDTO> getPress(int count) {
+    public List<NewsItemDTO> getPress(int count) {
         return null;
     }
 
     @Override
-    public List<DeclarationDTO> getDeclarations(int count) {
+    public List<NewsItemDTO> getDeclarations(int count) {
         return null;
     }
 
     @Override
-    public boolean putNews(List<NewsDTO> news) {
+    public boolean putNews(List<NewsItemDTO> news) {
         return false;
     }
 
     @Override
-    public boolean putPress(List<PressDTO> presses) {
+    public boolean putPress(List<NewsItemDTO> presses) {
         return false;
     }
 
     @Override
-    public boolean putDeclarations(List<DeclarationDTO> declarations) {
+    public boolean putDeclarations(List<NewsItemDTO> declarations) {
         return false;
     }
 }

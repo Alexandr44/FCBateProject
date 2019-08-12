@@ -1,22 +1,20 @@
 package com.alex44.fcbate.news.model.repo;
 
-import com.alex44.fcbate.news.model.dto.DeclarationDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
-import com.alex44.fcbate.news.model.dto.PressDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.List;
 
 public interface INewsRepoCache {
 
-    List<NewsDTO> getNews(int count);
+    List<NewsItemDTO> getNews(int count);
 
-    List<PressDTO> getPress(int count);
+    List<NewsItemDTO> getPress(int count);
 
-    List<DeclarationDTO> getDeclarations(int count);
+    List<NewsItemDTO> getDeclarations(int count);
 
-    boolean putNews(List<NewsDTO> news);
+    boolean putNews(List<NewsItemDTO> news);
 
-    boolean putPress(List<PressDTO> presses);
+    boolean putPress(List<NewsItemDTO> presses);
 
-    boolean putDeclarations(List<DeclarationDTO> declarations);
+    boolean putDeclarations(List<NewsItemDTO> declarations);
 }

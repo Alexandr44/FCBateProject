@@ -1,8 +1,6 @@
 package com.alex44.fcbate.news.model.repo;
 
-import com.alex44.fcbate.news.model.dto.DeclarationDTO;
-import com.alex44.fcbate.news.model.dto.NewsDTO;
-import com.alex44.fcbate.news.model.dto.PressDTO;
+import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 
 import java.util.List;
 
@@ -10,10 +8,10 @@ import io.reactivex.Maybe;
 
 public interface INewsRepo {
 
-    Maybe<List<NewsDTO>> getNews();
+    Maybe<List<NewsItemDTO>> getNews();
 
-    Maybe<List<PressDTO>> getPresses();
+    Maybe<List<NewsItemDTO>> getPresses();
 
-    Maybe<List<DeclarationDTO>> getDeclarations();
+    Maybe<List<NewsItemDTO>> getDeclarations();
 
 }
