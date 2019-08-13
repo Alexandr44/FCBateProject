@@ -1,5 +1,8 @@
 package com.alex44.fcbate.di.modules;
 
+import com.alex44.fcbate.calendar.model.api.ICalendarSource;
+import com.alex44.fcbate.calendar.model.repo.CalendarRepo;
+import com.alex44.fcbate.calendar.model.repo.ICalendarRepo;
 import com.alex44.fcbate.common.model.INetworkStatus;
 import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.home.model.api.IHomeSource;
@@ -45,6 +48,11 @@ public class RepoModule {
     @Provides
     public ITournamentRepo tournamentRepo(ITournamentSource source, INetworkStatus networkStatus, @Named("Room") ITournamentRepoCache tournamentRepoCache) {
         return new TournamentRepo(source, networkStatus, tournamentRepoCache);
+    }
+
+    @Provides
+    public ICalendarRepo calendarRepo(ICalendarSource source, INetworkStatus networkStatus) {
+        return new CalendarRepo(source, networkStatus);
     }
 
 }
