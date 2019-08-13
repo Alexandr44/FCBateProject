@@ -1,5 +1,6 @@
 package com.alex44.fcbate.di;
 
+import com.alex44.fcbate.calendar.presenter.CalendarPresenter;
 import com.alex44.fcbate.di.modules.AppModule;
 import com.alex44.fcbate.di.modules.CiceroneModule;
 import com.alex44.fcbate.di.modules.ImageModule;
@@ -47,4 +48,6 @@ public interface AppComponent {
     void inject(NewsRVAdapter adapter);
 
     void inject(TournamentPresenter tournamentPresenter);
+
+    void inject(CalendarPresenter calendarPresenter);
 }

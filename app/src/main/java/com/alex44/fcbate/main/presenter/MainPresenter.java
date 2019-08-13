@@ -31,6 +31,7 @@ public class MainPresenter  extends MvpPresenter<MainView> {
     }
 
     public void goToCalendarScreen() {
+        router.newRootScreen(new Screens.CalendarScreen());
     }
 
     public void goToTableScreen() {

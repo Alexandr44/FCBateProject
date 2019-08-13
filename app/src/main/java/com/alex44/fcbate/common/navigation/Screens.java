@@ -2,6 +2,7 @@ package com.alex44.fcbate.common.navigation;
 
 import androidx.fragment.app.Fragment;
 
+import com.alex44.fcbate.calendar.ui.CalendarFragment;
 import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.ui.NewsFragment;
@@ -45,6 +46,13 @@ public class Screens {
         @Override
         public Fragment getFragment() {
             return TournamentFragment.newInstance();
+        }
+    }
+
+    public static class CalendarScreen extends SupportAppScreen {
+        @Override
+        public Fragment getFragment() {
+            return CalendarFragment.newInstance();
         }
     }
 

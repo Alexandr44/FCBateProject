@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
+import com.alex44.fcbate.calendar.ui.CalendarFragment;
 import com.alex44.fcbate.common.ui.BackButtonListener;
 import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
@@ -158,7 +159,10 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
                 presenter.goToNewsScreen();
             }
         } else if (id == R.id.nav_calendar) {
-            presenter.goToCalendarScreen();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (!(fragment instanceof CalendarFragment)) {
+                presenter.goToCalendarScreen();
+            }
         } else if (id == R.id.nav_table) {
             final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
             if (!(fragment instanceof TournamentFragment)) {
