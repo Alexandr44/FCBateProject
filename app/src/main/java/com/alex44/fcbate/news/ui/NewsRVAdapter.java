@@ -21,8 +21,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import lombok.Getter;
 import lombok.Setter;
 
 public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder> {
@@ -57,9 +55,6 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
 
     protected class ViewHolder extends RecyclerView.ViewHolder implements NewsRVItemView {
 
-        @Getter
-        private Unbinder unbinder;
-
         @Setter
         private int pos;
 
@@ -75,7 +70,7 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
-            unbinder = ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         @Override

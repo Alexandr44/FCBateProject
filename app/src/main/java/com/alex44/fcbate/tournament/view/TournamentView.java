@@ -7,6 +7,10 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 @StateStrategyType(value = AddToEndSingleStrategy.class)
 public interface TournamentView extends MvpView {
 
+    void init();
+
+    void update();
+
     void showMessage(String message);
 
 }

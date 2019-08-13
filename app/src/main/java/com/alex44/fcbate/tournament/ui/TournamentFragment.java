@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
@@ -18,6 +20,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,6 +35,11 @@ public class TournamentFragment extends MvpAppCompatFragment implements Tourname
 
     @InjectPresenter
     TournamentPresenter presenter;
+
+    TournamentRVAdapter adapter;
+
+    @BindView(R.id.tournament_rv)
+    RecyclerView recyclerView;
 
     public static Fragment newInstance() {
         return new TournamentFragment();
@@ -66,6 +74,18 @@ public class TournamentFragment extends MvpAppCompatFragment implements Tourname
     public Boolean backClick() {
         presenter.backClick();
         return true;
+    }
+
+    @Override
+    public void init() {
+        adapter = new TournamentRVAdapter(presenter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void update() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override
