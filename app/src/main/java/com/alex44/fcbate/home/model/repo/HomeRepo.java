@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class HomeRepo implements IHomeRepo {
+    private static final int NEWS_COUNT = 5;
 
     private final IHomeSource homeSource;
 
@@ -72,7 +73,7 @@ public class HomeRepo implements IHomeRepo {
     public Maybe<List<NewsItemDTO>> getNews() {
         Timber.d("Requesting news");
         if (networkStatus.isOnline()) {
-            return homeSource.getNews()
+            return homeSource.getNews(NEWS_COUNT)
                     .filter(newsDTOS -> {
                         if (systemInfo.isStreamApiAvailable()) {
                             newsDTOS.removeIf(newsDTO -> newsDTO == null || newsDTO.getId() == null || newsDTO.getId() == 0);
@@ -87,7 +88,7 @@ public class HomeRepo implements IHomeRepo {
         }
         else {
             return Maybe.create((MaybeOnSubscribe<List<NewsItemDTO>>) emitter -> {
-                final List<NewsItemDTO> news = homeRepoCache.getNews(5);
+                final List<NewsItemDTO> news = homeRepoCache.getNews(NEWS_COUNT);
                 if (news == null || news.isEmpty()) {
                     emitter.onError(new RuntimeException("No news found in local storage"));
                 } else {

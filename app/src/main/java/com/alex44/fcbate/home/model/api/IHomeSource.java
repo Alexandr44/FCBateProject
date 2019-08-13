@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Maybe;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 import static com.alex44.fcbate.common.ApiStrings.MATCHES_URL;
 import static com.alex44.fcbate.common.ApiStrings.NEWS_URL;
@@ -18,7 +19,7 @@ public interface IHomeSource {
     Maybe<MatchesListResponse> getMatches();
 
     @GET(NEWS_URL)
-    Maybe<List<NewsItemDTO>> getNews();
+    Maybe<List<NewsItemDTO>> getNews(@Query("limit") int limit);
 
     @GET(TOURNAMENTS_URL)
     Maybe<List<List<String>>> getTournamentsInfo();
