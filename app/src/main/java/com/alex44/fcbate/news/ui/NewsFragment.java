@@ -81,9 +81,9 @@ public class NewsFragment extends MvpAppCompatFragment implements NewsView, Back
     @Override
     public void initPager() {
         final NewsPagerAdapter pagerAdapter = new NewsPagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        pagerAdapter.addFragment(createNewsPagerItemFragment(NewsItemType.NEWS), "News");
-        pagerAdapter.addFragment(createNewsPagerItemFragment(NewsItemType.PRESS), "Press");
-        pagerAdapter.addFragment(createNewsPagerItemFragment(NewsItemType.DECLARATION), "Declarations");
+        pagerAdapter.addFragment(createNewsPagerItemFragment(NewsItemType.NEWS), getResources().getString(R.string.pager_title_news));
+        pagerAdapter.addFragment(createNewsPagerItemFragment(NewsItemType.PRESS), getResources().getString(R.string.pager_title_press));
+        pagerAdapter.addFragment(createNewsPagerItemFragment(NewsItemType.DECLARATION), getResources().getString(R.string.pager_title_declarations));
 
         pager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);

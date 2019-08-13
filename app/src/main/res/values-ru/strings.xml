@@ -16,6 +16,9 @@
     <string name="games">И</string>
     <string name="points">О</string>
     <string name="team">Команда</string>
+    <string name="pager_title_news">НОВОСТИ</string>
+    <string name="pager_title_press">ПРЕССА</string>
+    <string name="pager_title_declarations">ОБЪЯВЛЕНИЯ</string>
 
 
 </resources>
