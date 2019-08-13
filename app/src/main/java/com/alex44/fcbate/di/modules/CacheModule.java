@@ -6,6 +6,8 @@ import com.alex44.fcbate.news.model.repo.INewsRepoCache;
 import com.alex44.fcbate.news.model.repo.RoomNewsRepoCache;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepoCache;
 import com.alex44.fcbate.newsdetail.model.repo.NewsDetailRepoCache;
+import com.alex44.fcbate.tournament.model.repo.ITournamentRepoCache;
+import com.alex44.fcbate.tournament.model.repo.RoomTournamentRepoCahe;
 
 import javax.inject.Named;
 
@@ -33,4 +35,9 @@ public class CacheModule {
         return new RoomNewsRepoCache();
     }
 
+    @Named("Room")
+    @Provides
+    public ITournamentRepoCache tournamentRepoCache() {
+        return new RoomTournamentRepoCahe();
+    }
 }

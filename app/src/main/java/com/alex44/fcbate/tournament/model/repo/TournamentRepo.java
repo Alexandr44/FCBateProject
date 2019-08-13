@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -17,9 +18,12 @@ public class TournamentRepo implements ITournamentRepo {
 
     private final INetworkStatus networkStatus;
 
-    public TournamentRepo(ITournamentSource source, INetworkStatus networkStatus) {
+    private final ITournamentRepoCache repoCache;
+
+    public TournamentRepo(ITournamentSource source, INetworkStatus networkStatus, ITournamentRepoCache repoCache) {
         this.source = source;
         this.networkStatus = networkStatus;
+        this.repoCache = repoCache;
     }
 
     @Override
@@ -47,22 +51,21 @@ public class TournamentRepo implements ITournamentRepo {
                     })
                     .subscribeOn(Schedulers.io())
                     .map(tournamentInfoDTOS -> {
-//                        homeRepoCache.putTournamentInfos(tournamentInfoDTOS);
+                        repoCache.putTournamentInfos(tournamentInfoDTOS);
                         return tournamentInfoDTOS;
                     });
         }
-//        else {
-//            return Maybe.create((MaybeOnSubscribe<List<TournamentInfoDTO>>) emitter -> {
-//                final List<TournamentInfoDTO> tournamentInfos = homeRepoCache.getTournamentsInfo();
-//                if (tournamentInfos == null || tournamentInfos.isEmpty()) {
-//                    emitter.onError(new RuntimeException("No tournaments info found in local storage"));
-//                } else {
-//                    emitter.onSuccess(tournamentInfos);
-//                }
-//            })
-//                    .subscribeOn(Schedulers.io());
-//        }
-        return null;
+        else {
+            return Maybe.create((MaybeOnSubscribe<List<TournamentInfoDTO>>) emitter -> {
+                final List<TournamentInfoDTO> tournamentInfos = repoCache.getTournamentsInfo();
+                if (tournamentInfos == null || tournamentInfos.isEmpty()) {
+                    emitter.onError(new RuntimeException("No tournaments info found in local storage"));
+                } else {
+                    emitter.onSuccess(tournamentInfos);
+                }
+            })
+                    .subscribeOn(Schedulers.io());
+        }
     }
 
 }

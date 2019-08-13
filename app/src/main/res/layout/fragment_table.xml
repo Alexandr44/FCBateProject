@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tournament.TournamentFragment"
+    tools:context=".tournament.ui.TournamentFragment"
     android:layout_marginStart="4dp"
     android:layout_marginEnd="4dp">
 

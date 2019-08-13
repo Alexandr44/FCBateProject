@@ -9,11 +9,9 @@ import androidx.room.RoomDatabase;
 import com.alex44.fcbate.home.model.room.RoomMatch;
 import com.alex44.fcbate.home.model.room.RoomTeam;
 import com.alex44.fcbate.home.model.room.RoomTournament;
-import com.alex44.fcbate.home.model.room.RoomTournamentInfo;
 import com.alex44.fcbate.home.model.room.dao.RoomMatchDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTeamDao;
 import com.alex44.fcbate.home.model.room.dao.RoomTournamentDao;
-import com.alex44.fcbate.home.model.room.dao.RoomTournamentInfoDao;
 import com.alex44.fcbate.news.model.room.RoomDeclaration;
 import com.alex44.fcbate.news.model.room.RoomNews;
 import com.alex44.fcbate.news.model.room.RoomPress;
@@ -26,6 +24,8 @@ import com.alex44.fcbate.newsdetail.model.room.RoomPressDetail;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomDeclarationDetailDao;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomNewsDetailDao;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomPressDetailDao;
+import com.alex44.fcbate.tournament.model.room.RoomTournamentInfo;
+import com.alex44.fcbate.tournament.model.room.dao.RoomTournamentInfoDao;
 
 @Database(entities = {RoomMatch.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
         RoomNewsDetail.class, RoomPressDetail.class, RoomDeclarationDetail.class,
