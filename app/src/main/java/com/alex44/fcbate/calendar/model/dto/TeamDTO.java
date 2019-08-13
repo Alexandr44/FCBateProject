@@ -1,4 +1,4 @@
-package com.alex44.fcbate.home.model.dto;
+package com.alex44.fcbate.calendar.model.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

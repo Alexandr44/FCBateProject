@@ -1,11 +1,11 @@
 package com.alex44.fcbate;
 
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
+import com.alex44.fcbate.calendar.model.dto.TeamDTO;
+import com.alex44.fcbate.calendar.model.dto.TournamentDTO;
 import com.alex44.fcbate.di.DaggerTestComponent;
 import com.alex44.fcbate.di.TestComponent;
 import com.alex44.fcbate.di.modules.TestRepoModule;
-import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.home.model.dto.TeamDTO;
-import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.view.HomeView;

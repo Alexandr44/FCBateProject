@@ -1,6 +1,6 @@
 package com.alex44.fcbate.home.presenter;
 
-import com.alex44.fcbate.home.model.dto.MatchDTO;
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.alex44.fcbate.home.view.MatchItemView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;

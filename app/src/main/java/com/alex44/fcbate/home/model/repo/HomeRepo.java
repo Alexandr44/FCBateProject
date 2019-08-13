@@ -2,10 +2,10 @@ package com.alex44.fcbate.home.model.repo;
 
 import android.annotation.SuppressLint;
 
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.alex44.fcbate.common.model.INetworkStatus;
 import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.home.model.api.IHomeSource;
-import com.alex44.fcbate.home.model.dto.MatchDTO;
 import com.alex44.fcbate.home.model.dto.MatchesListResponse;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;

@@ -2,12 +2,12 @@ package com.alex44.fcbate;
 
 import androidx.test.InstrumentationRegistry;
 
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
+import com.alex44.fcbate.calendar.model.dto.TeamDTO;
+import com.alex44.fcbate.calendar.model.dto.TournamentDTO;
 import com.alex44.fcbate.di.DaggerTestComponent;
 import com.alex44.fcbate.di.TestComponent;
 import com.alex44.fcbate.di.modules.AppModule;
-import com.alex44.fcbate.home.model.dto.MatchDTO;
-import com.alex44.fcbate.home.model.dto.TeamDTO;
-import com.alex44.fcbate.home.model.dto.TournamentDTO;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;

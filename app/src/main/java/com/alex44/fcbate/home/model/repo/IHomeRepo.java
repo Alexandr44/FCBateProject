@@ -1,6 +1,6 @@
 package com.alex44.fcbate.home.model.repo;
 
-import com.alex44.fcbate.home.model.dto.MatchDTO;
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
 

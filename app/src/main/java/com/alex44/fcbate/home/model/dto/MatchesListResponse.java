@@ -1,5 +1,6 @@
 package com.alex44.fcbate.home.model.dto;
 
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
