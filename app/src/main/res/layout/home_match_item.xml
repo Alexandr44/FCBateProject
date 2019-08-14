@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/match_item_height"
+    android:layout_margin="4dp"
     android:background="@drawable/home_match_item_background">
 
     <LinearLayout
@@ -56,6 +57,7 @@
             android:id="@+id/tournament_logo"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:paddingTop="4dp"
             tools:src="@drawable/trnm_bel_league_logo"/>
 
         <TextView

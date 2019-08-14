@@ -9,4 +9,8 @@ public interface CalendarView extends MvpView {
 
     void showMessage(String message);
 
+    void init();
+
+    void updateData();
+
 }

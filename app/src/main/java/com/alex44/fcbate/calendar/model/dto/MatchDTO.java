@@ -19,6 +19,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class MatchDTO implements Serializable {
+    public static final int DATA_ROW = 0;
+    public static final int SUBTITLE_ROW = 1;
 
     @Expose
     @SerializedName("game_general_id")
@@ -52,4 +54,22 @@ public class MatchDTO implements Serializable {
     @SerializedName("online")
     private boolean isOnline;
 
+    private int dataType = DATA_ROW;
+
+    public MatchDTO(Long id, TeamDTO leftTeam, TeamDTO rightTeam, TournamentDTO tournament, String dateStr, int goalsLeft, int goalsRight, boolean isOnline) {
+        this.id = id;
+        this.leftTeam = leftTeam;
+        this.rightTeam = rightTeam;
+        this.tournament = tournament;
+        this.dateStr = dateStr;
+        this.goalsLeft = goalsLeft;
+        this.goalsRight = goalsRight;
+        this.isOnline = isOnline;
+        this.dataType = DATA_ROW;
+    }
+
+    public MatchDTO(String dateStr) {
+        this.dateStr = dateStr;
+        this.dataType = SUBTITLE_ROW;
+    }
 }

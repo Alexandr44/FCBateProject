@@ -2,24 +2,25 @@ package com.alex44.fcbate.calendar.ui;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.calendar.presenter.CalendarPresenter;
 import com.alex44.fcbate.calendar.view.CalendarView;
 import com.alex44.fcbate.common.ui.BackButtonListener;
-import com.alex44.fcbate.news.presenter.NewsPresenter;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,6 +35,11 @@ public class CalendarFragment extends MvpAppCompatFragment implements CalendarVi
 
     @InjectPresenter
     CalendarPresenter presenter;
+
+    CalendarRVAdapter adapter;
+
+    @BindView(R.id.calendar_rv)
+    RecyclerView recyclerView;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -65,8 +71,27 @@ public class CalendarFragment extends MvpAppCompatFragment implements CalendarVi
     }
 
     @Override
+    public void init() {
+        adapter = new CalendarRVAdapter(presenter);
+        App.getInstance().getAppComponent().inject(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void updateData() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public Boolean backClick() {
         presenter.backClick();
         return true;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
