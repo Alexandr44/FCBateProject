@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
+
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,7 +83,12 @@ public class NewsPagerItemFragment extends MvpAppCompatFragment implements NewsP
     public void init() {
         adapter = new NewsRVAdapter(presenter);
         App.getInstance().getAppComponent().inject(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        }
+        else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
         recyclerView.setAdapter(adapter);
     }
 

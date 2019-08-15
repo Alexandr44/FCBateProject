@@ -82,7 +82,7 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
 
     @Override
     public void setPhoto(@NotNull String photoUrl) {
-        imageLoader.loadInto(photoUrl, newsPhoto, 20);
+        imageLoader.loadInto(photoUrl, newsPhoto, 40);
     }
 
     @Override
