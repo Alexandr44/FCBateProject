@@ -7,18 +7,23 @@ import com.alex44.fcbate.common.model.INetworkStatus;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class CalendarRepo implements ICalendarRepo {
+    private static final int GAMES_CACHE_COUNT = 25;
 
     private final ICalendarSource calendarSource;
 
     private final INetworkStatus networkStatus;
 
-    public CalendarRepo(ICalendarSource calendarSource, INetworkStatus networkStatus) {
+    private final ICalendarRepoCache repoCache;
+
+    public CalendarRepo(ICalendarSource calendarSource, INetworkStatus networkStatus, ICalendarRepoCache repoCache) {
         this.calendarSource = calendarSource;
         this.networkStatus = networkStatus;
+        this.repoCache = repoCache;
     }
 
     @Override
@@ -29,21 +34,20 @@ public class CalendarRepo implements ICalendarRepo {
                     .filter(gameDTOs -> gameDTOs != null && !gameDTOs.isEmpty())
                     .subscribeOn(Schedulers.io())
                     .map(matchDTOS -> {
-//                        homeRepoCache.putMatches(matchDTOS);
+                        repoCache.putGames(matchDTOS);
                         return matchDTOS;
                     });
         }
-//        else {
-//            return Maybe.create((MaybeOnSubscribe<List<MatchDTO>>) emitter -> {
-//                final List<MatchDTO> matches = homeRepoCache.getMatches();
-//                if (matches == null || matches.isEmpty()) {
-//                    emitter.onError(new RuntimeException("No matches found in local storage"));
-//                } else {
-//                    emitter.onSuccess(matches);
-//                }
-//            })
-//                    .subscribeOn(Schedulers.io());
-//        }
-        return null;
+        else {
+            return Maybe.create((MaybeOnSubscribe<List<MatchDTO>>) emitter -> {
+                final List<MatchDTO> matches = repoCache.getGames(GAMES_CACHE_COUNT);
+                if (matches == null || matches.isEmpty()) {
+                    emitter.onError(new RuntimeException("No games found in local storage"));
+                } else {
+                    emitter.onSuccess(matches);
+                }
+            })
+                    .subscribeOn(Schedulers.io());
+        }
     }
 }

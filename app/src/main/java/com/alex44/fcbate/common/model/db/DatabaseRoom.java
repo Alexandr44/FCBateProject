@@ -6,12 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.alex44.fcbate.home.model.room.RoomMatch;
-import com.alex44.fcbate.home.model.room.RoomTeam;
-import com.alex44.fcbate.home.model.room.RoomTournament;
-import com.alex44.fcbate.home.model.room.dao.RoomMatchDao;
-import com.alex44.fcbate.home.model.room.dao.RoomTeamDao;
-import com.alex44.fcbate.home.model.room.dao.RoomTournamentDao;
+import com.alex44.fcbate.calendar.model.room.RoomMatch;
+import com.alex44.fcbate.calendar.model.room.RoomTeam;
+import com.alex44.fcbate.calendar.model.room.RoomTournament;
+import com.alex44.fcbate.calendar.model.room.dao.RoomMatchDao;
+import com.alex44.fcbate.calendar.model.room.dao.RoomTeamDao;
+import com.alex44.fcbate.calendar.model.room.dao.RoomTournamentDao;
 import com.alex44.fcbate.news.model.room.RoomDeclaration;
 import com.alex44.fcbate.news.model.room.RoomNews;
 import com.alex44.fcbate.news.model.room.RoomPress;

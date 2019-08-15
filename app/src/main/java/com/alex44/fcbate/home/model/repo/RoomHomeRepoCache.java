@@ -4,9 +4,9 @@ import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.alex44.fcbate.calendar.model.dto.TeamDTO;
 import com.alex44.fcbate.calendar.model.dto.TournamentDTO;
 import com.alex44.fcbate.common.model.db.DatabaseRoom;
-import com.alex44.fcbate.home.model.room.RoomMatch;
-import com.alex44.fcbate.home.model.room.RoomTeam;
-import com.alex44.fcbate.home.model.room.RoomTournament;
+import com.alex44.fcbate.calendar.model.room.RoomMatch;
+import com.alex44.fcbate.calendar.model.room.RoomTeam;
+import com.alex44.fcbate.calendar.model.room.RoomTournament;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
 import com.alex44.fcbate.news.model.room.RoomNews;
 import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
@@ -23,8 +23,8 @@ public class RoomHomeRepoCache implements IHomeRepoCache {
     private final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     @Override
-    public List<MatchDTO> getMatches() {
-        final List<RoomMatch> matches = DatabaseRoom.getInstance().getMatchDao().findLastFive();
+    public List<MatchDTO> getMatches(int count) {
+        final List<RoomMatch> matches = DatabaseRoom.getInstance().getMatchDao().findLast(count);
         final List<MatchDTO> matchDTOs = new ArrayList<>();
         for (RoomMatch match : matches) {
             final MatchDTO matchDTO = new MatchDTO();

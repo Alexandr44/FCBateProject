@@ -1,4 +1,4 @@
-package com.alex44.fcbate.home.model.room.dao;
+package com.alex44.fcbate.calendar.model.room.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.alex44.fcbate.home.model.room.RoomTournament;
+import com.alex44.fcbate.calendar.model.room.RoomTournament;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IHomeRepoCache {
 
-    List<MatchDTO> getMatches();
+    List<MatchDTO> getMatches(int count);
 
     MatchDTO getMatchById(Long id);
 

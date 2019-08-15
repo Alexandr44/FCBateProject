@@ -1,4 +1,4 @@
-package com.alex44.fcbate.home.model.room;
+package com.alex44.fcbate.calendar.model.room;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

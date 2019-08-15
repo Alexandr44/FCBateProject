@@ -20,6 +20,7 @@ import timber.log.Timber;
 
 public class HomeRepo implements IHomeRepo {
     private static final int NEWS_COUNT = 5;
+    private static final int MATCHES_COUNT = 5;
 
     private final IHomeSource homeSource;
 
@@ -57,7 +58,7 @@ public class HomeRepo implements IHomeRepo {
         }
         else {
             return Maybe.create((MaybeOnSubscribe<List<MatchDTO>>) emitter -> {
-                final List<MatchDTO> matches = homeRepoCache.getMatches();
+                final List<MatchDTO> matches = homeRepoCache.getMatches(MATCHES_COUNT);
                 if (matches == null || matches.isEmpty()) {
                     emitter.onError(new RuntimeException("No matches found in local storage"));
                 } else {
