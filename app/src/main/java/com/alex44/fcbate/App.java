@@ -6,6 +6,7 @@ import com.alex44.fcbate.di.AppComponent;
 import com.alex44.fcbate.di.DaggerAppComponent;
 import com.alex44.fcbate.di.modules.AppModule;
 import com.alex44.fcbate.common.model.db.DatabaseRoom;
+import com.squareup.leakcanary.LeakCanary;
 
 import lombok.Getter;
 import timber.log.Timber;
@@ -20,6 +21,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
         instance = this;
         Timber.plant(new Timber.DebugTree());
         appComponent = DaggerAppComponent.builder()
