@@ -1,5 +1,6 @@
 package com.alex44.fcbate.tournament.presenter;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.tournament.model.dto.TournamentInfoDTO;
 import com.alex44.fcbate.tournament.model.repo.ITournamentRepo;
@@ -62,6 +63,7 @@ public class TournamentPresenter extends MvpPresenter<TournamentView> {
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+        App.getInstance().getComponentManager().clearTournamentSubComponent();
     }
 
     public void backClick() {

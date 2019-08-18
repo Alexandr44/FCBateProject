@@ -57,7 +57,7 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
     protected TextView dateText;
 
     public NewsDetailFragment() {
-        App.getInstance().getAppComponent().inject(this);
+        App.getInstance().getComponentManager().getNewsDetailSubComponent().inject(this);
     }
 
     public static Fragment newInstance(NewsItemType type, Long newsId) {
@@ -79,7 +79,7 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
         }
 
         final NewsDetailPresenter newsDetailPresenter = new NewsDetailPresenter(type, newsId, AndroidSchedulers.mainThread());
-        App.getInstance().getAppComponent().inject(newsDetailPresenter);
+        App.getInstance().getComponentManager().getNewsDetailSubComponent().inject(newsDetailPresenter);
         return newsDetailPresenter;
     }
 

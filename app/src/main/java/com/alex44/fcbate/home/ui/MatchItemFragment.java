@@ -59,7 +59,7 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
     protected TextView matchScore;
 
     public MatchItemFragment() {
-        App.getInstance().getAppComponent().inject(this);
+        App.getInstance().getComponentManager().getHomeSubComponent().inject(this);
     }
 
     @ProvidePresenter

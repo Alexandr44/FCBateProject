@@ -1,20 +1,14 @@
 package com.alex44.fcbate.di.modules;
 
 import com.alex44.fcbate.App;
-import com.alex44.fcbate.calendar.model.api.ICalendarSource;
 import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
-import com.alex44.fcbate.home.model.api.IHomeSource;
-import com.alex44.fcbate.news.model.api.INewsSource;
-import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
-import com.alex44.fcbate.tournament.model.api.ITournamentSource;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
 import javax.inject.Named;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,7 +29,6 @@ public class ApiModule {
         return RETROFIT_BASE_URL;
     }
 
-    @Singleton
     @Provides
     public Gson gson() {
         return new GsonBuilder()
@@ -71,31 +64,6 @@ public class ApiModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)
                 .build();
-    }
-
-    @Provides
-    public IHomeSource homeSource(Retrofit retrofit) {
-        return retrofit.create(IHomeSource.class);
-    }
-
-    @Provides
-    public INewsDetailSource newsDetailSource(Retrofit retrofit) {
-        return retrofit.create(INewsDetailSource.class);
-    }
-
-    @Provides
-    public INewsSource newsSource(Retrofit retrofit) {
-        return retrofit.create(INewsSource.class);
-    }
-
-    @Provides
-    public ITournamentSource tournamentSource(Retrofit retrofit) {
-        return retrofit.create(ITournamentSource.class);
-    }
-
-    @Provides
-    public ICalendarSource calendarSource(Retrofit retrofit) {
-        return retrofit.create(ICalendarSource.class);
     }
 
 }

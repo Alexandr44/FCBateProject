@@ -103,7 +103,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     @ProvidePresenter
     protected HomePresenter createPresenter() {
         final HomePresenter homePresenter = new HomePresenter(AndroidSchedulers.mainThread());
-        App.getInstance().getAppComponent().inject(homePresenter);
+        App.getInstance().getComponentManager().getHomeSubComponent().inject(homePresenter);
         return homePresenter;
     }
 

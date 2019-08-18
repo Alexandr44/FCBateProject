@@ -49,7 +49,7 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
     protected TextView newsDateTime;
 
     public NewsItemFragment() {
-        App.getInstance().getAppComponent().inject(this);
+        App.getInstance().getComponentManager().getHomeSubComponent().inject(this);
     }
 
     @ProvidePresenter
@@ -62,7 +62,7 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
             Timber.e("No data for NewsItemPresenter");
         }
         final NewsItemPresenter newsItemPresenter = new NewsItemPresenter(newsDTO);
-        App.getInstance().getAppComponent().inject(newsItemPresenter);
+        App.getInstance().getComponentManager().getHomeSubComponent().inject(newsItemPresenter);
         return newsItemPresenter;
     }
 

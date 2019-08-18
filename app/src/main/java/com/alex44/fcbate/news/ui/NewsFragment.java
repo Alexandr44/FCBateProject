@@ -53,7 +53,7 @@ public class NewsFragment extends MvpAppCompatFragment implements NewsView, Back
     @ProvidePresenter
     protected NewsPresenter createPresenter() {
         final NewsPresenter newsPresenter = new NewsPresenter();
-        App.getInstance().getAppComponent().inject(newsPresenter);
+        App.getInstance().getComponentManager().getNewsSubComponent().inject(newsPresenter);
         return newsPresenter;
     }
 

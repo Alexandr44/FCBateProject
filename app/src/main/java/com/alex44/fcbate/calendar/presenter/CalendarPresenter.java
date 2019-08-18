@@ -1,5 +1,6 @@
 package com.alex44.fcbate.calendar.presenter;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.alex44.fcbate.calendar.model.repo.ICalendarRepo;
 import com.alex44.fcbate.calendar.view.CalendarItemView;
@@ -99,6 +100,7 @@ public class CalendarPresenter extends MvpPresenter<CalendarView> {
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+        App.getInstance().getComponentManager().clearCalendarSubComponent();
     }
 
     public void backClick() {
@@ -134,14 +136,4 @@ public class CalendarPresenter extends MvpPresenter<CalendarView> {
         holder.setTitle(matchDTO.getDateStr());
     }
 
-/*    public void bind(RecyclerView.ViewHolder holder, int position) {
-        final MatchDTO matchDTO = data.get(position);
-        if (matchDTO.getDataType() == MatchDTO.DATA_ROW) {
-            holder = holder
-
-        }
-        else {
-
-        }
-    }*/
 }

@@ -9,7 +9,7 @@ import com.alex44.fcbate.di.DaggerTestComponent;
 import com.alex44.fcbate.di.TestComponent;
 import com.alex44.fcbate.di.modules.ApiModule;
 import com.alex44.fcbate.di.modules.AppModule;
-import com.alex44.fcbate.di.modules.CacheModule;
+import com.alex44.fcbate.di.modules.HomeModule;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
 import com.alex44.fcbate.news.model.dto.NewsItemDTO;
@@ -113,7 +113,7 @@ public class HomeRepoInstrumentedTest {
                         return mockWebServer.url("/").toString();
                     }
                 })
-                .cacheModule(new CacheModule() {
+                .homeModule(new HomeModule() {
                     @Override
                     public IHomeRepoCache roomHomeRepoCache() {
                         final IHomeRepoCache cache = Mockito.mock(IHomeRepoCache.class);
@@ -127,7 +127,7 @@ public class HomeRepoInstrumentedTest {
                         listNews.add(new NewsItemDTO(id, url, anyDateStr, title, titleShort));
                         final List<TournamentInfoDTO> infoList = new ArrayList<>();
                         infoList.add(new TournamentInfoDTO(position, title, games, wins, draws, loses, diffs, points));
-                        Mockito.when(cache.getMatches()).thenReturn(list);
+                        Mockito.when(cache.getMatches(5)).thenReturn(list);
                         Mockito.when(cache.getNews(5)).thenReturn(listNews);
                         Mockito.when(cache.getTournamentsInfo()).thenReturn(infoList);
                         Mockito.when(cache.putMatches(Mockito.any())).thenReturn(true);

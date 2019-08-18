@@ -69,7 +69,7 @@ public class NewsPagerItemFragment extends MvpAppCompatFragment implements NewsP
         }
 
         final NewsPagerItemPresenter presenter = new NewsPagerItemPresenter(AndroidSchedulers.mainThread(), type);
-        App.getInstance().getAppComponent().inject(presenter);
+        App.getInstance().getComponentManager().getNewsSubComponent().inject(presenter);
         return presenter;
     }
 
@@ -82,7 +82,7 @@ public class NewsPagerItemFragment extends MvpAppCompatFragment implements NewsP
     @Override
     public void init() {
         adapter = new NewsRVAdapter(presenter);
-        App.getInstance().getAppComponent().inject(adapter);
+        App.getInstance().getComponentManager().getNewsSubComponent().inject(adapter);
         if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }

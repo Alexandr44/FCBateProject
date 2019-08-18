@@ -51,7 +51,7 @@ public class TournamentFragment extends MvpAppCompatFragment implements Tourname
     @ProvidePresenter
     protected TournamentPresenter createPresenter() {
         final TournamentPresenter tournamentPresenter = new TournamentPresenter(AndroidSchedulers.mainThread());
-        App.getInstance().getAppComponent().inject(tournamentPresenter);
+        App.getInstance().getComponentManager().getTournamentSubComponent().inject(tournamentPresenter);
         return tournamentPresenter;
     }
 

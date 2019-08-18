@@ -1,5 +1,6 @@
 package com.alex44.fcbate.home.presenter;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.view.HomeView;
 import com.arellomobile.mvp.InjectViewState;
@@ -104,6 +105,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
             newsDisposable.dispose();
         if (tournamentsDisposable != null && !tournamentsDisposable.isDisposed())
             tournamentsDisposable.dispose();
+        App.getInstance().getComponentManager().clearHomeSubComponent();
     }
 
     public void backClick() {

@@ -1,5 +1,6 @@
 package com.alex44.fcbate.news.presenter;
 
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.news.view.NewsView;
 import com.arellomobile.mvp.InjectViewState;
@@ -31,6 +32,7 @@ public class NewsPresenter extends MvpPresenter<NewsView> {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        App.getInstance().getComponentManager().clearNewsSubComponent();
     }
 
     public void backClick() {

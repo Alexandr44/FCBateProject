@@ -1,7 +1,8 @@
 package com.alex44.fcbate.newsdetail.presenter;
 
-import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
+import com.alex44.fcbate.App;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
+import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepo;
 import com.alex44.fcbate.newsdetail.view.NewsDetailView;
 import com.arellomobile.mvp.InjectViewState;
@@ -95,6 +96,7 @@ public class NewsDetailPresenter extends MvpPresenter<NewsDetailView> {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+        App.getInstance().getComponentManager().clearNewsDetailSubComponent();
     }
 
     public void backClick() {

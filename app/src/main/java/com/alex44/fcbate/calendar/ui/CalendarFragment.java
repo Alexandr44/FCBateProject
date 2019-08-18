@@ -52,7 +52,7 @@ public class CalendarFragment extends MvpAppCompatFragment implements CalendarVi
     @ProvidePresenter
     protected CalendarPresenter createPresenter() {
         final CalendarPresenter calendarPresenter = new CalendarPresenter(AndroidSchedulers.mainThread());
-        App.getInstance().getAppComponent().inject(calendarPresenter);
+        App.getInstance().getComponentManager().getCalendarSubComponent().inject(calendarPresenter);
         return calendarPresenter;
     }
 
@@ -73,7 +73,7 @@ public class CalendarFragment extends MvpAppCompatFragment implements CalendarVi
     @Override
     public void init() {
         adapter = new CalendarRVAdapter(presenter);
-        App.getInstance().getAppComponent().inject(adapter);
+        App.getInstance().getComponentManager().getCalendarSubComponent().inject(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }
