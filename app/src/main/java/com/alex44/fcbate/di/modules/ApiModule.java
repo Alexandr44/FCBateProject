@@ -1,8 +1,8 @@
 package com.alex44.fcbate.di.modules;
 
+import com.alex44.apisupport.ApiSupportUtil;
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.common.model.ISystemInfo;
-import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,7 +42,12 @@ public class ApiModule {
         final OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addNetworkInterceptor(httpLoggingInterceptor)
                 .addNetworkInterceptor(chuckInterceptor);
-        return ApiSupportUtil.enableTls12OnPreLollipop(builder, systemInfo).build();
+        if (systemInfo.needToConfigSSL()) {
+            return ApiSupportUtil.enableTls12OnPreLollipop(builder).build();
+        }
+        else {
+            return builder.build();
+        }
     }
 
     @Provides

@@ -1,6 +1,4 @@
-package com.alex44.fcbate.common.model.api.support;
-
-import com.alex44.fcbate.common.model.ISystemInfo;
+package com.alex44.apisupport;
 
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -17,7 +15,6 @@ import javax.net.ssl.X509TrustManager;
 import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
 import okhttp3.TlsVersion;
-import timber.log.Timber;
 
 /**
  * Fixes error like:
@@ -26,27 +23,25 @@ import timber.log.Timber;
  */
 public class ApiSupportUtil {
 
-    public static OkHttpClient.Builder enableTls12OnPreLollipop(OkHttpClient.Builder client, ISystemInfo systemInfo) {
-        if (systemInfo.needToConfigSSL()) {
-            try {
-                SSLContext sc = SSLContext.getInstance("TLSv1.2");
-                sc.init(null, null, null);
+    public static OkHttpClient.Builder enableTls12OnPreLollipop(OkHttpClient.Builder client) {
+        try {
+            SSLContext sc = SSLContext.getInstance("TLSv1.2");
+            sc.init(null, null, null);
 
-                X509TrustManager trustManager = getTrustManager();
-                client.sslSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()), trustManager);
+            X509TrustManager trustManager = getTrustManager();
+            client.sslSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()), trustManager);
 
-                ConnectionSpec cs = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-                        .tlsVersions(TlsVersion.TLS_1_2).build();
+            ConnectionSpec cs = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
+                    .tlsVersions(TlsVersion.TLS_1_2).build();
 
-                List<ConnectionSpec> specs = new ArrayList<>();
-                specs.add(cs);
-                specs.add(ConnectionSpec.COMPATIBLE_TLS);
-                specs.add(ConnectionSpec.CLEARTEXT);
+            List<ConnectionSpec> specs = new ArrayList<>();
+            specs.add(cs);
+            specs.add(ConnectionSpec.COMPATIBLE_TLS);
+            specs.add(ConnectionSpec.CLEARTEXT);
 
-                client.connectionSpecs(specs);
-            } catch (Exception exc) {
-                Timber.e(exc, "Error while setting TLS 1.2");
-            }
+            client.connectionSpecs(specs);
+        } catch (Exception exc) {
+            System.out.println("Error while setting TLS 1.2: " + exc);
         }
 
         return client;
@@ -60,10 +55,10 @@ public class ApiSupportUtil {
             trustManagers = trustManagerFactory.getTrustManagers();
         }
         catch (NoSuchAlgorithmException e) {
-            Timber.e(e, "TrustManagerFactory getInstance Exception");
+            System.out.println("TrustManagerFactory getInstance Exception: " + e);
         }
         catch (KeyStoreException e) {
-            Timber.e(e, "TrustManagerFactory init Exception");
+            System.out.println("TrustManagerFactory init Exception: " + e);
         }
         if (trustManagers == null || trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
             throw new IllegalStateException("Unexpected default trust managers:" + Arrays.toString(trustManagers));
