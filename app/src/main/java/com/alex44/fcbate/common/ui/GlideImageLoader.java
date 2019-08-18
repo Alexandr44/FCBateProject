@@ -1,45 +1,24 @@
 package com.alex44.fcbate.common.ui;
 
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.alex44.fcbate.common.model.IImageLoader;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
+import com.alex44.glidemodule.GlideLoader;
 
 public class GlideImageLoader implements IImageLoader<ImageView> {
 
     @Override
     public void loadInto(String url, ImageView container, int corners) {
-        final MultiTransformation<Bitmap> multi = new MultiTransformation<>(
-                new RoundedCorners(corners)
-        );
-
-        Glide.with(container.getContext())
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(multi))
-                .into(container);
+        new GlideLoader().loadInto(url, container, corners);
     }
 
     @Override
     public void loadInto(String url, ImageView container) {
-        Glide.with(container.getContext())
-                .load(url)
-                .into(container);
+        new GlideLoader().loadInto(url, container);
     }
 
     @Override
     public void loadIntoWithCrop(String url, ImageView container, int corners) {
-        final MultiTransformation<Bitmap> multi = new MultiTransformation<>(
-                new CenterCrop(), new RoundedCorners(corners)
-        );
-
-        Glide.with(container.getContext())
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(multi))
-                .into(container);
+        new GlideLoader().loadIntoWithCrop(url, container, corners);
     }
 }
