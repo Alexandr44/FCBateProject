@@ -18,6 +18,7 @@ import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.view.MainView;
 import com.alex44.fcbate.news.ui.NewsFragment;
+import com.alex44.fcbate.team.ui.TeamFragment;
 import com.alex44.fcbate.tournament.ui.TournamentFragment;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -169,7 +170,10 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
                 presenter.goToTableScreen();
             }
         } else if (id == R.id.nav_team) {
-            presenter.goToTeamScreen();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (!(fragment instanceof TeamFragment)) {
+                presenter.goToTeamScreen();
+            }
         } else if (id == R.id.nav_club) {
             presenter.goToClubScreen();
         } else if (id == R.id.nav_app) {

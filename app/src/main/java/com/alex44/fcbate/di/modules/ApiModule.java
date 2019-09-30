@@ -7,6 +7,7 @@ import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
 import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.news.model.api.INewsSource;
 import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
+import com.alex44.fcbate.team.model.api.ITeamSource;
 import com.alex44.fcbate.tournament.model.api.ITournamentSource;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -96,6 +97,11 @@ public class ApiModule {
     @Provides
     public ICalendarSource calendarSource(Retrofit retrofit) {
         return retrofit.create(ICalendarSource.class);
+    }
+
+    @Provides
+    public ITeamSource teamSource(Retrofit retrofit) {
+        return retrofit.create(ITeamSource.class);
     }
 
 }

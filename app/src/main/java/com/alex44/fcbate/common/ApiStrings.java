@@ -16,4 +16,8 @@ public class ApiStrings {
 
     public final static String TOURNAMENTS_URL = "tournaments/1/table";
 
+    public final static String PLAYERS_URL = "players";
+
+    public final static String TRAINERS_URL = "trainers";
+
 }

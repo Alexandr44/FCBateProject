@@ -28,4 +28,6 @@
     <string name="pager_title_news">NEWS</string>
     <string name="pager_title_press">PRESS</string>
     <string name="pager_title_declarations">DECLARATIONS</string>
+    <string name="pager_title_players">PLAYERS</string>
+    <string name="pager_title_trainers">TRAINERS</string>
 </resources>

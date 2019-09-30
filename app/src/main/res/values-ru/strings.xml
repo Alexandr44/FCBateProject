@@ -19,6 +19,8 @@
     <string name="pager_title_news">НОВОСТИ</string>
     <string name="pager_title_press">ПРЕССА</string>
     <string name="pager_title_declarations">ОБЪЯВЛЕНИЯ</string>
+    <string name="pager_title_players">ИГРОКИ</string>
+    <string name="pager_title_trainers">ТРЕНЕРЫ</string>
 
 
 </resources>

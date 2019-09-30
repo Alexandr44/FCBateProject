@@ -18,6 +18,9 @@ import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepo;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepoCache;
 import com.alex44.fcbate.newsdetail.model.repo.NewsDetailRepo;
+import com.alex44.fcbate.team.model.api.ITeamSource;
+import com.alex44.fcbate.team.model.repo.ITeamRepo;
+import com.alex44.fcbate.team.model.repo.TeamRepo;
 import com.alex44.fcbate.tournament.model.api.ITournamentSource;
 import com.alex44.fcbate.tournament.model.repo.ITournamentRepo;
 import com.alex44.fcbate.tournament.model.repo.ITournamentRepoCache;
@@ -54,6 +57,11 @@ public class RepoModule {
     @Provides
     public ICalendarRepo calendarRepo(ICalendarSource source, INetworkStatus networkStatus, @Named("Room")ICalendarRepoCache repoCache) {
         return new CalendarRepo(source, networkStatus, repoCache);
+    }
+
+    @Provides
+    public ITeamRepo teamRepo(ITeamSource source, INetworkStatus networkStatus) {
+        return new TeamRepo(source, networkStatus);
     }
 
 }
