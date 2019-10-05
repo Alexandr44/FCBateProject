@@ -1,5 +1,6 @@
 package com.alex44.fcbate.team.presenter;
 
+import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.team.model.dto.PlayerDTO;
 import com.alex44.fcbate.team.model.dto.TrainerDTO;
 import com.alex44.fcbate.team.model.enums.TeamItemType;
@@ -102,11 +103,11 @@ public class TeamPagerItemPresenter extends MvpPresenter<TeamPagerItemView> {
         clickDisposable = clickSubject.subscribe(newsRVItemView -> {
             if (TeamItemType.PLAYERS.equals(type)) {
                 final PlayerDTO playerDTO = playersData.get(newsRVItemView.getPos());
-//                router.navigateTo(new Screens.PlayerDetailScreen(type, playerDTO.getId()));
+                router.navigateTo(new Screens.TeamDetailScreen(type, playerDTO.getId()));
             }
             else if (TeamItemType.TRAINERS.equals(type)) {
                 final TrainerDTO trainerDTO = trainersData.get(newsRVItemView.getPos());
-//                router.navigateTo(new Screens.TrainerDetailScreen(type, trainerDTO.getId()));
+                router.navigateTo(new Screens.TeamDetailScreen(type, trainerDTO.getId()));
             }
         });
     }

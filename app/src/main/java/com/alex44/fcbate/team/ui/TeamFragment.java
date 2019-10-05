@@ -26,7 +26,7 @@ import butterknife.Unbinder;
 
 import static androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
 
-public class TeamFragment  extends MvpAppCompatFragment implements TeamView, BackButtonListener {
+public class TeamFragment extends MvpAppCompatFragment implements TeamView, BackButtonListener {
 
     private View view;
     private Unbinder unbinder;
