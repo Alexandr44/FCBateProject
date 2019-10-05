@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
@@ -17,6 +19,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,18 +33,17 @@ public class TeamPagerItemFragment extends MvpAppCompatFragment implements TeamP
     private View view;
     private Unbinder unbinder;
 
-//    private NewsRVAdapter adapter;
+    private TeamRVAdapter adapter;
 
     @InjectPresenter
     TeamPagerItemPresenter presenter;
 
-//    @BindView(R.id.news_pager_rv)
-//    RecyclerView recyclerView;
+    @BindView(R.id.team_pager_rv)
+    RecyclerView recyclerView;
 
     public TeamPagerItemFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,12 +77,25 @@ public class TeamPagerItemFragment extends MvpAppCompatFragment implements TeamP
 
     @Override
     public void init() {
-
+        adapter = new TeamRVAdapter(presenter);
+        App.getInstance().getAppComponent().inject(adapter);
+        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (adapter.getItemViewType(position) == TeamRVAdapter.TYPE_TITLE) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void updateData() {
-
+        adapter.notifyDataSetChanged();
     }
 
     @Override

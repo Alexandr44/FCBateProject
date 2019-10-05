@@ -34,10 +34,10 @@ public class TeamFragment  extends MvpAppCompatFragment implements TeamView, Bac
     @InjectPresenter
     TeamPresenter presenter;
 
-    @BindView(R.id.news_pager)
+    @BindView(R.id.team_pager)
     protected ViewPager pager;
 
-    @BindView(R.id.news_tab_layout)
+    @BindView(R.id.team_tab_layout)
     protected TabLayout tabLayout;
 
     public TeamFragment() {

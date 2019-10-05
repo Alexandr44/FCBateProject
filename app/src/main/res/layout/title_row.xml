@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_columnSpan="2"
+    android:layout_span="2">
 
     <TextView
         android:id="@+id/title_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/defaultYellow"
         android:layout_gravity="start"
@@ -15,6 +17,8 @@
         android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:textSize="18sp"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+        android:layout_columnSpan="2"
+        android:layout_span="2"/>
 
 </LinearLayout>

@@ -54,4 +54,8 @@ public class PlayerDTO implements Serializable {
     @SerializedName("born_place")
     private String bornPlace;
 
+    public PlayerDTO(Long id) {
+        this.id = id;
+    }
+
 }
