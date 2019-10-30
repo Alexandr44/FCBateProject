@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -88,6 +89,8 @@ dependencies {
     //LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //Multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     //Unit Tests
     testImplementation 'junit:junit:4.12'

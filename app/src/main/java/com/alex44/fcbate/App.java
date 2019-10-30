@@ -1,6 +1,9 @@
 package com.alex44.fcbate;
 
 import android.app.Application;
+import android.content.Context;
+
+import androidx.multidex.MultiDex;
 
 import com.alex44.fcbate.di.AppComponent;
 import com.alex44.fcbate.di.DaggerAppComponent;
@@ -31,6 +34,12 @@ public class App extends Application {
                 .appModule(new AppModule(this))
                 .build();
         DatabaseRoom.create(getApplicationContext());
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static App getInstance() {
