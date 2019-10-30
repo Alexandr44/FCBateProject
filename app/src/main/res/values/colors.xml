@@ -8,4 +8,5 @@
     <color name="defaultYellow">#FFAF01</color>
     <color name="navigationViewBackground">#56B2E3</color>
     <color name="textBackgroundColor">#00193c</color>
+    <color name="backgroundBlue">#00193c</color>
 </resources>

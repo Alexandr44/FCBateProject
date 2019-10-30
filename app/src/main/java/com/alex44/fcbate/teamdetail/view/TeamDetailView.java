@@ -11,4 +11,20 @@ public interface TeamDetailView extends MvpView {
 
     void showMessage(String message);
 
+    void setPhoto(String url);
+
+    void setFIO(String text);
+
+    void setNum(String text);
+
+    void setSpec(String text);
+
+    void setParams(int age, String content);
+
+    void setAgeOnly(int age);
+
+    void setCountry(String text);
+
+    void setCountryFromContent(String content);
+
 }

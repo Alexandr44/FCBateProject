@@ -131,7 +131,6 @@ public class TeamPagerItemPresenter extends MvpPresenter<TeamPagerItemView> {
                         })
                         .observeOn(mainThreadScheduler)
                         .subscribe(players -> {
-                            Timber.d("Result");
                             playersData = players;
                             getViewState().updateData();
                         }, throwable -> {
@@ -142,7 +141,6 @@ public class TeamPagerItemPresenter extends MvpPresenter<TeamPagerItemView> {
             case TRAINERS:
                 disposable = teamRepo.getTrainers().observeOn(mainThreadScheduler)
                         .subscribe(trainers -> {
-                            Timber.d("Result");
                             trainersData = trainers;
                             getViewState().updateData();
                         }, throwable -> {
