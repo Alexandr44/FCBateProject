@@ -18,7 +18,7 @@ public class SystemInfo implements ISystemInfo {
 
     @Override
     public boolean isStreamApiAvailable() {
-        return getBuildVersion() >= 22;
+        return getBuildVersion() >= 24;
     }
 
 }
