@@ -20,4 +20,6 @@ public class ApiStrings {
 
     public final static String TRAINERS_URL = "trainers";
 
+    public final static String PHOTOS_URL = "photos";
+
 }

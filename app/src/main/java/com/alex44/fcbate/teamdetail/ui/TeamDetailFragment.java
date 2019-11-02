@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alex44.fcbate.App;
@@ -45,6 +46,9 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
 
     private View view;
     private Unbinder unbinder;
+
+    private TeamItemType type = null;
+    private Long id = null;
 
     @InjectPresenter
     TeamDetailPresenter presenter;
@@ -87,8 +91,8 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
 
     @ProvidePresenter
     protected TeamDetailPresenter createPresenter() {
-        TeamItemType type = null;
-        Long id = null;
+        type = null;
+        id = null;
         if (getArguments() != null) {
             id = getArguments().getLong("id");
             type = (TeamItemType)getArguments().getSerializable("type");
@@ -125,6 +129,7 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
         final TeamDetailPagerAdapter pagerAdapter = new TeamDetailPagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         pagerAdapter.addFragment(new TeamDetailAnketaFragment(presenter.getTeamDetailAnketaPresenter()), "Анкета");
         pagerAdapter.addFragment(new TeamDetailBiographyFragment(presenter.getTeamDetailBiographyPresenter()), "Биография");
+        pagerAdapter.addFragment(createTeamDetailPhotoFragment(), "Фото");
 
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -133,7 +138,8 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
 
             @Override
             public void onPageSelected(int position) {
-                pager.reMeasureCurrentPage(position);
+                final Fragment fragment = pagerAdapter.getItem(position);
+                pager.setViewForMeasure(fragment.getView());
             }
 
             @Override
@@ -143,8 +149,17 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
 
         pager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);
-//        pager.setPageTransformer(true, new TabletTransformer());
     }
+
+    private TeamDetailPhotoFragment createTeamDetailPhotoFragment() {
+        final Bundle arguments = new Bundle();
+        arguments.putSerializable("type", type);
+        arguments.putLong("id", id);
+        final TeamDetailPhotoFragment fragment = new TeamDetailPhotoFragment();
+        fragment.setArguments(arguments);
+        return fragment;
+    }
+
 
     @Override
     public void showMessage(String message) {

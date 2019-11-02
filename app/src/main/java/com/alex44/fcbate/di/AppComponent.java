@@ -21,8 +21,11 @@ import com.alex44.fcbate.team.presenter.TeamPagerItemPresenter;
 import com.alex44.fcbate.team.presenter.TeamPresenter;
 import com.alex44.fcbate.team.ui.TeamRVAdapter;
 import com.alex44.fcbate.teamdetail.presenter.TeamDetailAnketaPresenter;
+import com.alex44.fcbate.teamdetail.presenter.TeamDetailPhotoPresenter;
 import com.alex44.fcbate.teamdetail.presenter.TeamDetailPresenter;
 import com.alex44.fcbate.teamdetail.ui.TeamDetailFragment;
+import com.alex44.fcbate.teamdetail.ui.TeamDetailPhotoFragment;
+import com.alex44.fcbate.teamdetail.ui.TeamDetailPhotoRVAdapter;
 import com.alex44.fcbate.tournament.presenter.TournamentPresenter;
 
 import javax.inject.Singleton;
@@ -71,4 +74,10 @@ public interface AppComponent {
     void inject(TeamDetailFragment teamDetailFragment);
 
     void inject(TeamDetailAnketaPresenter teamDetailAnketaPresenter);
+
+    void inject(TeamDetailPhotoFragment teamDetailPhotoFragment);
+
+    void inject(TeamDetailPhotoPresenter teamDetailPhotoPresenter);
+
+    void inject(TeamDetailPhotoRVAdapter adapter);
 }

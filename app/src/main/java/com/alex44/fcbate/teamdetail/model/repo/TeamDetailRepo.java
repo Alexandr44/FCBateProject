@@ -3,6 +3,9 @@ package com.alex44.fcbate.teamdetail.model.repo;
 import com.alex44.fcbate.common.model.INetworkStatus;
 import com.alex44.fcbate.teamdetail.model.api.ITeamDetailSource;
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailDTO;
+import com.alex44.fcbate.teamdetail.model.dto.TeamDetailPhotoDTO;
+
+import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.schedulers.Schedulers;
@@ -34,6 +37,26 @@ public class TeamDetailRepo implements ITeamDetailRepo {
         Timber.d("Requesting trainer %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getTrainerDetail(id)
+                    .subscribeOn(Schedulers.io());
+        }
+        return null;
+    }
+
+    @Override
+    public Maybe<List<TeamDetailPhotoDTO>> getPlayerPhotos(Long id) {
+        Timber.d("Requesting player photos %s", id);
+        if (networkStatus.isOnline()) {
+            return teamDetailSource.getPlayerPhotos(id)
+                    .subscribeOn(Schedulers.io());
+        }
+        return null;
+    }
+
+    @Override
+    public Maybe<List<TeamDetailPhotoDTO>> getTrainerPhotos(Long id) {
+        Timber.d("Requesting trainer photos %s", id);
+        if (networkStatus.isOnline()) {
+            return teamDetailSource.getTrainerPhotos(id)
                     .subscribeOn(Schedulers.io());
         }
         return null;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".news.ui.NewsPagerItemFragment"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/tean_detail_rv_item_photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_details_image_height"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_launcher"/>
+
+</RelativeLayout>
