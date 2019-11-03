@@ -1,5 +1,6 @@
 package com.alex44.fcbate.teamdetail.view;
 
+import com.alex44.fcbate.team.model.enums.TeamItemType;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
@@ -7,7 +8,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 @StateStrategyType(value = AddToEndSingleStrategy.class)
 public interface TeamDetailView extends MvpView {
 
-    void initPager();
+    void initPager(TeamItemType type, Long id);
 
     void showMessage(String message);
 
@@ -26,5 +27,4 @@ public interface TeamDetailView extends MvpView {
     void setCountry(String text);
 
     void setCountryFromContent(String content);
-
 }

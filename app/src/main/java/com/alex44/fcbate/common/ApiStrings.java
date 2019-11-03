@@ -22,4 +22,6 @@ public class ApiStrings {
 
     public final static String PHOTOS_URL = "photos";
 
+    public final static String STATS_URL = "stats";
+
 }

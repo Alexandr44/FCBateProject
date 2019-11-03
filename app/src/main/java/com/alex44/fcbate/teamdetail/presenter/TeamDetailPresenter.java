@@ -98,7 +98,7 @@ public class TeamDetailPresenter extends MvpPresenter<TeamDetailView> {
     }
 
     private void init() {
-        getViewState().initPager();
+        getViewState().initPager(type, id);
     }
 
     private void update(TeamDetailDTO teamDetailDTO) {

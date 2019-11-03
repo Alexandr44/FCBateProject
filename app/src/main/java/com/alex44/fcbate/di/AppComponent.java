@@ -23,6 +23,7 @@ import com.alex44.fcbate.team.ui.TeamRVAdapter;
 import com.alex44.fcbate.teamdetail.presenter.TeamDetailAnketaPresenter;
 import com.alex44.fcbate.teamdetail.presenter.TeamDetailPhotoPresenter;
 import com.alex44.fcbate.teamdetail.presenter.TeamDetailPresenter;
+import com.alex44.fcbate.teamdetail.presenter.TeamDetailStatisticPresenter;
 import com.alex44.fcbate.teamdetail.ui.TeamDetailFragment;
 import com.alex44.fcbate.teamdetail.ui.TeamDetailPhotoFragment;
 import com.alex44.fcbate.teamdetail.ui.TeamDetailPhotoRVAdapter;
@@ -80,4 +81,6 @@ public interface AppComponent {
     void inject(TeamDetailPhotoPresenter teamDetailPhotoPresenter);
 
     void inject(TeamDetailPhotoRVAdapter adapter);
+
+    void inject(TeamDetailStatisticPresenter teamDetailStatisticPresenter);
 }

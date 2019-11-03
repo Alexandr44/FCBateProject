@@ -47,9 +47,6 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
     private View view;
     private Unbinder unbinder;
 
-    private TeamItemType type = null;
-    private Long id = null;
-
     @InjectPresenter
     TeamDetailPresenter presenter;
 
@@ -91,8 +88,8 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
 
     @ProvidePresenter
     protected TeamDetailPresenter createPresenter() {
-        type = null;
-        id = null;
+        TeamItemType type = null;
+        Long id = null;
         if (getArguments() != null) {
             id = getArguments().getLong("id");
             type = (TeamItemType)getArguments().getSerializable("type");
@@ -125,11 +122,14 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
     }
 
     @Override
-    public void initPager() {
+    public void initPager(TeamItemType type, Long id) {
         final TeamDetailPagerAdapter pagerAdapter = new TeamDetailPagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         pagerAdapter.addFragment(new TeamDetailAnketaFragment(presenter.getTeamDetailAnketaPresenter()), "Анкета");
         pagerAdapter.addFragment(new TeamDetailBiographyFragment(presenter.getTeamDetailBiographyPresenter()), "Биография");
-        pagerAdapter.addFragment(createTeamDetailPhotoFragment(), "Фото");
+        pagerAdapter.addFragment(createTeamDetailPhotoFragment(type, id), "Фото");
+        if (type == TeamItemType.PLAYERS) {
+            pagerAdapter.addFragment(createTeamDetailStatisticFragment(id), "Статистика");
+        }
 
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -139,7 +139,8 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
             @Override
             public void onPageSelected(int position) {
                 final Fragment fragment = pagerAdapter.getItem(position);
-                pager.setViewForMeasure(fragment.getView());
+                final View view = fragment.getView();
+                pager.setViewForMeasure(view);
             }
 
             @Override
@@ -151,7 +152,7 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
         tabLayout.setupWithViewPager(pager);
     }
 
-    private TeamDetailPhotoFragment createTeamDetailPhotoFragment() {
+    private TeamDetailPhotoFragment createTeamDetailPhotoFragment(TeamItemType type, Long id) {
         final Bundle arguments = new Bundle();
         arguments.putSerializable("type", type);
         arguments.putLong("id", id);
@@ -160,6 +161,13 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
         return fragment;
     }
 
+    private TeamDetailStatisticFragment createTeamDetailStatisticFragment(Long id) {
+        final Bundle arguments = new Bundle();
+        arguments.putLong("id", id);
+        final TeamDetailStatisticFragment fragment = new TeamDetailStatisticFragment();
+        fragment.setArguments(arguments);
+        return fragment;
+    }
 
     @Override
     public void showMessage(String message) {
