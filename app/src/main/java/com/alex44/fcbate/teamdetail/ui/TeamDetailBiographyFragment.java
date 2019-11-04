@@ -8,18 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.alex44.fcbate.R;
-import com.alex44.fcbate.teamdetail.presenter.TeamDetailBiographyPresenter;
-import com.alex44.fcbate.teamdetail.view.TeamDetailBiographyView;
-import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class TeamDetailBiographyFragment extends MvpAppCompatFragment implements TeamDetailBiographyView {
+public class TeamDetailBiographyFragment extends Fragment {
 
     private View view;
     private Unbinder unbinder;
@@ -27,15 +24,10 @@ public class TeamDetailBiographyFragment extends MvpAppCompatFragment implements
     @BindView(R.id.biography_text)
     protected TextView biographyText;
 
-    @InjectPresenter
-    TeamDetailBiographyPresenter presenter;
+    private String text;
 
     public TeamDetailBiographyFragment() {
         // Required empty public constructor
-    }
-
-    public TeamDetailBiographyFragment(TeamDetailBiographyPresenter teamDetailBiographyPresenter) {
-        presenter = teamDetailBiographyPresenter;
     }
 
     @Override
@@ -44,12 +36,14 @@ public class TeamDetailBiographyFragment extends MvpAppCompatFragment implements
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_team_detail_biography, container, false);
         unbinder = ButterKnife.bind(this, view);
+        init();
         return view;
     }
 
-    @ProvidePresenter
-    protected TeamDetailBiographyPresenter createPresenter() {
-        return this.presenter;
+    private void init() {
+        if (text != null && !text.isEmpty()) {
+            setBiographyText(text);
+        }
     }
 
     @Override
@@ -58,8 +52,11 @@ public class TeamDetailBiographyFragment extends MvpAppCompatFragment implements
         unbinder.unbind();
     }
 
-    @Override
     public void setBiographyText(String text) {
-        biographyText.setText(Html.fromHtml(text).toString().trim());
+        this.text = text;
+        if (biographyText != null) {
+            biographyText.setText(Html.fromHtml(text).toString().trim());
+        }
     }
+
 }

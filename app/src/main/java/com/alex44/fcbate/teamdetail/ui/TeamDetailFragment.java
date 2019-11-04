@@ -18,6 +18,7 @@ import com.alex44.fcbate.common.model.IImageLoader;
 import com.alex44.fcbate.common.ui.BackButtonListener;
 import com.alex44.fcbate.common.ui.ViewPagerExt;
 import com.alex44.fcbate.team.model.enums.TeamItemType;
+import com.alex44.fcbate.teamdetail.model.dto.TeamDetailDTO;
 import com.alex44.fcbate.teamdetail.presenter.TeamDetailPresenter;
 import com.alex44.fcbate.teamdetail.view.TeamDetailView;
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -25,6 +26,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,8 +126,8 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
     @Override
     public void initPager(TeamItemType type, Long id) {
         final TeamDetailPagerAdapter pagerAdapter = new TeamDetailPagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        pagerAdapter.addFragment(new TeamDetailAnketaFragment(presenter.getTeamDetailAnketaPresenter()), "Анкета");
-        pagerAdapter.addFragment(new TeamDetailBiographyFragment(presenter.getTeamDetailBiographyPresenter()), "Биография");
+        pagerAdapter.addFragment(createTeamDetailAnketaFragment(), "Анкета");
+        pagerAdapter.addFragment(createTeamDetailBiographyFragment(), "Биография");
         pagerAdapter.addFragment(createTeamDetailPhotoFragment(type, id), "Фото");
         if (type == TeamItemType.PLAYERS) {
             pagerAdapter.addFragment(createTeamDetailStatisticFragment(id), "Статистика");
@@ -140,7 +142,7 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
             public void onPageSelected(int position) {
                 final Fragment fragment = pagerAdapter.getItem(position);
                 final View view = fragment.getView();
-                pager.setViewForMeasure(view);
+                pager.setViewForMeasure(view);  //установит размер PagerView для нового фрагмента
             }
 
             @Override
@@ -149,6 +151,9 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
         });
 
         pager.setAdapter(pagerAdapter);
+        final Fragment fragment = pagerAdapter.getItem(pager.getCurrentItem());
+        final View view = fragment.getView();
+        pager.setViewForMeasure(view);  //установит размер PagerView для текущего фрагмента
         tabLayout.setupWithViewPager(pager);
     }
 
@@ -162,11 +167,51 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
     }
 
     private TeamDetailStatisticFragment createTeamDetailStatisticFragment(Long id) {
-        final Bundle arguments = new Bundle();
-        arguments.putLong("id", id);
-        final TeamDetailStatisticFragment fragment = new TeamDetailStatisticFragment();
-        fragment.setArguments(arguments);
-        return fragment;
+        TeamDetailStatisticFragment resultFragment = null;
+        final List<Fragment> allFragments = getChildFragmentManager().getFragments();
+        for (Fragment fragment: allFragments) {
+            if (fragment instanceof TeamDetailStatisticFragment) {
+                resultFragment = (TeamDetailStatisticFragment)fragment;
+                break;
+            }
+        }
+        if (resultFragment == null) {
+            final Bundle arguments = new Bundle();
+            arguments.putLong("id", id);
+            resultFragment = new TeamDetailStatisticFragment();
+            resultFragment.setArguments(arguments);
+        }
+        return resultFragment;
+    }
+
+    private TeamDetailAnketaFragment createTeamDetailAnketaFragment() {
+        TeamDetailAnketaFragment resultFragment = null;
+        final List<Fragment> allFragments = getChildFragmentManager().getFragments();
+        for (Fragment fragment: allFragments) {
+            if (fragment instanceof TeamDetailAnketaFragment) {
+                resultFragment = (TeamDetailAnketaFragment)fragment;
+                break;
+            }
+        }
+        if (resultFragment == null) {
+            resultFragment = new TeamDetailAnketaFragment();
+        }
+        return resultFragment;
+    }
+
+    private TeamDetailBiographyFragment createTeamDetailBiographyFragment() {
+        TeamDetailBiographyFragment resultFragment = null;
+        final List<Fragment> allFragments = getChildFragmentManager().getFragments();
+        for (Fragment fragment: allFragments) {
+            if (fragment instanceof TeamDetailBiographyFragment) {
+                resultFragment = (TeamDetailBiographyFragment)fragment;
+                break;
+            }
+        }
+        if (resultFragment == null) {
+            resultFragment = new TeamDetailBiographyFragment();
+        }
+        return resultFragment;
     }
 
     @Override
@@ -231,6 +276,21 @@ public class TeamDetailFragment extends MvpAppCompatFragment implements TeamDeta
         final Matcher matcherC = patternC.matcher(contentStr);
         if (matcherC.find()) {
             textCountry.setText(matcherC.group(1));
+        }
+    }
+
+    @Override
+    public void updateFragments(TeamDetailDTO teamDetailDTO) {
+        final TeamDetailPagerAdapter adapter = (TeamDetailPagerAdapter)pager.getAdapter();
+        if (adapter != null) {
+            for (int i=0; i<adapter.getCount(); i++) {
+                if (adapter.getItem(i) instanceof TeamDetailAnketaFragment) {
+                    ((TeamDetailAnketaFragment)adapter.getItem(i)).setAnketaText(teamDetailDTO.getAnketa());
+                }
+                if (adapter.getItem(i) instanceof TeamDetailBiographyFragment) {
+                    ((TeamDetailBiographyFragment)adapter.getItem(i)).setBiographyText(teamDetailDTO.getBiography());
+                }
+            }
         }
     }
 

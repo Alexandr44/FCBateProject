@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
-import lombok.Getter;
 import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
@@ -34,11 +33,6 @@ public class TeamDetailPresenter extends MvpPresenter<TeamDetailView> {
     private Scheduler mainThreadScheduler;
 
     private Disposable disposable;
-
-    @Getter
-    private TeamDetailAnketaPresenter teamDetailAnketaPresenter = new TeamDetailAnketaPresenter();
-    @Getter
-    private TeamDetailBiographyPresenter teamDetailBiographyPresenter = new TeamDetailBiographyPresenter();
 
     private Map<String, String> ampMap = new HashMap<String, String>() {{
         put("amp1", "Вратарь");
@@ -85,13 +79,7 @@ public class TeamDetailPresenter extends MvpPresenter<TeamDetailView> {
         if (maybe == null) return;
 
         disposable = maybe.observeOn(mainThreadScheduler)
-                .subscribe(teamDetailDTO -> {
-                    teamDetailAnketaPresenter.setData(teamDetailDTO);
-                    teamDetailBiographyPresenter.setData(teamDetailDTO);
-                    update(teamDetailDTO);
-                    teamDetailAnketaPresenter.updateAnketaText();
-                    teamDetailBiographyPresenter.updateBiographyText();
-                }, throwable -> {
+                .subscribe(this::update, throwable -> {
                     getViewState().showMessage("Team member detail load failed");
                     Timber.e(throwable);
                 });
@@ -116,6 +104,7 @@ public class TeamDetailPresenter extends MvpPresenter<TeamDetailView> {
             getViewState().setAgeOnly(teamDetailDTO.getAge());
             getViewState().setCountryFromContent(teamDetailDTO.getContent());
         }
+        getViewState().updateFragments(teamDetailDTO);
     }
 
     @Override

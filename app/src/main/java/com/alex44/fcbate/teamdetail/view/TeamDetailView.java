@@ -1,6 +1,7 @@
 package com.alex44.fcbate.teamdetail.view;
 
 import com.alex44.fcbate.team.model.enums.TeamItemType;
+import com.alex44.fcbate.teamdetail.model.dto.TeamDetailDTO;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
@@ -27,4 +28,6 @@ public interface TeamDetailView extends MvpView {
     void setCountry(String text);
 
     void setCountryFromContent(String content);
+
+    void updateFragments(TeamDetailDTO teamDetailDTO);
 }
