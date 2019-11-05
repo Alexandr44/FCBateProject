@@ -1,5 +1,7 @@
 package com.alex44.fcbate.di;
 
+import com.alex44.fcbate.about.presenter.AboutPresenter;
+import com.alex44.fcbate.about.ui.AboutFragment;
 import com.alex44.fcbate.calendar.presenter.CalendarPresenter;
 import com.alex44.fcbate.calendar.ui.CalendarRVAdapter;
 import com.alex44.fcbate.di.modules.AppModule;
@@ -80,4 +82,8 @@ public interface AppComponent {
     void inject(TeamDetailPhotoRVAdapter adapter);
 
     void inject(TeamDetailStatisticPresenter teamDetailStatisticPresenter);
+
+    void inject(AboutFragment aboutFragment);
+
+    void inject(AboutPresenter aboutPresenter);
 }

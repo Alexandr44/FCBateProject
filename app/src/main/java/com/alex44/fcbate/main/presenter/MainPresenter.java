@@ -43,6 +43,7 @@ public class MainPresenter  extends MvpPresenter<MainView> {
     }
 
     public void goToClubScreen() {
+        router.newRootScreen(new Screens.AboutScreen());
     }
 
     public void goToAppScreen() {

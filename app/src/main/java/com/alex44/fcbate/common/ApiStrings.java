@@ -24,4 +24,6 @@ public class ApiStrings {
 
     public final static String STATS_URL = "stats";
 
+    public final static String ABOUT_URL = "pages/briefly-about-us";
+
 }

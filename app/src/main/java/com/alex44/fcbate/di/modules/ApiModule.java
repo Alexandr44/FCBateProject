@@ -1,6 +1,7 @@
 package com.alex44.fcbate.di.modules;
 
 import com.alex44.fcbate.App;
+import com.alex44.fcbate.about.model.api.IAboutSource;
 import com.alex44.fcbate.calendar.model.api.ICalendarSource;
 import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
@@ -108,6 +109,11 @@ public class ApiModule {
     @Provides
     public ITeamDetailSource teamDetailSource(Retrofit retrofit) {
         return retrofit.create(ITeamDetailSource.class);
+    }
+
+    @Provides
+    public IAboutSource aboutSource(Retrofit retrofit) {
+        return retrofit.create(IAboutSource.class);
     }
 
 }

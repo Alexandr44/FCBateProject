@@ -1,5 +1,8 @@
 package com.alex44.fcbate.di.modules;
 
+import com.alex44.fcbate.about.model.api.IAboutSource;
+import com.alex44.fcbate.about.model.repo.AboutRepo;
+import com.alex44.fcbate.about.model.repo.IAboutRepo;
 import com.alex44.fcbate.calendar.model.api.ICalendarSource;
 import com.alex44.fcbate.calendar.model.repo.CalendarRepo;
 import com.alex44.fcbate.calendar.model.repo.ICalendarRepo;
@@ -70,6 +73,11 @@ public class RepoModule {
     @Provides
     public ITeamDetailRepo teamDetailRepo(ITeamDetailSource source, INetworkStatus networkStatus) {
         return new TeamDetailRepo(source, networkStatus);
+    }
+
+    @Provides
+    public IAboutRepo aboutRepo(IAboutSource source, INetworkStatus networkStatus) {
+        return new AboutRepo(source, networkStatus);
     }
 
 }
