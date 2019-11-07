@@ -47,5 +47,6 @@ public class MainPresenter  extends MvpPresenter<MainView> {
     }
 
     public void goToAppScreen() {
+        router.newRootScreen(new Screens.InfoScreen());
     }
 }

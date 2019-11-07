@@ -32,4 +32,11 @@
     <string name="pager_title_trainers">TRAINERS</string>
     <string name="open_with">Open with</string>
     <string name="championship_str">Championship</string>
+    <string name="feedback_txt">Feedback</string>
+    <string name="rate_app_txt">Rate app</string>
+    <string name="write_to_developers_txt">Write to developers</string>
+    <string name="club_resources_txt">Club Resources</string>
+    <string name="official_site_txt">Official site</string>
+    <string name="official_forum_txt">Official forum</string>
+    <string name="info_title_txt">Application FC BATE (Borisov)</string>
 </resources>

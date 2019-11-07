@@ -13,4 +13,5 @@
     <dimen name="about_image_height">260dp</dimen>
     <dimen name="team_details_image_height">258dp</dimen>
     <dimen name="team_details_margin_top">268dp</dimen>
+    <dimen name="info_image_height">200dp</dimen>
 </resources>

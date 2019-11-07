@@ -12,6 +12,7 @@ import com.alex44.fcbate.home.presenter.HomePresenter;
 import com.alex44.fcbate.home.presenter.NewsItemPresenter;
 import com.alex44.fcbate.home.ui.MatchItemFragment;
 import com.alex44.fcbate.home.ui.NewsItemFragment;
+import com.alex44.fcbate.info.presenter.InfoPresenter;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.ui.MainActivity;
 import com.alex44.fcbate.news.presenter.NewsPagerItemPresenter;
@@ -86,4 +87,7 @@ public interface AppComponent {
     void inject(AboutFragment aboutFragment);
 
     void inject(AboutPresenter aboutPresenter);
+
+    void inject(InfoPresenter infoPresenter);
+
 }

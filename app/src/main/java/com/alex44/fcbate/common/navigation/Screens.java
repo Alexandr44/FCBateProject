@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.alex44.fcbate.about.ui.AboutFragment;
 import com.alex44.fcbate.calendar.ui.CalendarFragment;
 import com.alex44.fcbate.home.ui.HomeFragment;
+import com.alex44.fcbate.info.ui.InfoFragment;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.ui.NewsFragment;
 import com.alex44.fcbate.newsdetail.ui.NewsDetailFragment;
@@ -86,6 +87,13 @@ public class Screens {
         @Override
         public Fragment getFragment() {
             return AboutFragment.newInstance();
+        }
+    }
+
+    public static class InfoScreen extends SupportAppScreen {
+        @Override
+        public Fragment getFragment() {
+            return InfoFragment.newInstance();
         }
     }
 }

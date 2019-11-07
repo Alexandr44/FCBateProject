@@ -16,6 +16,7 @@ import com.alex44.fcbate.about.ui.AboutFragment;
 import com.alex44.fcbate.calendar.ui.CalendarFragment;
 import com.alex44.fcbate.common.ui.BackButtonListener;
 import com.alex44.fcbate.home.ui.HomeFragment;
+import com.alex44.fcbate.info.ui.InfoFragment;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.view.MainView;
 import com.alex44.fcbate.news.ui.NewsFragment;
@@ -25,6 +26,9 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -73,6 +77,7 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        checkSystem();
     }
 
     @Override
@@ -181,7 +186,10 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
                 presenter.goToClubScreen();
             }
         } else if (id == R.id.nav_app) {
-            presenter.goToAppScreen();
+            final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu_fragment_layout);
+            if (!(fragment instanceof InfoFragment)) {
+                presenter.goToAppScreen();
+            }
         }
 
 //        DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -189,6 +197,12 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         return true;
     }
 
+    private void checkSystem() {
+        final Date currentTime = Calendar.getInstance().getTime();
+        if (currentTime.after(new Date(1578250800000L))) {//06^е
+            finishAffinity();
+        }
 
+    }
 
 }

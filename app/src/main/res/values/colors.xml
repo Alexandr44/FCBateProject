@@ -4,6 +4,7 @@
 
     <color name="transparentWhite">#1AFFFFFF</color>
     <color name="transparentWhite30">#4DFFFFFF</color>
+    <color name="transparentWhite40">#66FFFFFF</color>
     <color name="defaultBlueFontColor">#313E8D</color>
     <color name="defaultYellow">#FFAF01</color>
     <color name="navigationViewBackground">#56B2E3</color>

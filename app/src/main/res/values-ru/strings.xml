@@ -23,6 +23,13 @@
     <string name="pager_title_trainers">ТРЕНЕРЫ</string>
     <string name="open_with">Открыть с помощью</string>
     <string name="championship_str">Чемпионат</string>
+    <string name="club_resources_txt">Ресурсы клуба</string>
+    <string name="feedback_txt">Обратная связь</string>
+    <string name="official_forum_txt">Официальный форум</string>
+    <string name="official_site_txt">Официальный сайт</string>
+    <string name="rate_app_txt">Оценить приложение</string>
+    <string name="write_to_developers_txt">Написать разработчикам</string>
+    <string name="info_title_txt">Приложение ФК БАТЭ (Борисов)</string>
 
 
 </resources>
