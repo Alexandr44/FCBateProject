@@ -19,4 +19,16 @@ public interface HomeView extends MvpView {
     void fillTable(List<TournamentInfoDTO> infoList);
 
     void showMessage(String message);
+
+    void openFacebook();
+
+    void openInstagram();
+
+    void openTwitter();
+
+    void openVk();
+
+    void openYoutube();
+
+    void openViber();
 }

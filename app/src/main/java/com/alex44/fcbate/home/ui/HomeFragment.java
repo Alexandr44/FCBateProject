@@ -1,6 +1,12 @@
 package com.alex44.fcbate.home.ui;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +32,9 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,6 +46,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import static androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener {
+
+
+    private static final String MARKET_PREFIX = "market://details?id=";
+    private static final String FACEBOOK_PREFIX =  "fb://facewebmodal/f?href=";
+    private static final String FACEBOOK_URL = "https://www.facebook.com/fcbate";
+    private static final String FACEBOOK_PACKAGE = "com.facebook.katana";
+    private static final String INSTAGRAM_URL = "https://www.instagram.com/fcbate/";
+    private static final String INSTAGRAM_PACKAGE = "com.instagram.android";
+    private static final String TWITTER_URL = "https://mobile.twitter.com/FCBATE";
+    private static final String TWITTER_PACKAGE = "com.twitter.android";
+    private static final String VK_URL = "https://vk.com/fcbate";
+    private static final String VK_PACKAGE = "com.vkontakte.android";
+    private static final String YOUTUBE_URL = "https://www.youtube.com/user/fcbatetv";
+    private static final String YOUTUBE_PACKAGE = "com.google.android.youtube";
+    private static final String VIBER_URL = "https://invite.viber.com/?g2=AQA%2FMdJPPqCUGEeTgM0dbfZ0Pr%2BQzTZk0xZUS%2FX2eBMEWEkU7%2Bori3Rn4CqBf9NK";
+    private static final String VIBER_PACKAGE = "com.viber.voip";
 
     private View view;
     private Unbinder unbinder;
@@ -194,44 +218,32 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
 
     @OnClick(R.id.home_facebook_button)
     public void facebookClick() {
-        final Snackbar snackbar = Snackbar.make(view, "Facebook Button", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("Ok", v -> snackbar.dismiss());
-        snackbar.show();
+        presenter.facebookClicked();
     }
 
     @OnClick(R.id.home_instagram_button)
     public void instagramClick() {
-        final Snackbar snackbar = Snackbar.make(view, "Instagram Button", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("Ok", v -> snackbar.dismiss());
-        snackbar.show();
+        presenter.instagramClicked();
     }
 
     @OnClick(R.id.home_twitter_button)
     public void twitterClick() {
-        final Snackbar snackbar = Snackbar.make(view, "Twitter Button", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("Ok", v -> snackbar.dismiss());
-        snackbar.show();
+        presenter.twitterClicked();
     }
 
     @OnClick(R.id.home_vk_button)
     public void vkClick() {
-        final Snackbar snackbar = Snackbar.make(view, "VK Button", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("Ok", v -> snackbar.dismiss());
-        snackbar.show();
+        presenter.vkClicked();
     }
 
     @OnClick(R.id.home_youtube_button)
     public void youtubeClick() {
-        final Snackbar snackbar = Snackbar.make(view, "Youtube Button", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("Ok", v -> snackbar.dismiss());
-        snackbar.show();
+        presenter.youtubeClicked();
     }
 
     @OnClick(R.id.home_viber_button)
     public void viberClick() {
-        final Snackbar snackbar = Snackbar.make(view, "Viber Button", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("Ok", v -> snackbar.dismiss());
-        snackbar.show();
+        presenter.viberClicked();
     }
 
     @OnClick(R.id.matches_side)
@@ -252,6 +264,93 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     @Override
     public Boolean backClick() {
         presenter.backClick();
+        return true;
+    }
+
+    @Override
+    public void openFacebook() {
+        launchSocialIntent(FACEBOOK_PACKAGE, FACEBOOK_URL, FACEBOOK_PREFIX+FACEBOOK_URL);
+    }
+
+    @Override
+    public void openInstagram() {
+        launchSocialIntent(INSTAGRAM_PACKAGE, INSTAGRAM_URL);
+    }
+
+    @Override
+    public void openTwitter() {
+        launchSocialIntent(TWITTER_PACKAGE, TWITTER_URL);
+    }
+
+    @Override
+    public void openVk() {
+        launchSocialIntent(VK_PACKAGE, VK_URL);
+    }
+
+    @Override
+    public void openYoutube() {
+        launchSocialIntent(YOUTUBE_PACKAGE, YOUTUBE_URL);
+    }
+
+    @Override
+    public void openViber() {
+        launchSocialIntent(VIBER_PACKAGE, VIBER_URL);
+    }
+
+    private void launchSocialIntent(String packageName, String url) {
+        launchSocialIntent(packageName, url, url);
+    }
+
+    private void launchSocialIntent(String packageName, String url, String appUrl) {
+        if (checkPackagemanager()) {
+            final PackageManager packageManager = getContext().getPackageManager();
+            final Intent intent;
+            if (packageManager.getLaunchIntentForPackage(packageName) != null) {
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl));
+                intent.setPackage(packageName);
+            }
+            else {
+                intent = createChooserIntentWithMarket(packageName, url, packageManager);
+            }
+            if (intent != null) {
+                startActivity(intent);
+            }
+        }
+    }
+
+    private @Nullable Intent createChooserIntentWithMarket(String packageName, String url, PackageManager packageManager) {
+        final Intent browserIntent = createWebIntent(url, packageManager);
+        final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_PREFIX+packageName));
+        final Intent chooser;
+        if (browserIntent != null) {
+            chooser = Intent.createChooser(browserIntent, getString(R.string.open_with));
+            if (marketIntent.resolveActivity(packageManager) != null) {
+                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] { marketIntent });
+            }
+        }
+        else if (marketIntent.resolveActivity(packageManager) != null) {
+            chooser = Intent.createChooser(browserIntent, getString(R.string.open_with));
+        }
+        else {
+            showMessage("No app found to open link");
+            chooser = null;
+        }
+        return chooser;
+    }
+
+    private @Nullable Intent createWebIntent(String url, PackageManager packageManager) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        if (intent.resolveActivity(packageManager) != null) {
+            return intent;
+        }
+        return null;
+    }
+
+    private boolean checkPackagemanager() {
+        if (getContext() == null || getContext().getPackageManager() == null) {
+            showMessage("Package manager is unavailable");
+            return false;
+        }
         return true;
     }
 }

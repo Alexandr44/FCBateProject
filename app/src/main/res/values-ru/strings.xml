@@ -21,6 +21,8 @@
     <string name="pager_title_declarations">ОБЪЯВЛЕНИЯ</string>
     <string name="pager_title_players">ИГРОКИ</string>
     <string name="pager_title_trainers">ТРЕНЕРЫ</string>
+    <string name="open_with">Открыть с помощью</string>
+    <string name="championship_str">Чемпионат</string>
 
 
 </resources>

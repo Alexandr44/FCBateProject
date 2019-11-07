@@ -109,4 +109,28 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     public void backClick() {
         router.exit();
     }
+
+    public void facebookClicked() {
+        getViewState().openFacebook();
+    }
+
+    public void instagramClicked() {
+        getViewState().openInstagram();
+    }
+
+    public void twitterClicked() {
+        getViewState().openTwitter();
+    }
+
+    public void vkClicked() {
+        getViewState().openVk();
+    }
+
+    public void youtubeClicked() {
+        getViewState().openYoutube();
+    }
+
+    public void viberClicked() {
+        getViewState().openViber();
+    }
 }

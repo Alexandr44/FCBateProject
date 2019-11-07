@@ -30,5 +30,6 @@
     <string name="pager_title_declarations">DECLARATIONS</string>
     <string name="pager_title_players">PLAYERS</string>
     <string name="pager_title_trainers">TRAINERS</string>
-    <string name="championship_str">Чемпионат</string>
+    <string name="open_with">Open with</string>
+    <string name="championship_str">Championship</string>
 </resources>
