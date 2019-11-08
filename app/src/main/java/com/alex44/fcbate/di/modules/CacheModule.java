@@ -1,5 +1,7 @@
 package com.alex44.fcbate.di.modules;
 
+import com.alex44.fcbate.about.model.repo.IAboutRepoCache;
+import com.alex44.fcbate.about.model.repo.RoomAboutRepoCache;
 import com.alex44.fcbate.calendar.model.repo.ICalendarRepoCache;
 import com.alex44.fcbate.calendar.model.repo.RoomCalendarRepoCache;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
@@ -47,5 +49,11 @@ public class CacheModule {
     @Provides
     public ICalendarRepoCache calendarRepoCache() {
         return new RoomCalendarRepoCache();
+    }
+
+    @Named("Room")
+    @Provides
+    public IAboutRepoCache aboutRepoCache() {
+        return new RoomAboutRepoCache();
     }
 }

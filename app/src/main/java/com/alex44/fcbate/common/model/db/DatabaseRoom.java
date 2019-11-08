@@ -6,6 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.alex44.fcbate.about.model.room.RoomAbout;
+import com.alex44.fcbate.about.model.room.dao.RoomAboutDao;
 import com.alex44.fcbate.calendar.model.room.RoomMatch;
 import com.alex44.fcbate.calendar.model.room.RoomTeam;
 import com.alex44.fcbate.calendar.model.room.RoomTournament;
@@ -29,7 +31,8 @@ import com.alex44.fcbate.tournament.model.room.dao.RoomTournamentInfoDao;
 
 @Database(entities = {RoomMatch.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
         RoomNewsDetail.class, RoomPressDetail.class, RoomDeclarationDetail.class,
-        RoomNews.class, RoomPress.class, RoomDeclaration.class}, version = 1)
+        RoomNews.class, RoomPress.class, RoomDeclaration.class,
+        RoomAbout.class}, version = 1)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static final String DATABASE_NAME = "RoomDatabase.db";
@@ -74,4 +77,5 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract RoomPressDao getPressDao();
     public abstract RoomDeclarationDao getDeclarationDao();
 
+    public abstract RoomAboutDao getAboutDao();
 }
