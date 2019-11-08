@@ -12,6 +12,8 @@ import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepoCache;
 import com.alex44.fcbate.newsdetail.model.repo.NewsDetailRepoCache;
 import com.alex44.fcbate.team.model.repo.ITeamRepoCache;
 import com.alex44.fcbate.team.model.repo.RoomTeamRepoCache;
+import com.alex44.fcbate.teamdetail.model.repo.ITeamDetailRepoCache;
+import com.alex44.fcbate.teamdetail.model.repo.RoomTeamDetailRepoCache;
 import com.alex44.fcbate.tournament.model.repo.ITournamentRepoCache;
 import com.alex44.fcbate.tournament.model.repo.RoomTournamentRepoCahe;
 
@@ -63,5 +65,11 @@ public class CacheModule {
     @Provides
     public ITeamRepoCache teamRepoCache() {
         return new RoomTeamRepoCache();
+    }
+
+    @Named("Room")
+    @Provides
+    public ITeamDetailRepoCache teamDetailRepoCache() {
+        return new RoomTeamDetailRepoCache();
     }
 }

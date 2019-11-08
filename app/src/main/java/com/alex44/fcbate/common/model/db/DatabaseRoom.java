@@ -30,13 +30,20 @@ import com.alex44.fcbate.team.model.room.RoomPlayer;
 import com.alex44.fcbate.team.model.room.RoomTrainer;
 import com.alex44.fcbate.team.model.room.dao.RoomPlayerDao;
 import com.alex44.fcbate.team.model.room.dao.RoomTrainerDao;
+import com.alex44.fcbate.teamdetail.model.room.RoomTeamDetail;
+import com.alex44.fcbate.teamdetail.model.room.RoomTeamDetailPhoto;
+import com.alex44.fcbate.teamdetail.model.room.RoomTeamDetailStatistic;
+import com.alex44.fcbate.teamdetail.model.room.dao.RoomTeamDetailDao;
+import com.alex44.fcbate.teamdetail.model.room.dao.RoomTeamDetailPhotoDao;
+import com.alex44.fcbate.teamdetail.model.room.dao.RoomTeamDetailStatisticDao;
 import com.alex44.fcbate.tournament.model.room.RoomTournamentInfo;
 import com.alex44.fcbate.tournament.model.room.dao.RoomTournamentInfoDao;
 
 @Database(entities = {RoomMatch.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
         RoomNewsDetail.class, RoomPressDetail.class, RoomDeclarationDetail.class,
         RoomNews.class, RoomPress.class, RoomDeclaration.class,
-        RoomAbout.class, RoomPlayer.class, RoomTrainer.class}, version = 1)
+        RoomAbout.class, RoomPlayer.class, RoomTrainer.class,
+        RoomTeamDetail.class, RoomTeamDetailPhoto.class, RoomTeamDetailStatistic.class}, version = 1)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static final String DATABASE_NAME = "RoomDatabase.db";
@@ -85,4 +92,8 @@ public abstract class DatabaseRoom extends RoomDatabase {
 
     public abstract RoomPlayerDao getRoomPlayerDao();
     public abstract RoomTrainerDao getRoomTrainerDao();
+
+    public abstract RoomTeamDetailDao getRoomTeamDetailDao();
+    public abstract RoomTeamDetailPhotoDao getRoomTeamDetailPhotoDao();
+    public abstract RoomTeamDetailStatisticDao getRoomTeamDetailStatisticDao();
 }

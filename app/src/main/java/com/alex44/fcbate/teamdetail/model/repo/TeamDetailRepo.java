@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Maybe;
+import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -18,10 +19,13 @@ public class TeamDetailRepo implements ITeamDetailRepo {
 
     private final ITeamDetailSource teamDetailSource;
 
+    private final ITeamDetailRepoCache repoCache;
+
     private final INetworkStatus networkStatus;
 
-    public TeamDetailRepo(ITeamDetailSource teamDetailSource, INetworkStatus networkStatus) {
+    public TeamDetailRepo(ITeamDetailSource teamDetailSource, ITeamDetailRepoCache teamDetailRepoCache, INetworkStatus networkStatus) {
         this.teamDetailSource = teamDetailSource;
+        this.repoCache = teamDetailRepoCache;
         this.networkStatus = networkStatus;
     }
 
@@ -30,9 +34,24 @@ public class TeamDetailRepo implements ITeamDetailRepo {
         Timber.d("Requesting player %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getPlayerDetail(id)
+                    .subscribeOn(Schedulers.io())
+                    .map(teamDetailDTO -> {
+                        repoCache.putPlayer(teamDetailDTO);
+                        return teamDetailDTO;
+                    });
+        }
+        else {
+            return Maybe.create((MaybeOnSubscribe<TeamDetailDTO>) emitter -> {
+                final TeamDetailDTO playerDetailDTO = repoCache.getPlayer(id);
+                if (playerDetailDTO == null || playerDetailDTO.getId() == null) {
+                    emitter.onError(new RuntimeException("No detail info for player found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(playerDetailDTO);
+                }
+            })
                     .subscribeOn(Schedulers.io());
         }
-        return null;
     }
 
     @Override
@@ -40,9 +59,24 @@ public class TeamDetailRepo implements ITeamDetailRepo {
         Timber.d("Requesting trainer %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getTrainerDetail(id)
+                    .subscribeOn(Schedulers.io())
+                    .map(teamDetailDTO -> {
+                        repoCache.putTrainer(teamDetailDTO);
+                        return teamDetailDTO;
+                    });
+        }
+        else {
+            return Maybe.create((MaybeOnSubscribe<TeamDetailDTO>) emitter -> {
+                final TeamDetailDTO trainerDetailDTO = repoCache.getTrainer(id);
+                if (trainerDetailDTO == null || trainerDetailDTO.getId() == null) {
+                    emitter.onError(new RuntimeException("No detail info for trainer found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(trainerDetailDTO);
+                }
+            })
                     .subscribeOn(Schedulers.io());
         }
-        return null;
     }
 
     @Override
@@ -50,9 +84,24 @@ public class TeamDetailRepo implements ITeamDetailRepo {
         Timber.d("Requesting player photos %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getPlayerPhotos(id)
+                    .subscribeOn(Schedulers.io())
+                    .map(teamDetailPhotoDTOS -> {
+                        repoCache.putPlayerPhotos(id, teamDetailPhotoDTOS);
+                        return teamDetailPhotoDTOS;
+                    });
+        }
+        else {
+            return Maybe.create((MaybeOnSubscribe<List<TeamDetailPhotoDTO>>) emitter -> {
+                final List<TeamDetailPhotoDTO> list = repoCache.getPlayerPhotos(id);
+                if (list == null || list.isEmpty()) {
+                    emitter.onError(new RuntimeException("No photo for player found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(list);
+                }
+            })
                     .subscribeOn(Schedulers.io());
         }
-        return null;
     }
 
     @Override
@@ -60,9 +109,24 @@ public class TeamDetailRepo implements ITeamDetailRepo {
         Timber.d("Requesting trainer photos %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getTrainerPhotos(id)
+                    .subscribeOn(Schedulers.io())
+                    .map(teamDetailPhotoDTOS -> {
+                        repoCache.putTrainerPhotos(id, teamDetailPhotoDTOS);
+                        return teamDetailPhotoDTOS;
+                    });
+        }
+        else {
+            return Maybe.create((MaybeOnSubscribe<List<TeamDetailPhotoDTO>>) emitter -> {
+                final List<TeamDetailPhotoDTO> list = repoCache.getTrainerPhotos(id);
+                if (list == null || list.isEmpty()) {
+                    emitter.onError(new RuntimeException("No photo for trainer found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(list);
+                }
+            })
                     .subscribeOn(Schedulers.io());
         }
-        return null;
     }
 
     @Override
@@ -89,11 +153,23 @@ public class TeamDetailRepo implements ITeamDetailRepo {
                                 statsList.add(statisticDTO);
                             }
                         }
+                        repoCache.putPlayerStats(id, statsList);
                         return statsList;
                     })
                     .subscribeOn(Schedulers.io());
         }
-        return null;
+        else {
+            return Maybe.create((MaybeOnSubscribe<List<TeamDetailStatisticDTO>>) emitter -> {
+                final List<TeamDetailStatisticDTO> list = repoCache.getPlayerStats(id);
+                if (list == null || list.isEmpty()) {
+                    emitter.onError(new RuntimeException("No stats for player found in local storage"));
+                }
+                else {
+                    emitter.onSuccess(list);
+                }
+            })
+                    .subscribeOn(Schedulers.io());
+        }
     }
 
     private int parseStatString(String str, int def) {

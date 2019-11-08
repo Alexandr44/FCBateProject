@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4afcb297ddfa1eb4d960ea6b8446709c",
+    "identityHash": "0f6478d695911c6e4b3ce9affdbe6d83",
     "entities": [
       {
         "tableName": "RoomMatch",
@@ -694,12 +694,258 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "RoomTeamDetail",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`detailId` TEXT NOT NULL, `id` INTEGER, `photoUrl` TEXT, `amplua` TEXT, `post` TEXT, `title` TEXT, `playerNumber` INTEGER NOT NULL, `citizenship` TEXT, `age` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `shortName` TEXT, `bornDate` TEXT, `bornPlace` TEXT, `content` TEXT, `biography` TEXT, `anketa` TEXT, PRIMARY KEY(`detailId`))",
+        "fields": [
+          {
+            "fieldPath": "detailId",
+            "columnName": "detailId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amplua",
+            "columnName": "amplua",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "post",
+            "columnName": "post",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "playerNumber",
+            "columnName": "playerNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "citizenship",
+            "columnName": "citizenship",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "firstName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "lastName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "shortName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bornDate",
+            "columnName": "bornDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bornPlace",
+            "columnName": "bornPlace",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "biography",
+            "columnName": "biography",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "anketa",
+            "columnName": "anketa",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "detailId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "RoomTeamDetailPhoto",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`photoId` TEXT NOT NULL, `memberId` TEXT, `id` INTEGER, `bigPhotoUrl` TEXT, `smallPhotoUrl` TEXT, `title` TEXT, PRIMARY KEY(`photoId`))",
+        "fields": [
+          {
+            "fieldPath": "photoId",
+            "columnName": "photoId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberId",
+            "columnName": "memberId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bigPhotoUrl",
+            "columnName": "bigPhotoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "smallPhotoUrl",
+            "columnName": "smallPhotoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "photoId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "RoomTeamDetailStatistic",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`itemId` TEXT NOT NULL, `playerId` INTEGER, `matches` INTEGER NOT NULL, `minutes` INTEGER, `goals` INTEGER NOT NULL, `goalPasses` INTEGER NOT NULL, `yellowCards` INTEGER NOT NULL, `redCards` INTEGER NOT NULL, `dryMatches` INTEGER NOT NULL, `missedGoals` INTEGER NOT NULL, `year` INTEGER NOT NULL, PRIMARY KEY(`itemId`))",
+        "fields": [
+          {
+            "fieldPath": "itemId",
+            "columnName": "itemId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerId",
+            "columnName": "playerId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "matches",
+            "columnName": "matches",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minutes",
+            "columnName": "minutes",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "goals",
+            "columnName": "goals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goalPasses",
+            "columnName": "goalPasses",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "yellowCards",
+            "columnName": "yellowCards",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "redCards",
+            "columnName": "redCards",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dryMatches",
+            "columnName": "dryMatches",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "missedGoals",
+            "columnName": "missedGoals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "itemId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4afcb297ddfa1eb4d960ea6b8446709c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f6478d695911c6e4b3ce9affdbe6d83')"
     ]
   }
 }
