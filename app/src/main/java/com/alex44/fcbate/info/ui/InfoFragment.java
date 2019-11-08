@@ -35,6 +35,8 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
 
     private static final String SITE_URL = "https://www.fcbate.by/";
     private static final String FORUM_URL = "https://forum.fcbate.by/";
+    
+    private static final String DEVELOPER_EMAIL = "developer@fcbate.ru";
 
     private View view;
     private Unbinder unbinder;
@@ -107,7 +109,22 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
 
     @Override
     public void writeToDevelopers() {
+        if (checkPackagemanager()) {
+            final PackageManager packageManager = getContext().getPackageManager();
 
+            final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("message/rfc822");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{ DEVELOPER_EMAIL });
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject));
+            emailIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.email_body));
+            
+            if (emailIntent.resolveActivity(packageManager) != null) {
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            }
+            else {
+                showMessage("There are no email clients installed");
+            }
+        }
     }
 
     @Override

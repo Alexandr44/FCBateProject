@@ -39,4 +39,6 @@
     <string name="official_site_txt">Official site</string>
     <string name="official_forum_txt">Official forum</string>
     <string name="info_title_txt">Application FC BATE (Borisov)</string>
+    <string name="email_subject">Question to developer</string>
+    <string name="email_body">The question is:</string>
 </resources>

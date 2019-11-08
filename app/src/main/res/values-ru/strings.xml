@@ -30,6 +30,8 @@
     <string name="rate_app_txt">Оценить приложение</string>
     <string name="write_to_developers_txt">Написать разработчикам</string>
     <string name="info_title_txt">Приложение ФК БАТЭ (Борисов)</string>
+    <string name="email_subject">Вопрос разработчку</string>
+    <string name="email_body">Вопрос:</string>
 
 
 </resources>
