@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7f0787e3af01e9a6a414bd221e29913f",
+    "identityHash": "4afcb297ddfa1eb4d960ea6b8446709c",
     "entities": [
       {
         "tableName": "RoomMatch",
@@ -570,12 +570,136 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "RoomPlayer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `photoUrl` TEXT, `amplua` TEXT, `playerNumber` INTEGER NOT NULL, `age` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `shortName` TEXT, `bornDate` TEXT, `bornPlace` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amplua",
+            "columnName": "amplua",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "playerNumber",
+            "columnName": "playerNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "firstName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "lastName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "shortName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bornDate",
+            "columnName": "bornDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bornPlace",
+            "columnName": "bornPlace",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "RoomTrainer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `photoUrl` TEXT, `age` INTEGER NOT NULL, `title` TEXT, `post` TEXT, `bornDate` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "post",
+            "columnName": "post",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bornDate",
+            "columnName": "bornDate",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7f0787e3af01e9a6a414bd221e29913f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4afcb297ddfa1eb4d960ea6b8446709c')"
     ]
   }
 }

@@ -26,13 +26,17 @@ import com.alex44.fcbate.newsdetail.model.room.RoomPressDetail;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomDeclarationDetailDao;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomNewsDetailDao;
 import com.alex44.fcbate.newsdetail.model.room.dao.RoomPressDetailDao;
+import com.alex44.fcbate.team.model.room.RoomPlayer;
+import com.alex44.fcbate.team.model.room.RoomTrainer;
+import com.alex44.fcbate.team.model.room.dao.RoomPlayerDao;
+import com.alex44.fcbate.team.model.room.dao.RoomTrainerDao;
 import com.alex44.fcbate.tournament.model.room.RoomTournamentInfo;
 import com.alex44.fcbate.tournament.model.room.dao.RoomTournamentInfoDao;
 
 @Database(entities = {RoomMatch.class, RoomTeam.class, RoomTournament.class, RoomTournamentInfo.class,
         RoomNewsDetail.class, RoomPressDetail.class, RoomDeclarationDetail.class,
         RoomNews.class, RoomPress.class, RoomDeclaration.class,
-        RoomAbout.class}, version = 1)
+        RoomAbout.class, RoomPlayer.class, RoomTrainer.class}, version = 1)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static final String DATABASE_NAME = "RoomDatabase.db";
@@ -78,4 +82,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract RoomDeclarationDao getDeclarationDao();
 
     public abstract RoomAboutDao getAboutDao();
+
+    public abstract RoomPlayerDao getRoomPlayerDao();
+    public abstract RoomTrainerDao getRoomTrainerDao();
 }
