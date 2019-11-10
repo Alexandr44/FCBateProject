@@ -1,5 +1,6 @@
 package com.alex44.fcbate.home.presenter;
 
+import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.view.HomeView;
 import com.arellomobile.mvp.InjectViewState;
@@ -81,18 +82,15 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     }
 
     public void goToCalendarScreen() {
-        Timber.d("ToDo: go to calendar");
-//        router.navigateTo(TODO: new screen);
+        router.newRootScreen(new Screens.CalendarScreen());
     }
 
     public void goToNewsScreen() {
-        Timber.d("ToDo: go to news");
-//        router.navigateTo(TODO: new screen);
+        router.newRootScreen(new Screens.NewsScreen());
     }
 
     public void goToTournamentScreen() {
-        Timber.d("ToDo: go to tournaments");
-//        router.navigateTo(TODO: new screen);
+        router.newRootScreen(new Screens.TournamentScreen());
     }
 
     @Override
@@ -133,4 +131,5 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     public void viberClicked() {
         getViewState().openViber();
     }
+
 }
