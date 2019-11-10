@@ -70,6 +70,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(
         context, DatabaseRoom.class, DATABASE_NAME)
+                    .fallbackToDestructiveMigration()
 //                    .addMigrations(migration1_2)
                     .build();
         }
