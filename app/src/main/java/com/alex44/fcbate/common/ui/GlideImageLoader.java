@@ -32,6 +32,17 @@ public class GlideImageLoader implements IImageLoader<ImageView> {
     }
 
     @Override
+    public void loadIntoWithPlaceholder(String url, ImageView container, int photoPlaceholder) {
+        final RequestOptions requestOptions = new RequestOptions()
+                .placeholder(photoPlaceholder);
+
+        Glide.with(container.getContext())
+                .load(url)
+                .apply(requestOptions)
+                .into(container);
+    }
+
+    @Override
     public void loadIntoWithCrop(String url, ImageView container, int corners) {
         final MultiTransformation<Bitmap> multi = new MultiTransformation<>(
                 new CenterCrop(), new RoundedCorners(corners)
@@ -42,4 +53,5 @@ public class GlideImageLoader implements IImageLoader<ImageView> {
                 .apply(RequestOptions.bitmapTransform(multi))
                 .into(container);
     }
+
 }
