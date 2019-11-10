@@ -106,7 +106,7 @@ public class TeamRVAdapter extends RecyclerView.Adapter {
 
         @Override
         public void setPhoto(String url) {
-            imageLoader.loadInto(url, photo);
+            imageLoader.loadIntoWithPlaceholder(url, photo, R.drawable.photo_placeholder);
         }
 
         @Override

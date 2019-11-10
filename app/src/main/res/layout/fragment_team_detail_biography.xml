@@ -13,6 +13,7 @@
         android:padding="8dp"
         android:layout_margin="4dp"
         android:textColor="@android:color/white"
-        android:background="@drawable/background_text"/>
+        android:background="@drawable/background_text"
+        android:minLines="8"/>
 
 </FrameLayout>
