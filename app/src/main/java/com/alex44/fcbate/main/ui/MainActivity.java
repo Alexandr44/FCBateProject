@@ -199,7 +199,7 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
 
     private void checkSystem() {
         final Date currentTime = Calendar.getInstance().getTime();
-        if (currentTime.after(new Date(1578250800000L))) {//06^е
+        if (currentTime.after(new Date(1580497200000L))) {//01^f
             finishAffinity();
         }
 

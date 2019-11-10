@@ -142,7 +142,7 @@ public class TeamDetailRepo implements ITeamDetailRepo {
                             if (stats.size() == 8) {
                                 final TeamDetailStatisticDTO statisticDTO = new TeamDetailStatisticDTO();
                                 statisticDTO.setMatches(parseStatString(stats.get(0), 0));
-                                statisticDTO.setMinutes(Long.valueOf(stats.get(1)));
+                                statisticDTO.setMinutes((long) parseStatString(stats.get(1), 0));
                                 statisticDTO.setGoals(parseStatString(stats.get(2), 0));
                                 statisticDTO.setGoalPasses(parseStatString(stats.get(3), 0));
                                 statisticDTO.setYellowCards(parseStatString(stats.get(4), 0));
