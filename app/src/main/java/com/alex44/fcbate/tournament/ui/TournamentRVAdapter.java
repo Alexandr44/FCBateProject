@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import lombok.Setter;
 
 public class TournamentRVAdapter extends RecyclerView.Adapter<TournamentRVAdapter.ViewHolder> {
+    private final static String TITLE_TO_HIGHLIGHT = "БАТЭ";
 
     private TournamentPresenter presenter;
 
@@ -78,6 +79,9 @@ public class TournamentRVAdapter extends RecyclerView.Adapter<TournamentRVAdapte
         @Override
         public void setTeam(String team) {
             tableTeam.setText(team);
+            if (team.equals(TITLE_TO_HIGHLIGHT)) {
+                tableTeam.setTextColor(view.getResources().getColor(R.color.defaultYellow));
+            }
         }
 
         @Override
