@@ -50,8 +50,8 @@ public class ApiModule {
     @Provides
     public OkHttpClient okHttpClient(ISystemInfo systemInfo, ChuckInterceptor chuckInterceptor, HttpLoggingInterceptor httpLoggingInterceptor) {
         final OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addNetworkInterceptor(httpLoggingInterceptor);
-//                .addNetworkInterceptor(chuckInterceptor);
+                .addNetworkInterceptor(httpLoggingInterceptor)
+                .addNetworkInterceptor(chuckInterceptor);
         return ApiSupportUtil.enableTls12OnPreLollipop(builder, systemInfo).build();
     }
 
