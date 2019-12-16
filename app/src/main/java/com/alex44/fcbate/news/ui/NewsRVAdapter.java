@@ -97,7 +97,7 @@ public class NewsRVAdapter extends RecyclerView.Adapter<NewsRVAdapter.ViewHolder
             }
             else {
                 this.dateTime.setTextColor(Color.WHITE);
-                this.dateTime.setBackgroundColor(0x000);
+                this.dateTime.setBackground(view.getResources().getDrawable(R.drawable.transparent_black_40_background));
             }
         }
 

@@ -95,11 +95,11 @@ public class NewsItemFragment extends MvpAppCompatFragment implements NewsItemVi
         newsDateTime.setText(dateTime);
         if (isInLastHour) {
             newsDateTime.setTextColor(getResources().getColor(R.color.defaultBlueFontColor));
-            newsDateTime.setBackgroundColor(getResources().getColor(R.color.defaultYellow));
+            newsDateTime.setBackground(getResources().getDrawable(R.drawable.yellow_background));
         }
         else {
             newsDateTime.setTextColor(Color.WHITE);
-            newsDateTime.setBackgroundColor(0x000);
+            newsDateTime.setBackground(getResources().getDrawable(R.drawable.transparent_black_40_background));
         }
     }
 
