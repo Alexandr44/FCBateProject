@@ -32,6 +32,12 @@
     <string name="info_title_txt">Приложение ФК БАТЭ (Борисов)</string>
     <string name="email_subject">Вопрос разработчку</string>
     <string name="email_body">Вопрос:</string>
-
-
+    <string name="_0_mb_txt">0 Мб</string>
+    <string name="clean_media_cache_txt">Очистить кэш медиа -\u0020</string>
+    <string name="data_txt">Данные</string>
+    <string name="byte_txt">Байт</string>
+    <string name="gigabyte_txt">ГБ</string>
+    <string name="kilobyte_txt">кБ</string>
+    <string name="megabyte_txt">МБ</string>
+    <string name="terabyte_txt">ТБ</string>
 </resources>

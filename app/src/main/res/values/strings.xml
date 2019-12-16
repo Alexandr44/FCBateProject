@@ -41,4 +41,12 @@
     <string name="info_title_txt">Application FC BATE (Borisov)</string>
     <string name="email_subject">Question to developer</string>
     <string name="email_body">The question is:</string>
+    <string name="clean_media_cache_txt">Clean media cache -\u0020</string>
+    <string name="_0_mb_txt">0 Mb</string>
+    <string name="data_txt">Data</string>
+    <string name="byte_txt">Bytes</string>
+    <string name="kilobyte_txt">kB</string>
+    <string name="megabyte_txt">MB</string>
+    <string name="gigabyte_txt">GB</string>
+    <string name="terabyte_txt">TB</string>
 </resources>

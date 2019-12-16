@@ -19,14 +19,13 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="4"
-        android:shadowDy="4"
-        android:shadowRadius="1.5"
         tools:text="Заголовок очень длинной интересной новости"
-        tools:textColor="@android:color/black" />
+        tools:textColor="@android:color/black"
+        android:background="@drawable/transparent_black_40_background"/>
 
     <TextView
         android:id="@+id/news_date_time"
@@ -36,13 +35,11 @@
         android:layout_above="@id/news_title"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/defaultYellow"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/yellow_background"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="4"
-        android:shadowDy="4"
-        android:shadowRadius="1.5"
         tools:text="Дата время"
         tools:textColor="@android:color/black"/>
 

@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/feedback_txt"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
@@ -92,7 +92,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/rate_app_txt"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
@@ -124,7 +124,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/write_to_developers_txt"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/club_resources_txt"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
@@ -167,7 +167,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/official_site_txt"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
@@ -199,12 +199,68 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/official_forum_txt"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:textColor="@android:color/white"
                     android:layout_weight="1"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:src="@drawable/ic_right_bkt"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+            </LinearLayout>
+
+<!--            Data-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/data_txt"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/defaultYellow"
+                />
+
+            <LinearLayout
+                android:id="@+id/clean_data_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/info_linear_layout_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/clean_media_cache_txt"
+                    android:textSize="18sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/cache_size_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_0_mb_txt"
+                    android:textSize="18sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="@android:color/white"
+                    android:textAlignment="textStart"
+                    android:layout_weight="0.5"
                     />
 
                 <ImageView
