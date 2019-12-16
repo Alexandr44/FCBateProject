@@ -17,11 +17,15 @@ import com.alex44.fcbate.App;
 import com.alex44.fcbate.BuildConfig;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.ui.BackButtonListener;
+import com.alex44.fcbate.common.ui.FileUtils;
 import com.alex44.fcbate.info.presenter.InfoPresenter;
 import com.alex44.fcbate.info.view.InfoView;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +42,8 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
     
     private static final String DEVELOPER_EMAIL = "developer@fcbate.ru";
 
+    private List<String> sizeLabels;
+
     private View view;
     private Unbinder unbinder;
 
@@ -46,6 +52,8 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
 
     @BindView(R.id.version_text)
     protected TextView versionText;
+    @BindView(R.id.cache_size_text)
+    protected TextView cacheText;
 
     public InfoFragment() {
     }
@@ -67,7 +75,18 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_info, container, false);
         unbinder = ButterKnife.bind(this, view);
+        init();
         return view;
+    }
+
+    private void init() {
+        sizeLabels = new ArrayList<String>() {{
+            add(getResources().getString(R.string.byte_txt));
+            add(getResources().getString(R.string.kilobyte_txt));
+            add(getResources().getString(R.string.megabyte_txt));
+            add(getResources().getString(R.string.gigabyte_txt));
+            add(getResources().getString(R.string.terabyte_txt));
+        }};
     }
 
     @Override
@@ -107,6 +126,11 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
 
     }
 
+    @OnClick(R.id.clean_data_layout)
+    public void cleanCache() {
+        presenter.cleanCacheClicked();
+    }
+
     @Override
     public void writeToDevelopers() {
         if (checkPackagemanager()) {
@@ -141,6 +165,34 @@ public class InfoFragment extends MvpAppCompatFragment implements InfoView, Back
     public void updateVersion() {
         final String versionStr = "v " + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")";
         versionText.setText(versionStr);
+    }
+
+    @Override
+    public void cleanAppCache() {
+        if (getContext() != null) {
+            FileUtils.deleteDir(getContext().getCacheDir());
+            if (getContext().getExternalCacheDir() != null) {
+                FileUtils.deleteDir(getContext().getExternalCacheDir());
+            }
+        }
+        presenter.cleanFinished();
+    }
+
+    @Override
+    public void countAppCacheSize() {
+        long cacheSize = 0L;
+        if (getContext() != null) {
+            cacheSize = FileUtils.getDirSize(getContext().getCacheDir());
+            if (getContext().getExternalCacheDir() != null) {
+                cacheSize += FileUtils.getDirSize(getContext().getExternalCacheDir());
+            }
+        }
+        presenter.cacheSizeCalculated(FileUtils.getHumanableSize(cacheSize, sizeLabels));
+    }
+
+    @Override
+    public void updateCacheSize(String sizeStr) {
+        cacheText.setText(sizeStr);
     }
 
     @Override

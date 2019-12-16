@@ -17,6 +17,11 @@ public interface InfoView extends MvpView {
 
     void updateVersion();
 
-    void showMessage(String message);
+    void cleanAppCache();
 
+    void countAppCacheSize();
+
+    void updateCacheSize(String sizeStr);
+
+    void showMessage(String message);
 }

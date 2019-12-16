@@ -30,6 +30,7 @@ public class InfoPresenter extends MvpPresenter<InfoView> {
 
     private void init() {
         getViewState().updateVersion();
+        getViewState().countAppCacheSize();
     }
 
     public void backClick() {
@@ -50,5 +51,17 @@ public class InfoPresenter extends MvpPresenter<InfoView> {
 
     public void writeClicked() {
         getViewState().writeToDevelopers();
+    }
+
+    public void cleanCacheClicked() {
+        getViewState().cleanAppCache();
+    }
+
+    public void cacheSizeCalculated(String cacheSize) {
+        getViewState().updateCacheSize(cacheSize);
+    }
+
+    public void cleanFinished() {
+        getViewState().countAppCacheSize();
     }
 }
