@@ -9,12 +9,15 @@ import com.alex44.fcbate.di.modules.CiceroneModule;
 import com.alex44.fcbate.di.modules.ImageModule;
 import com.alex44.fcbate.di.modules.RepoModule;
 import com.alex44.fcbate.home.presenter.HomePresenter;
+import com.alex44.fcbate.home.presenter.MatchItemPresenter;
 import com.alex44.fcbate.home.presenter.NewsItemPresenter;
 import com.alex44.fcbate.home.ui.MatchItemFragment;
 import com.alex44.fcbate.home.ui.NewsItemFragment;
 import com.alex44.fcbate.info.presenter.InfoPresenter;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.ui.MainActivity;
+import com.alex44.fcbate.match.presenter.MatchPresenter;
+import com.alex44.fcbate.match.ui.MatchFragment;
 import com.alex44.fcbate.news.presenter.NewsPagerItemPresenter;
 import com.alex44.fcbate.news.presenter.NewsPresenter;
 import com.alex44.fcbate.news.ui.NewsRVAdapter;
@@ -90,4 +93,9 @@ public interface AppComponent {
 
     void inject(InfoPresenter infoPresenter);
 
+    void inject(MatchFragment matchFragment);
+
+    void inject(MatchPresenter matchPresenter);
+
+    void inject(MatchItemPresenter matchItemPresenter);
 }

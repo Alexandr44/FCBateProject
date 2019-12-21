@@ -3,9 +3,11 @@ package com.alex44.fcbate.common.navigation;
 import androidx.fragment.app.Fragment;
 
 import com.alex44.fcbate.about.ui.AboutFragment;
+import com.alex44.fcbate.calendar.model.dto.MatchDTO;
 import com.alex44.fcbate.calendar.ui.CalendarFragment;
 import com.alex44.fcbate.home.ui.HomeFragment;
 import com.alex44.fcbate.info.ui.InfoFragment;
+import com.alex44.fcbate.match.ui.MatchFragment;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.news.ui.NewsFragment;
 import com.alex44.fcbate.newsdetail.ui.NewsDetailFragment;
@@ -94,6 +96,19 @@ public class Screens {
         @Override
         public Fragment getFragment() {
             return InfoFragment.newInstance();
+        }
+    }
+
+    public static class MatchScreen extends SupportAppScreen {
+        private MatchDTO matchDTO;
+
+        public MatchScreen(MatchDTO matchDTO) {
+            this.matchDTO = matchDTO;
+        }
+
+        @Override
+        public Fragment getFragment() {
+            return MatchFragment.newInstance(matchDTO);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.alex44.fcbate.home.presenter;
 
 import com.alex44.fcbate.calendar.model.dto.MatchDTO;
+import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.home.view.MatchItemView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -10,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
@@ -20,6 +24,9 @@ public class MatchItemPresenter extends MvpPresenter<MatchItemView> {
     private final SimpleDateFormat timeOutFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     
     private MatchDTO matchDTO;
+
+    @Inject
+    protected Router router;
 
     public MatchItemPresenter(MatchDTO matchDTO) {
         this.matchDTO = matchDTO;
@@ -54,4 +61,7 @@ public class MatchItemPresenter extends MvpPresenter<MatchItemView> {
         }
     }
 
+    public void goToMatchScreen() {
+        router.newRootScreen(new Screens.MatchScreen(matchDTO));
+    }
 }

@@ -24,6 +24,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import timber.log.Timber;
 
@@ -71,7 +72,9 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
         else {
             Timber.e("No data for MatchItemPresenter");
         }
-        return new MatchItemPresenter(matchDTO);
+        final MatchItemPresenter matchItemPresenter = new MatchItemPresenter(matchDTO);
+        App.getInstance().getAppComponent().inject(matchItemPresenter);
+        return matchItemPresenter;
     }
 
     @Override
@@ -142,4 +145,10 @@ public class MatchItemFragment extends MvpAppCompatFragment implements MatchItem
         if ("ЛЮ".equals(name)) return R.drawable.trnm_eur_youth_league_logo;
         return 0;
     }
+
+    @OnClick(R.id.match_layout)
+    public void matchClicked() {
+        matchItemPresenter.goToMatchScreen();
+    }
+
 }
