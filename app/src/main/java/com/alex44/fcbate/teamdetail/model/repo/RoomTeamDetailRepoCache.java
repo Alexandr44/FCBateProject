@@ -2,7 +2,7 @@ package com.alex44.fcbate.teamdetail.model.repo;
 
 import com.alex44.fcbate.common.model.db.DatabaseRoom;
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailDTO;
-import com.alex44.fcbate.teamdetail.model.dto.TeamDetailPhotoDTO;
+import com.alex44.fcbate.teamdetail.model.dto.PhotoDTO;
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailStatisticDTO;
 import com.alex44.fcbate.teamdetail.model.room.RoomTeamDetail;
 import com.alex44.fcbate.teamdetail.model.room.RoomTeamDetailPhoto;
@@ -120,12 +120,12 @@ public class RoomTeamDetailRepoCache implements ITeamDetailRepoCache {
     }
 
     @Override
-    public List<TeamDetailPhotoDTO> getPlayerPhotos(Long id) {
+    public List<PhotoDTO> getPlayerPhotos(Long id) {
         final String memberId = TYPE_PLAYER+"_"+id;
         final List<RoomTeamDetailPhoto> roomPhotoList = DatabaseRoom.getInstance().getRoomTeamDetailPhotoDao().findByMemberId(memberId);
-        final List<TeamDetailPhotoDTO> photoDTOList = new ArrayList<>();
+        final List<PhotoDTO> photoDTOList = new ArrayList<>();
         for (RoomTeamDetailPhoto roomPhoto : roomPhotoList) {
-            photoDTOList.add(new TeamDetailPhotoDTO(
+            photoDTOList.add(new PhotoDTO(
                 roomPhoto.getId(),
                 roomPhoto.getBigPhotoUrl(),
                 roomPhoto.getSmallPhotoUrl(),
@@ -136,10 +136,10 @@ public class RoomTeamDetailRepoCache implements ITeamDetailRepoCache {
     }
 
     @Override
-    public boolean putPlayerPhotos(Long teamMemberId, List<TeamDetailPhotoDTO> teamDetailPhotoDTOS) {
+    public boolean putPlayerPhotos(Long teamMemberId, List<PhotoDTO> photoDTOS) {
         final String memberId = TYPE_PLAYER+"_"+teamMemberId;
         final List<RoomTeamDetailPhoto> roomPhotoList = new ArrayList<>();
-        for (TeamDetailPhotoDTO photoDTO: teamDetailPhotoDTOS) {
+        for (PhotoDTO photoDTO: photoDTOS) {
             final String photoId = TYPE_PLAYER+"_"+photoDTO.getId();
             roomPhotoList.add(new RoomTeamDetailPhoto(
                     photoId,
@@ -155,12 +155,12 @@ public class RoomTeamDetailRepoCache implements ITeamDetailRepoCache {
     }
 
     @Override
-    public List<TeamDetailPhotoDTO> getTrainerPhotos(Long id) {
+    public List<PhotoDTO> getTrainerPhotos(Long id) {
         final String memberId = TYPE_TRAINER+"_"+id;
         final List<RoomTeamDetailPhoto> roomPhotoList = DatabaseRoom.getInstance().getRoomTeamDetailPhotoDao().findByMemberId(memberId);
-        final List<TeamDetailPhotoDTO> photoDTOList = new ArrayList<>();
+        final List<PhotoDTO> photoDTOList = new ArrayList<>();
         for (RoomTeamDetailPhoto roomPhoto : roomPhotoList) {
-            photoDTOList.add(new TeamDetailPhotoDTO(
+            photoDTOList.add(new PhotoDTO(
                     roomPhoto.getId(),
                     roomPhoto.getBigPhotoUrl(),
                     roomPhoto.getSmallPhotoUrl(),
@@ -171,10 +171,10 @@ public class RoomTeamDetailRepoCache implements ITeamDetailRepoCache {
     }
 
     @Override
-    public boolean putTrainerPhotos(Long teamMemberId, List<TeamDetailPhotoDTO> teamDetailPhotoDTOS) {
+    public boolean putTrainerPhotos(Long teamMemberId, List<PhotoDTO> photoDTOS) {
         final String memberId = TYPE_TRAINER+"_"+teamMemberId;
         final List<RoomTeamDetailPhoto> roomPhotoList = new ArrayList<>();
-        for (TeamDetailPhotoDTO photoDTO: teamDetailPhotoDTOS) {
+        for (PhotoDTO photoDTO: photoDTOS) {
             final String photoId = TYPE_TRAINER+"_"+photoDTO.getId();
             roomPhotoList.add(new RoomTeamDetailPhoto(
                     photoId,

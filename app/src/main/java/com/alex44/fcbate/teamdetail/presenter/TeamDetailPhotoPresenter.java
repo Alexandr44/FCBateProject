@@ -1,7 +1,7 @@
 package com.alex44.fcbate.teamdetail.presenter;
 
 import com.alex44.fcbate.team.model.enums.TeamItemType;
-import com.alex44.fcbate.teamdetail.model.dto.TeamDetailPhotoDTO;
+import com.alex44.fcbate.teamdetail.model.dto.PhotoDTO;
 import com.alex44.fcbate.teamdetail.model.repo.ITeamDetailRepo;
 import com.alex44.fcbate.teamdetail.view.TeamDetailPhotoView;
 import com.alex44.fcbate.teamdetail.view.TeamDetailRVItemView;
@@ -37,7 +37,7 @@ public class TeamDetailPhotoPresenter extends MvpPresenter<TeamDetailPhotoView> 
     private Disposable disposable;
 
     @Getter
-    private List<TeamDetailPhotoDTO> photos = new ArrayList<>();
+    private List<PhotoDTO> photos = new ArrayList<>();
 
     public TeamDetailPhotoPresenter(TeamItemType type, Long id, Scheduler mainThreadScheduler) {
         this.type = type;
@@ -64,7 +64,7 @@ public class TeamDetailPhotoPresenter extends MvpPresenter<TeamDetailPhotoView> 
             return;
         }
 
-        Maybe<List<TeamDetailPhotoDTO>> maybe = null;
+        Maybe<List<PhotoDTO>> maybe = null;
         switch (type) {
             case PLAYERS:
                 maybe = repo.getPlayerPhotos(id);

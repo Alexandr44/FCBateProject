@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TeamDetailPhotoDTO {
+public class PhotoDTO {
 
     @Expose
     @SerializedName("photo_file_id")

@@ -3,7 +3,7 @@ package com.alex44.fcbate.teamdetail.model.repo;
 import com.alex44.fcbate.common.model.INetworkStatus;
 import com.alex44.fcbate.teamdetail.model.api.ITeamDetailSource;
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailDTO;
-import com.alex44.fcbate.teamdetail.model.dto.TeamDetailPhotoDTO;
+import com.alex44.fcbate.teamdetail.model.dto.PhotoDTO;
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailStatisticDTO;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class TeamDetailRepo implements ITeamDetailRepo {
     }
 
     @Override
-    public Maybe<List<TeamDetailPhotoDTO>> getPlayerPhotos(Long id) {
+    public Maybe<List<PhotoDTO>> getPlayerPhotos(Long id) {
         Timber.d("Requesting player photos %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getPlayerPhotos(id)
@@ -91,8 +91,8 @@ public class TeamDetailRepo implements ITeamDetailRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<List<TeamDetailPhotoDTO>>) emitter -> {
-                final List<TeamDetailPhotoDTO> list = repoCache.getPlayerPhotos(id);
+            return Maybe.create((MaybeOnSubscribe<List<PhotoDTO>>) emitter -> {
+                final List<PhotoDTO> list = repoCache.getPlayerPhotos(id);
                 if (list == null || list.isEmpty()) {
                     emitter.onError(new RuntimeException("No photo for player found in local storage"));
                 }
@@ -105,7 +105,7 @@ public class TeamDetailRepo implements ITeamDetailRepo {
     }
 
     @Override
-    public Maybe<List<TeamDetailPhotoDTO>> getTrainerPhotos(Long id) {
+    public Maybe<List<PhotoDTO>> getTrainerPhotos(Long id) {
         Timber.d("Requesting trainer photos %s", id);
         if (networkStatus.isOnline()) {
             return teamDetailSource.getTrainerPhotos(id)
@@ -116,8 +116,8 @@ public class TeamDetailRepo implements ITeamDetailRepo {
                     });
         }
         else {
-            return Maybe.create((MaybeOnSubscribe<List<TeamDetailPhotoDTO>>) emitter -> {
-                final List<TeamDetailPhotoDTO> list = repoCache.getTrainerPhotos(id);
+            return Maybe.create((MaybeOnSubscribe<List<PhotoDTO>>) emitter -> {
+                final List<PhotoDTO> list = repoCache.getTrainerPhotos(id);
                 if (list == null || list.isEmpty()) {
                     emitter.onError(new RuntimeException("No photo for trainer found in local storage"));
                 }

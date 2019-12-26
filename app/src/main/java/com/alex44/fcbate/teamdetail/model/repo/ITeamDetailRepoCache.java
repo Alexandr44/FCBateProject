@@ -1,7 +1,7 @@
 package com.alex44.fcbate.teamdetail.model.repo;
 
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailDTO;
-import com.alex44.fcbate.teamdetail.model.dto.TeamDetailPhotoDTO;
+import com.alex44.fcbate.teamdetail.model.dto.PhotoDTO;
 import com.alex44.fcbate.teamdetail.model.dto.TeamDetailStatisticDTO;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public interface ITeamDetailRepoCache {
 
     boolean putTrainer(TeamDetailDTO teamDetailDTO);
 
-    List<TeamDetailPhotoDTO> getPlayerPhotos(Long id);
+    List<PhotoDTO> getPlayerPhotos(Long id);
 
-    boolean putPlayerPhotos(Long teamMemberId, List<TeamDetailPhotoDTO> teamDetailPhotoDTOS);
+    boolean putPlayerPhotos(Long teamMemberId, List<PhotoDTO> photoDTOS);
 
-    List<TeamDetailPhotoDTO> getTrainerPhotos(Long id);
+    List<PhotoDTO> getTrainerPhotos(Long id);
 
-    boolean putTrainerPhotos(Long teamMemberId, List<TeamDetailPhotoDTO> teamDetailPhotoDTOS);
+    boolean putTrainerPhotos(Long teamMemberId, List<PhotoDTO> photoDTOS);
 
     List<TeamDetailStatisticDTO> getPlayerStats(Long id);
 
