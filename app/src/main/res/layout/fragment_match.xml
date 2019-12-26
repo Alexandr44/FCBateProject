@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".teamdetail.ui.TeamDetailFragment"
+    android:background="@drawable/background_gradient"
+    android:layout_margin="8dp">
+
+    <include
+        android:id="@+id/match_details"
+        layout="@layout/home_match_item" />
+
+    <androidx.core.widget.NestedScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layoutMode="opticalBounds"
+        app:layout_constraintTop_toBottomOf="@+id/match_details"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/match_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="top|start|end"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
+                app:tabSelectedTextColor="@color/defaultYellow"
+                app:tabTextColor="#fff"
+                android:background="@android:color/transparent"
+                />
+
+            <com.alex44.fcbate.common.ui.ViewPagerExt
+                android:id="@+id/match_pager"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
