@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import lombok.Getter;
@@ -27,8 +28,8 @@ import timber.log.Timber;
 
 @InjectViewState
 public class CalendarPresenter extends MvpPresenter<CalendarView> {
-    private final static int PREVIOUS_GAME_COUNT = 10;
-    private final static int NEXT_GAME_COUNT = 15;
+    private final static int PREVIOUS_GAME_COUNT = 50;
+    private final static int NEXT_GAME_COUNT = 30;
     private final static int DIRECTION_PREVIOUS = 0;
     private final static int DIRECTION_NEXT = 1;
 
@@ -61,8 +62,9 @@ public class CalendarPresenter extends MvpPresenter<CalendarView> {
     }
 
     private void loadData() {
-        disposable = repo.getGames(PREVIOUS_GAME_COUNT, DIRECTION_PREVIOUS)
-                .zipWith(repo.getGames(NEXT_GAME_COUNT, DIRECTION_NEXT), (prevMatchDTOs, nextMatchDTOs) -> {
+        disposable = Maybe.zip(repo.getGames(PREVIOUS_GAME_COUNT, DIRECTION_NEXT).defaultIfEmpty(new ArrayList<>()),
+                                repo.getGames(NEXT_GAME_COUNT, DIRECTION_PREVIOUS).defaultIfEmpty(new ArrayList<>()),
+                                        (nextMatchDTOs, prevMatchDTOs) -> {
                     final List<MatchDTO> matchDTOs = new ArrayList<>();
                     Collections.reverse(prevMatchDTOs);
                     matchDTOs.addAll(prevMatchDTOs);
@@ -134,14 +136,4 @@ public class CalendarPresenter extends MvpPresenter<CalendarView> {
         holder.setTitle(matchDTO.getDateStr());
     }
 
-/*    public void bind(RecyclerView.ViewHolder holder, int position) {
-        final MatchDTO matchDTO = data.get(position);
-        if (matchDTO.getDataType() == MatchDTO.DATA_ROW) {
-            holder = holder
-
-        }
-        else {
-
-        }
-    }*/
 }
