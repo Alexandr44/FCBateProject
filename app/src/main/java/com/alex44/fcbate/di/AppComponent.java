@@ -16,8 +16,11 @@ import com.alex44.fcbate.home.ui.NewsItemFragment;
 import com.alex44.fcbate.info.presenter.InfoPresenter;
 import com.alex44.fcbate.main.presenter.MainPresenter;
 import com.alex44.fcbate.main.ui.MainActivity;
+import com.alex44.fcbate.match.presenter.MatchOnlinePresenter;
+import com.alex44.fcbate.match.presenter.MatchPhotoPresenter;
 import com.alex44.fcbate.match.presenter.MatchPresenter;
 import com.alex44.fcbate.match.ui.MatchFragment;
+import com.alex44.fcbate.match.ui.MatchPhotoRVAdapter;
 import com.alex44.fcbate.news.presenter.NewsPagerItemPresenter;
 import com.alex44.fcbate.news.presenter.NewsPresenter;
 import com.alex44.fcbate.news.ui.NewsRVAdapter;
@@ -98,4 +101,10 @@ public interface AppComponent {
     void inject(MatchPresenter matchPresenter);
 
     void inject(MatchItemPresenter matchItemPresenter);
+
+    void inject(MatchOnlinePresenter matchOnlinePresenter);
+
+    void inject(MatchPhotoPresenter matchPhotoPresenter);
+
+    void inject(MatchPhotoRVAdapter adapter);
 }

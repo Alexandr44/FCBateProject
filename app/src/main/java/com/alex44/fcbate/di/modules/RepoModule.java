@@ -14,6 +14,9 @@ import com.alex44.fcbate.home.model.api.IHomeSource;
 import com.alex44.fcbate.home.model.repo.HomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepo;
 import com.alex44.fcbate.home.model.repo.IHomeRepoCache;
+import com.alex44.fcbate.match.model.api.IMatchSource;
+import com.alex44.fcbate.match.model.repo.IMatchRepo;
+import com.alex44.fcbate.match.model.repo.MatchRepo;
 import com.alex44.fcbate.news.model.api.INewsSource;
 import com.alex44.fcbate.news.model.repo.INewsRepo;
 import com.alex44.fcbate.news.model.repo.INewsRepoCache;
@@ -81,6 +84,11 @@ public class RepoModule {
     @Provides
     public IAboutRepo aboutRepo(IAboutSource source, @Named("Room")IAboutRepoCache aboutRepoCache, INetworkStatus networkStatus) {
         return new AboutRepo(source, aboutRepoCache, networkStatus);
+    }
+
+    @Provides
+    public IMatchRepo matchOnlineRepo(IMatchSource source, INetworkStatus networkStatus) {
+        return new MatchRepo(source, networkStatus);
     }
 
 }

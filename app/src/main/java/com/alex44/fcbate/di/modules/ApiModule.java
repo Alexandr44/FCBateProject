@@ -6,6 +6,7 @@ import com.alex44.fcbate.calendar.model.api.ICalendarSource;
 import com.alex44.fcbate.common.model.ISystemInfo;
 import com.alex44.fcbate.common.model.api.support.ApiSupportUtil;
 import com.alex44.fcbate.home.model.api.IHomeSource;
+import com.alex44.fcbate.match.model.api.IMatchSource;
 import com.alex44.fcbate.news.model.api.INewsSource;
 import com.alex44.fcbate.newsdetail.model.api.INewsDetailSource;
 import com.alex44.fcbate.team.model.api.ITeamSource;
@@ -114,6 +115,11 @@ public class ApiModule {
     @Provides
     public IAboutSource aboutSource(Retrofit retrofit) {
         return retrofit.create(IAboutSource.class);
+    }
+
+    @Provides
+    public IMatchSource matchSource(Retrofit retrofit) {
+        return retrofit.create(IMatchSource.class);
     }
 
 }
