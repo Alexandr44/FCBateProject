@@ -66,7 +66,7 @@ public class TeamPagerItemPresenter extends MvpPresenter<TeamPagerItemView> {
             view.setPhoto(playerDTO.getPhotoUrl());
             view.setFirstName(firstName);
             view.setLastName(playerDTO.getLastName(), true);
-            view.setInfo(String.valueOf(playerDTO.getAge()), true);
+            view.setInfo(String.valueOf(playerDTO.getPlayerNumber()), true);
         }
         else if (TeamItemType.TRAINERS.equals(type)) {
             final TrainerDTO trainerDTO = trainersData.get(view.getPos());
@@ -117,7 +117,7 @@ public class TeamPagerItemPresenter extends MvpPresenter<TeamPagerItemView> {
             case PLAYERS:
                 disposable = teamRepo.getPlayers()
                         .map(playersDTOS -> {
-                            Collections.sort(playersDTOS, (o1, o2) -> o1.getAmplua().compareTo(o2.getAmplua()));
+                            Collections.sort(playersDTOS, (o1, o2) -> o2.getAmplua().compareTo(o1.getAmplua()));
                             String curAmplua = "";
                             for (int i = 0; i < playersDTOS.size(); i++) {
                                 if (!curAmplua.equals(playersDTOS.get(i).getAmplua())) {
