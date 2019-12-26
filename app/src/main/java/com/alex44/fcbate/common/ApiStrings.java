@@ -26,4 +26,6 @@ public class ApiStrings {
 
     public final static String ABOUT_URL = "pages/briefly-about-us";
 
+    public final static String COMMENTS_URL = "comments";
+
 }
