@@ -72,7 +72,7 @@ public class MatchPhotoRVAdapter extends RecyclerView.Adapter<MatchPhotoRVAdapte
 
         @Override
         public void setPhoto(String url) {
-            imageLoader.loadIntoWithCrop(url, photo, 60);
+            imageLoader.loadInto(url, photo, 60);
         }
 
     }

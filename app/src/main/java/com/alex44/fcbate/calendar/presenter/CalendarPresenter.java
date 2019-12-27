@@ -62,8 +62,8 @@ public class CalendarPresenter extends MvpPresenter<CalendarView> {
     }
 
     private void loadData() {
-        disposable = Maybe.zip(repo.getGames(PREVIOUS_GAME_COUNT, DIRECTION_NEXT).defaultIfEmpty(new ArrayList<>()),
-                                repo.getGames(NEXT_GAME_COUNT, DIRECTION_PREVIOUS).defaultIfEmpty(new ArrayList<>()),
+        disposable = Maybe.zip(repo.getGames(NEXT_GAME_COUNT, DIRECTION_NEXT).defaultIfEmpty(new ArrayList<>()),
+                                repo.getGames(PREVIOUS_GAME_COUNT, DIRECTION_PREVIOUS).defaultIfEmpty(new ArrayList<>()),
                                         (nextMatchDTOs, prevMatchDTOs) -> {
                     final List<MatchDTO> matchDTOs = new ArrayList<>();
                     Collections.reverse(prevMatchDTOs);

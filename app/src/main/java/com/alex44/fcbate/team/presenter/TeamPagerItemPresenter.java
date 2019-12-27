@@ -117,7 +117,9 @@ public class TeamPagerItemPresenter extends MvpPresenter<TeamPagerItemView> {
             case PLAYERS:
                 disposable = teamRepo.getPlayers()
                         .map(playersDTOS -> {
-                            Collections.sort(playersDTOS, (o1, o2) -> o2.getAmplua().compareTo(o1.getAmplua()));
+                            Collections.sort(playersDTOS, (o1, o2) -> {
+                                return o1.getAmplua().compareTo(o2.getAmplua());
+                            });
                             String curAmplua = "";
                             for (int i = 0; i < playersDTOS.size(); i++) {
                                 if (!curAmplua.equals(playersDTOS.get(i).getAmplua())) {
