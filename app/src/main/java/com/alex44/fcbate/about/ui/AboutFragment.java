@@ -2,12 +2,11 @@ package com.alex44.fcbate.about.ui;
 
 
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +17,7 @@ import com.alex44.fcbate.about.presenter.AboutPresenter;
 import com.alex44.fcbate.about.view.AboutView;
 import com.alex44.fcbate.common.model.IImageLoader;
 import com.alex44.fcbate.common.ui.BackButtonListener;
+import com.alex44.fcbate.common.ui.HtmlParser;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -38,6 +38,8 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutView, Ba
     private View view;
     private Unbinder unbinder;
 
+    private HtmlParser htmlParser;
+
     @InjectPresenter
     AboutPresenter presenter;
 
@@ -47,8 +49,8 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutView, Ba
 
     @BindView(R.id.about_photo)
     protected ImageView aboutPhoto;
-    @BindView(R.id.about_text)
-    protected TextView aboutText;
+    @BindView(R.id.text_layout)
+    protected LinearLayout linearLayout;
 
     public AboutFragment() {
         App.getInstance().getAppComponent().inject(this);
@@ -71,6 +73,7 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutView, Ba
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_about, container, false);
         unbinder = ButterKnife.bind(this, view);
+        htmlParser = new HtmlParser(getContext(), imageLoader);
         return view;
     }
 
@@ -88,11 +91,7 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutView, Ba
 
     @Override
     public void setText(String text) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            aboutText.setText(Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT).toString().trim());
-        } else {
-            aboutText.setText(Html.fromHtml(text).toString().trim());
-        }
+        htmlParser.parseHtmlTextInto(text, linearLayout);
     }
 
     @Override

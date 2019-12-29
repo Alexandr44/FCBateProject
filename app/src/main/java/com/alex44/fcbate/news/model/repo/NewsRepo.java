@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class NewsRepo implements INewsRepo {
-    private static final int ELEMENTS_TO_REQUEST = 15;
+    private static final int ELEMENTS_TO_REQUEST = 60;
 
     private final INewsSource source;
 

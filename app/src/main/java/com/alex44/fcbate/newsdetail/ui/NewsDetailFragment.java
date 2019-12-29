@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
 import com.alex44.fcbate.common.model.IImageLoader;
 import com.alex44.fcbate.common.ui.BackButtonListener;
+import com.alex44.fcbate.common.ui.HtmlParser;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.newsdetail.presenter.NewsDetailPresenter;
 import com.alex44.fcbate.newsdetail.view.NewsDetailView;
@@ -40,6 +42,8 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
     private View view;
     private Unbinder unbinder;
 
+    private HtmlParser htmlParser;
+
     @InjectPresenter
     NewsDetailPresenter presenter;
 
@@ -49,12 +53,12 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
 
     @BindView(R.id.news_detail_photo)
     protected ImageView newsPhoto;
-    @BindView(R.id.news_detail_text)
-    protected TextView newsText;
     @BindView(R.id.news_detail_brief)
     protected TextView briefText;
     @BindView(R.id.news_detail_date)
     protected TextView dateText;
+    @BindView(R.id.text_layout)
+    protected LinearLayout linearLayout;
 
     public NewsDetailFragment() {
         App.getInstance().getAppComponent().inject(this);
@@ -90,6 +94,7 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_news_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
+        htmlParser = new HtmlParser(getContext(), imageLoader);
         return view;
     }
 
@@ -112,11 +117,7 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
 
     @Override
     public void setText(String text) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            newsText.setText(Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT).toString().trim());
-        } else {
-            newsText.setText(Html.fromHtml(text).toString().trim());
-        }
+        htmlParser.parseHtmlTextInto(text, linearLayout);
     }
 
     @Override

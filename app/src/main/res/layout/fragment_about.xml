@@ -30,17 +30,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-            <TextView
-                android:id="@+id/about_text"
+            <LinearLayout
+                android:id="@+id/text_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/about_image_height"
                 android:layout_marginBottom="10dp"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:background="@drawable/background_text"
-                />
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@drawable/background_text"/>
 
     </androidx.core.widget.NestedScrollView>
 
