@@ -45,6 +45,8 @@ public class NewsPagerItemFragment extends MvpAppCompatFragment implements NewsP
     @BindView(R.id.news_pager_rv)
     RecyclerView recyclerView;
 
+    private int currentVisiblePosition = 0;
+
     public NewsPagerItemFragment() {
         // Required empty public constructor
     }
@@ -100,5 +102,17 @@ public class NewsPagerItemFragment extends MvpAppCompatFragment implements NewsP
     @Override
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        currentVisiblePosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPosition(currentVisiblePosition);
     }
 }
