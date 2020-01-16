@@ -73,7 +73,10 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutView, Ba
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_about, container, false);
         unbinder = ButterKnife.bind(this, view);
-        htmlParser = new HtmlParser(getContext(), imageLoader);
+        htmlParser = new HtmlParser(getContext(), imageLoader) {
+            @Override
+            public void goToFullScreen(String videoId) {}
+        };
         return view;
     }
 

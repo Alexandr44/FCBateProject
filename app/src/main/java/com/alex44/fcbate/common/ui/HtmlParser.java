@@ -6,14 +6,23 @@ import android.graphics.Typeface;
 import android.text.Html;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.alex44.fcbate.common.model.IImageLoader;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,19 +32,23 @@ import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
-public class HtmlParser {
+public abstract class HtmlParser implements FullScreenVideoListener {
     private static final String PARAGRAPH_SPLIT = "<\\/p>\\r\\n<p>|<p>|<\\/p>";
     private static final String IMAGE_SPLIT = "<img";
-    private static final String IMAGE_URL = "src=\"(http:.*.(?:jpg|JPG))\"";
+    private static final String IMAGE_URL = "src=\"(http:.*.jpg)\"";
     private static final String TABLE_SPLIT = "<\\/tr>\\r\\n<tr>|<tr>?|<\\/tr>";
     private static final String ROW_SPLIT = "<\\/td><td>|<\\/?td>?";
+    private static final String VIDEO_SPLIT = "<iframe";
+    private static final String VIDEO_URL = "src=.*(?:youtube.com|youtu.be).*\\/(\\w+)\\/?\"";
 
     private static final String STRONG_TAG = "<strong>";
     private static final String TABLE_TAG = "<table";
 
-    private final Pattern imagePattern = Pattern.compile(IMAGE_URL);
+
+    private final Pattern imagePattern = Pattern.compile(IMAGE_URL, Pattern.CASE_INSENSITIVE);
     private final Pattern rowPattern = Pattern.compile(ROW_SPLIT);
     private final Pattern widthPattern = Pattern.compile("width=\"(\\d+)\"");
+    private final Pattern videoPattern = Pattern.compile(VIDEO_URL);
 
     private Context context;
     private IImageLoader<ImageView> imageLoader;
@@ -60,6 +73,18 @@ public class HtmlParser {
             }
             else if (p.contains(TABLE_TAG)) {
                 linearLayout.addView(createTableLayout(p, Color.WHITE, 16, getInPx(8)));
+            }
+            else if (p.contains(VIDEO_SPLIT)) {
+                final String[] videos = p.split(VIDEO_SPLIT);
+                for (String video: videos) {
+                    if (video.isEmpty()) continue;
+                    if (video.replaceAll("\r\n", "").isEmpty()) continue;
+                    final Matcher matcher = videoPattern.matcher(video);
+                    if (matcher.find()) {
+                        final String videoId = matcher.group(1);
+                        linearLayout.addView(createVideoView(videoId, margin));
+                    }
+                }
             }
             else {
 //                if (p.contains(STRONG_TAG)) { //TODO: подправить, чтоб не весь текст абзаца был жирным
@@ -170,6 +195,42 @@ public class HtmlParser {
             }
         }
         return tableLayout;
+    }
+
+    private View createVideoView(String videoId, int margin) {
+        final RelativeLayout relativeLayout = new RelativeLayout(context);
+        final RelativeLayout.LayoutParams relativeLayoutParams = new RelativeLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+        relativeLayoutParams.setMargins(0, margin, 0, margin);
+        relativeLayout.setLayoutParams(relativeLayoutParams);
+
+        final YouTubePlayerView youTubePlayerView = new YouTubePlayerView(context);
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+        youTubePlayerView.setLayoutParams(layoutParams);
+        youTubePlayerView.setEnableAutomaticInitialization(false);
+
+        final IFramePlayerOptions iFramePlayerOptions = new IFramePlayerOptions.Builder()
+                .controls(0)
+                .rel(0)
+                .build();
+
+        youTubePlayerView.initialize(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NotNull YouTubePlayer youTubePlayer) {
+                youTubePlayer.cueVideo(videoId, 0);
+            }
+        }, true, iFramePlayerOptions);
+
+        youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
+            @Override
+            public void onYouTubePlayerEnterFullScreen() {
+                goToFullScreen(videoId);
+            }
+            @Override
+            public void onYouTubePlayerExitFullScreen() {}
+        });
+
+        relativeLayout.addView(youTubePlayerView);
+        return relativeLayout;
     }
 
     private int getInPx(int val) {

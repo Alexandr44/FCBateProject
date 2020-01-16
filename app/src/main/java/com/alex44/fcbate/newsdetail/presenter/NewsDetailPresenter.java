@@ -1,5 +1,6 @@
 package com.alex44.fcbate.newsdetail.presenter;
 
+import com.alex44.fcbate.common.navigation.Screens;
 import com.alex44.fcbate.newsdetail.model.dto.NewsItemDetailDTO;
 import com.alex44.fcbate.news.model.enums.NewsItemType;
 import com.alex44.fcbate.newsdetail.model.repo.INewsDetailRepo;
@@ -101,4 +102,7 @@ public class NewsDetailPresenter extends MvpPresenter<NewsDetailView> {
         router.exit();
     }
 
+    public void goToFullScreen(String videoId) {
+        router.navigateTo(new Screens.VideoScreen(videoId));
+    }
 }

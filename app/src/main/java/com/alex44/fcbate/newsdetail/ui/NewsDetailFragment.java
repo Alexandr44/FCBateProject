@@ -94,7 +94,12 @@ public class NewsDetailFragment extends MvpAppCompatFragment implements NewsDeta
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_news_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
-        htmlParser = new HtmlParser(getContext(), imageLoader);
+        htmlParser = new HtmlParser(getContext(), imageLoader) {
+            @Override
+            public void goToFullScreen(String videoId) {
+                presenter.goToFullScreen(videoId);
+            }
+        };
         return view;
     }
 
