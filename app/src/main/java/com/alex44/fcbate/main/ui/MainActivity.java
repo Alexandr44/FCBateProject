@@ -3,6 +3,7 @@ package com.alex44.fcbate.main.ui;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -130,6 +131,17 @@ public class MainActivity  extends MvpAppCompatActivity implements MainView,
         unbinder.unbind();
     }
 
+    public void hideActionBar() {
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null)
+            actionBar.hide();
+    }
+
+    public void showActionBar() {
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null)
+            actionBar.show();
+    }
     //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
