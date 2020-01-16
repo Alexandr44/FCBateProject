@@ -22,6 +22,8 @@ public class ApiStrings {
 
     public final static String PHOTOS_URL = "photos";
 
+    public final static String VIDEOS_URL = "videos";
+
     public final static String STATS_URL = "stats";
 
     public final static String ABOUT_URL = "pages/briefly-about-us";

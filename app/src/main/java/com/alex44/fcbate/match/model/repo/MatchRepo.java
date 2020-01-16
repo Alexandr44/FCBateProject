@@ -3,6 +3,7 @@ package com.alex44.fcbate.match.model.repo;
 import com.alex44.fcbate.common.model.INetworkStatus;
 import com.alex44.fcbate.match.model.api.IMatchSource;
 import com.alex44.fcbate.match.model.dto.MatchOnlineMessageDTO;
+import com.alex44.fcbate.match.model.dto.VideoDTO;
 import com.alex44.fcbate.teamdetail.model.dto.PhotoDTO;
 
 import java.util.ArrayList;
@@ -58,9 +59,9 @@ public class MatchRepo implements IMatchRepo {
         Timber.d("Requesting photos %s", matchId);
         if (networkStatus.isOnline()) {
             return matchOnlineSource.getMatchPhotos(matchId)
-                    .map(messagesList -> {
+                    .map(photoList -> {
                         //put in db
-                        return messagesList;
+                        return photoList;
                     })
                     .subscribeOn(Schedulers.io());
         }
@@ -68,8 +69,34 @@ public class MatchRepo implements IMatchRepo {
             return Maybe.create((MaybeOnSubscribe<List<PhotoDTO>>) emitter -> {
                 //TODO: get from db
                 final List<PhotoDTO> list = new ArrayList<>();
-                if (list == null || list.isEmpty()) {
+                if (list.isEmpty()) {
                     emitter.onError(new RuntimeException("No photos found for current match in local storage"));
+                }
+                else {
+                    emitter.onSuccess(list);
+                }
+            })
+                    .subscribeOn(Schedulers.io());
+        }
+    }
+
+    @Override
+    public Maybe<List<VideoDTO>> getMatchVideos(Long matchId) {
+        Timber.d("Requesting videos %s", matchId);
+        if (networkStatus.isOnline()) {
+            return matchOnlineSource.getMatchVideo(matchId)
+                    .map(videoList -> {
+                        //put in db
+                        return videoList;
+                    })
+                    .subscribeOn(Schedulers.io());
+        }
+        else {
+            return Maybe.create((MaybeOnSubscribe<List<VideoDTO>>) emitter -> {
+                //TODO: get from db
+                final List<VideoDTO> list = new ArrayList<>();
+                if (list.isEmpty()) {
+                    emitter.onError(new RuntimeException("No videos found for current match in local storage"));
                 }
                 else {
                     emitter.onSuccess(list);
