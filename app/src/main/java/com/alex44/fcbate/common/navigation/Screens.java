@@ -15,6 +15,7 @@ import com.alex44.fcbate.team.model.enums.TeamItemType;
 import com.alex44.fcbate.team.ui.TeamFragment;
 import com.alex44.fcbate.teamdetail.ui.TeamDetailFragment;
 import com.alex44.fcbate.tournament.ui.TournamentFragment;
+import com.alex44.fcbate.video.ui.VideoFragment;
 
 import ru.terrakok.cicerone.android.support.SupportAppScreen;
 
@@ -111,4 +112,18 @@ public class Screens {
             return MatchFragment.newInstance(matchDTO);
         }
     }
+
+    public static class VideoScreen extends SupportAppScreen {
+        private String videoId;
+
+        public VideoScreen(String videoId) {
+            this.videoId = videoId;
+        }
+
+        @Override
+        public Fragment getFragment() {
+            return VideoFragment.newInstance(videoId);
+        }
+    }
+
 }
