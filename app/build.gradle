@@ -91,6 +91,9 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //Multidex
     implementation 'androidx.multidex:multidex:2.0.1'
+    //Video
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
 
     //Unit Tests
     testImplementation 'junit:junit:4.12'
