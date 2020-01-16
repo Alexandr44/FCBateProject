@@ -19,6 +19,7 @@ import com.alex44.fcbate.main.ui.MainActivity;
 import com.alex44.fcbate.match.presenter.MatchOnlinePresenter;
 import com.alex44.fcbate.match.presenter.MatchPhotoPresenter;
 import com.alex44.fcbate.match.presenter.MatchPresenter;
+import com.alex44.fcbate.match.presenter.MatchVideoPresenter;
 import com.alex44.fcbate.match.ui.MatchFragment;
 import com.alex44.fcbate.match.ui.MatchPhotoRVAdapter;
 import com.alex44.fcbate.news.presenter.NewsPagerItemPresenter;
@@ -107,4 +108,7 @@ public interface AppComponent {
     void inject(MatchPhotoPresenter matchPhotoPresenter);
 
     void inject(MatchPhotoRVAdapter adapter);
+
+    void inject(MatchVideoPresenter matchVideoPresenter);
+
 }
