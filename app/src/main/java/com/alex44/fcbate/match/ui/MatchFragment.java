@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.alex44.fcbate.App;
 import com.alex44.fcbate.R;
@@ -121,28 +122,24 @@ public class MatchFragment extends MvpAppCompatFragment implements MatchView, Ba
         final MatchPagerAdapter pagerAdapter = new MatchPagerAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         pagerAdapter.addFragment(createMatchOnlineFragment(), "Онлайн");
         pagerAdapter.addFragment(createMatchPhotoFragment(), "Фото");
-//        pagerAdapter.addFragment(createTeamDetailBiographyFragment(), "Биография");
-//        pagerAdapter.addFragment(createTeamDetailPhotoFragment(type, id), "Фото");
-//        if (type == TeamItemType.PLAYERS) {
-//            pagerAdapter.addFragment(createTeamDetailStatisticFragment(id), "Статистика");
-//        }
+        pagerAdapter.addFragment(createMatchVideoFragment(), "Видео");
 
-//        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                final Fragment fragment = pagerAdapter.getItem(position);
-//                final View view = fragment.getView();
-//                pager.setViewForMeasure(view);  //установит размер PagerView для нового фрагмента
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//            }
-//        });
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                final Fragment fragment = pagerAdapter.getItem(position);
+                final View view = fragment.getView();
+                pager.setViewForMeasure(view);  //установит размер PagerView для нового фрагмента
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
 
         pager.setAdapter(pagerAdapter);
         final Fragment fragment = pagerAdapter.getItem(pager.getCurrentItem());
@@ -155,6 +152,14 @@ public class MatchFragment extends MvpAppCompatFragment implements MatchView, Ba
         final Bundle arguments = new Bundle();
         arguments.putLong("matchId", presenter.getMatchDTO().getId());
         final MatchOnlineFragment fragment = new MatchOnlineFragment();
+        fragment.setArguments(arguments);
+        return fragment;
+    }
+
+    private MatchVideoFragment createMatchVideoFragment() {
+        final Bundle arguments = new Bundle();
+        arguments.putLong("matchId", presenter.getMatchDTO().getId());
+        final MatchVideoFragment fragment = new MatchVideoFragment();
         fragment.setArguments(arguments);
         return fragment;
     }
