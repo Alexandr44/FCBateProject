@@ -15,14 +15,10 @@ import javax.inject.Inject;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import lombok.Getter;
-import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
 public class MatchPhotoPresenter extends MvpPresenter<MatchPhotoView> {
-
-    @Inject
-    protected Router router;
 
     private Long matchId;
 
