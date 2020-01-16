@@ -21,13 +21,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import timber.log.Timber;
+
 public class HtmlParser {
     private static final String PARAGRAPH_SPLIT = "<\\/p>\\r\\n<p>|<p>|<\\/p>";
     private static final String IMAGE_SPLIT = "<img";
-    private static final String IMAGE_URL = "src=\"(http:.*.jpg)\"";
+    private static final String IMAGE_URL = "src=\"(http:.*.(?:jpg|JPG))\"";
     private static final String TABLE_SPLIT = "<\\/tr>\\r\\n<tr>|<tr>?|<\\/tr>";
     private static final String ROW_SPLIT = "<\\/td><td>|<\\/?td>?";
-
 
     private static final String STRONG_TAG = "<strong>";
     private static final String TABLE_TAG = "<table";
@@ -150,14 +151,18 @@ public class HtmlParser {
                             column = Html.fromHtml(column).toString().trim();
                         }
                         final TextView textView = createTextView(column, color, textSize, marginUpDown, marginUpDown, false);
+                        Timber.d(textView.getWidth()+" "+textView.getMeasuredWidth());
                         final TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, widths.get(columnNum));
-                        lp.setMargins(getInPx(8), 0, getInPx(8), 0);
+                        lp.setMargins(getInPx(2), 0, getInPx(2), 0);
                         textView.setLayoutParams(lp);
                         tableRow.addView(textView);
                     }
                 }
                 if (rowNum == 0) {
                     tableLayout.setColumnShrinkable(getMaxNum(widths), true);
+                    if (getWidthsSum(widths) > 850) {
+                        textSize -= 5;
+                    }
                 }
                 else {
                     tableLayout.addView(tableRow);
@@ -190,6 +195,15 @@ public class HtmlParser {
             }
         }
         return maxNum;
+    }
+
+    private int getWidthsSum(List<Integer> list) {
+        if (list == null || list.isEmpty()) return 0;
+        int result = 0;
+        for (int w : list) {
+            result += w;
+        }
+        return result;
     }
 
 }
