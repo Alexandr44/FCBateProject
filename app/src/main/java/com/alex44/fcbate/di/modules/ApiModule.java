@@ -1,6 +1,7 @@
 package com.alex44.fcbate.di.modules;
 
 import com.alex44.fcbate.App;
+import com.alex44.fcbate.BuildConfig;
 import com.alex44.fcbate.about.model.api.IAboutSource;
 import com.alex44.fcbate.calendar.model.api.ICalendarSource;
 import com.alex44.fcbate.common.model.ISystemInfo;
@@ -50,9 +51,11 @@ public class ApiModule {
 
     @Provides
     public OkHttpClient okHttpClient(ISystemInfo systemInfo, ChuckInterceptor chuckInterceptor, HttpLoggingInterceptor httpLoggingInterceptor) {
-        final OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addNetworkInterceptor(httpLoggingInterceptor)
-                .addNetworkInterceptor(chuckInterceptor);
+        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        if (BuildConfig.DEBUG) {
+            builder.addNetworkInterceptor(httpLoggingInterceptor)
+                    .addNetworkInterceptor(chuckInterceptor);
+        }
         return ApiSupportUtil.enableTls12OnPreLollipop(builder, systemInfo).build();
     }
 
