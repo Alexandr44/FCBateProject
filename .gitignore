@@ -17,6 +17,7 @@ hs_err_pid*
 *.iml
 /android/out/
 com_crashlytics_export_strings.xml
+*.aab
 
 ## Gradle
 /local.properties

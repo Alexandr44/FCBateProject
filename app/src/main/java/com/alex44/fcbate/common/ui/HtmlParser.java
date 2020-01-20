@@ -156,8 +156,7 @@ public abstract class HtmlParser implements FullScreenVideoListener {
             if (row.isEmpty()) continue;
             final Matcher matcher = rowPattern.matcher(row);
             if (matcher.find()) {
-                final List<String> columns = new ArrayList<>(Arrays.asList(row.split(ROW_SPLIT)));
-                if (columns.get(0).isEmpty()) columns.remove(0);
+                final List<String> columns = parseTableRow(row);
                 final TableRow tableRow = new TableRow(context);
                 tableRow.setLayoutParams(rowParams);
                 tableRow.setGravity(Gravity.CENTER_VERTICAL);
@@ -184,8 +183,16 @@ public abstract class HtmlParser implements FullScreenVideoListener {
                     }
                 }
                 if (rowNum == 0) {
-                    tableLayout.setColumnShrinkable(getMaxNum(widths), true);
-                    if (getWidthsSum(widths) > 850) {
+                    final int maxWidth = widths.get(getMaxNum(widths));
+                    for (int i = 0; i < widths.size(); i++) {
+                        if (widths.get(i) == maxWidth) {
+                            tableLayout.setColumnShrinkable(i, true);
+                        }
+                    }
+                    if (columns.size() > 8) {
+                        textSize -= 6;
+                    }
+                    else if (getWidthsSum(widths) > 850) {
                         textSize -= 5;
                     }
                 }
@@ -265,6 +272,34 @@ public abstract class HtmlParser implements FullScreenVideoListener {
             result += w;
         }
         return result;
+    }
+
+    private List<String> parseTableRow(String row) {
+        final List<String> columns = new ArrayList<>();
+        final String openTag = "<td>";
+        final String openTagTitle = "<td";
+        final String closeTag = "</td>";
+        int openTagLength = openTag.length();
+        int openTagIndex = row.indexOf(openTag);
+        if (openTagIndex == -1) {
+            openTagIndex = row.indexOf(openTagTitle);
+            openTagLength = openTagTitle.length();
+        }
+        int closeTagIndex = row.indexOf(closeTag);
+        while(openTagIndex != -1) {
+            if (closeTagIndex != -1) {
+                final String column = row.substring(openTagIndex+openTagLength, closeTagIndex);
+                columns.add(column);
+                row = row.substring(closeTagIndex+closeTag.length());
+                openTagIndex = row.indexOf(openTag);
+                if (openTagIndex == -1) {
+                    openTagIndex = row.indexOf(openTagTitle);
+                }
+                closeTagIndex = row.indexOf(closeTag);
+            }
+            else break;
+        }
+        return columns;
     }
 
 }
